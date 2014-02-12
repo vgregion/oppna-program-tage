@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+  <!--
+
+    Copyright 2009 Vastra Gotalandsregionen This library is free software; you can redistribute it and/or modify it
+    under the terms of version 2.1 of the GNU Lesser General Public License as published by the Free Software
+    Foundation. This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+    License for more details. You should have received a copy of the GNU Lesser General Public License along with this
+    library; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+  -->
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" id="javax.portlet.GenericPortlet.dde41c52a3">
+  <portlet>
+    <portlet-name>Retursidan</portlet-name>
+    <display-name>Retursidan</display-name>
+    <display-name xml:lang="sv">Retursidan</display-name>
+    <portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
+    <init-param>
+      <name>wps.markup</name>
+      <value>html</value>
+    </init-param>
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>view</portlet-mode>
+      <portlet-mode>edit</portlet-mode>
+    </supports>
+    <supported-locale>sv</supported-locale>
+    <resource-bundle>se.goteborg.retursidan.nl.Retursidan</resource-bundle>
+    <portlet-info>
+      <title>Retursidan</title>
+      <short-title>Retursidan</short-title>
+      <keywords>Retursidan</keywords>
+    </portlet-info>
+    <portlet-preferences>
+      <preference>
+        <name>useInternalResources</name>
+        <value>true</value>
+      </preference>
+      <preference>
+        <name>pageSize</name>
+        <value>10</value>
+      </preference>
+      <preference>
+        <name>imageWidth</name>
+        <value>600</value>
+      </preference>
+      <preference>
+        <name>imageHeight</name>
+        <value>600</value>
+      </preference>
+      <preference>
+        <name>thumbWidth</name>
+        <value>150</value>
+      </preference>
+      <preference>
+        <name>thumbHeight</name>
+        <value>150</value>
+      </preference>
+      <preference>
+        <name>adExpireTime</name>
+        <value>30</value>
+      </preference>
+      <preference>
+        <name>requestExpireTime</name>
+        <value>30</value>
+      </preference>
+      <preference>
+        <name>pocURIBase</name>
+        <value>/group/vgregion/tage?p_p_id=Retursidan_WAR_tageportlet</value>
+        <!--<value>/wps/myportal/int?uri=gbglnk:intranat.tage</value>-->
+      </preference>
+      <preference>
+        <name>rulesUrl</name>
+        <value>http://link</value>
+      </preference>
+      <preference>
+        <name>confirmCreateAdText</name>
+        <value>Jag har tillstånd från min chef att lägga ut annonsen. De praktiska detaljerna gör jag upp med den som bokar: det är den som bokar som ska ordna transport och hämta det jag annonserar ut. Det jag annonserar ut är fungerande, helt och rent.</value>
+      </preference>
+      <preference>
+        <name>confirmBookingText</name>
+        <value>Jag har tillstånd från min chef att svara på annonsen. De praktiska detaljerna gör jag upp med den som annonserar ut saken. Jag åtar mig att ordna transport och se till att hämta det jag bokat.</value>
+      </preference>
+      <preference>
+        <name>confirmRepublishText</name>
+        <value>Genom att återpublicera din annons så gör du den återigen tillgänglig för bokningar.</value>
+      </preference>
+      <preference>
+        <name>confirmRemoveRequestText</name>
+        <value>När du tar bort din efterlysning så visas den inte längre i Tage.</value>
+      </preference>
+      <preference>
+        <name>bookingConfirmationText</name>
+        <value>Du har nu fått ett mejl med kontaktuppgifter till annonsören. Ta kontakt snarast och kom överrens om hur avhämtningen ska gå till. Tänk på att det är du som bokat som har huvudansvaret för att ordna transport.</value>
+      </preference>
+      <preference>
+        <name>mailSenderAddress</name>
+        <value>tage@goteborg.se</value>
+      </preference>
+      <preference>
+        <name>mailSubject</name>
+        <value>Annons bokad!</value>
+      </preference>
+      <preference>
+        <name>mailBody</name>
+        <value><![CDATA[
+Annons bokad: {title}.
+-------------------------------------------------
+Bokare:
+{bookerName}
+{bookerPhone}
+{bookerMail}
+
+Annonsör:
+{advertiserName}
+{advertiserPhone}
+{advertiserMail}
+-------------------------------------------------
+Klicka på länken för att gå till annonsen:
+{link}
+
+Med vänliga hälsningar Tage
+				]]></value>
+      </preference>
+    </portlet-preferences>
+    <supported-public-render-parameter>externalPage</supported-public-render-parameter>
+    <supported-public-render-parameter>externalRequestId</supported-public-render-parameter>
+  </portlet>
+  <portlet>
+    <portlet-name>Efterlysningar</portlet-name>
+    <display-name>Efterlysningar</display-name>
+    <display-name xml:lang="sv">Efterlysningar</display-name>
+    <portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
+    <init-param>
+      <name>wps.markup</name>
+      <value>html</value>
+    </init-param>
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>view</portlet-mode>
+    </supports>
+    <supported-locale>sv</supported-locale>
+    <resource-bundle>se.goteborg.retursidan.nl.Efterlysningar</resource-bundle>
+    <portlet-info>
+      <title>Efterlysningar</title>
+      <short-title>Efterlysningar</short-title>
+      <keywords>Efterlysningar</keywords>
+    </portlet-info>
+    <supported-public-render-parameter>externalPage</supported-public-render-parameter>
+    <supported-public-render-parameter>externalRequestId</supported-public-render-parameter>
+  </portlet>
+
+  <custom-portlet-mode>
+    <portlet-mode>config</portlet-mode>
+  </custom-portlet-mode>
+
+  <user-attribute>
+    <description>User Login ID</description>
+    <name>user.login.id</name>
+  </user-attribute>
+
+  <filter-mapping>
+    <filter-name>OpenSessionFilter</filter-name>
+    <portlet-name>Retursidan</portlet-name>
+  </filter-mapping>
+
+  <default-namespace>http://retursidan-portlet/</default-namespace>
+
+  <public-render-parameter>
+    <identifier>externalPage</identifier>
+    <name>externalPage</name>
+  </public-render-parameter>
+
+  <public-render-parameter>
+    <identifier>externalRequestId</identifier>
+    <name>externalRequestId</name>
+  </public-render-parameter>
+
+</portlet-app>

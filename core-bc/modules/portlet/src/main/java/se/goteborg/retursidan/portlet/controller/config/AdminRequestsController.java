@@ -1,0 +1,61 @@
+package se.goteborg.retursidan.portlet.controller.config;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.portlet.bind.annotation.ActionMapping;
+import org.springframework.web.portlet.bind.annotation.RenderMapping;
+import se.goteborg.retursidan.model.PagedList;
+import se.goteborg.retursidan.model.entity.Request;
+import se.goteborg.retursidan.model.entity.Request.Status;
+import se.goteborg.retursidan.portlet.controller.BaseController;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+@Controller
+@RequestMapping("EDIT")
+public class AdminRequestsController extends BaseController {
+    Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+
+	@RenderMapping(params="page=adminRequests")
+	public String adminAds(@RequestParam(value="pageIdx", required=false) Integer pageIdx, RenderRequest request, RenderResponse response, Model model) {
+		PagedList<Request> pagedList = modelService.getAllRequests((pageIdx != null) ? pageIdx : 1, getConfig(request).getPageSizeInt());
+		model.addAttribute("requests", pagedList);
+		return "config/admin_requests";
+	}
+	
+	@ActionMapping("selectRequestsPage")
+	public void selectAds(@RequestParam(value="pageIdx", required=false) String pageIdx, Model model, ActionRequest request, ActionResponse response) {
+		response.setRenderParameter("page", "adminRequests");
+		response.setRenderParameter("pageIdx", pageIdx);
+	}
+	
+	@ActionMapping("removeRequest")
+	public void removeAd(@RequestParam(value="requestId", required=true) Integer requestId, ActionResponse response) {
+		Request request = modelService.getRequest(requestId);
+		modelService.removeRequest(request);
+		response.setRenderParameter("page", "adminRequests");
+	}
+	
+	@ActionMapping("expireRequest")
+	public void expireAd(@RequestParam(value="requestId", required=true) Integer requestId, ActionResponse response) {
+		Request request = modelService.getRequest(requestId);
+		request.setStatus(Status.EXPIRED);
+		modelService.updateRequest(request);
+		response.setRenderParameter("page", "adminRequests");
+	}
+	@ActionMapping("republishRequest")
+	public void republishAd(@RequestParam(value="requestId", required=true) Integer requestId, ActionResponse response) {
+		Request request = modelService.getRequest(requestId);
+		request.setStatus(Status.PUBLISHED);
+		modelService.updateRequest(request);
+		response.setRenderParameter("page", "adminRequests");
+	}		
+	
+}
