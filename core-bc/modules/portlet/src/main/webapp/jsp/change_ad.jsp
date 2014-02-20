@@ -173,7 +173,7 @@
 						</div>
 						<div class="radio alt">
 							<form:radiobutton id="radio1-50a24d8fd8a55" path="displayOption" value="<%= se.goteborg.retursidan.model.entity.Advertisement.DisplayOption.ENTIRE_CITY %>"/>
-							<label for="radio1-50a24d8fd8a55">Hela staden</label>
+							<label for="radio1-50a24d8fd8a55">Alla</label>
 						</div>
 					</div>
 				</fieldset>				

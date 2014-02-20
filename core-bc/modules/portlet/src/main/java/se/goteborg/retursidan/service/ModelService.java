@@ -135,10 +135,10 @@ public class ModelService {
 		return advertisementDAO.findById(id);
 	}
 	public PagedList<Advertisement> getAllFilteredAdvertisements(Advertisement.Status status, Category topCategory, Category category, Unit unit, int page, int pageSize) {
-		return advertisementDAO.find(null, status, topCategory, category, unit, true, page, pageSize);
+		return advertisementDAO.find(null, status, topCategory, category, unit, false, page, pageSize);
 	}
 	public PagedList<Advertisement> getAllAdvertisements(Advertisement.Status status, int page, int pageSize) {
-		return advertisementDAO.find(null, status, null, null, null, true, page, pageSize);
+		return advertisementDAO.find(null, status, null, null, null, false, page, pageSize);
 	}
 	public PagedList<Advertisement> getAllAdvertisementsForUid(String uid, int page, int pageSize) {
 		return advertisementDAO.find(uid, null, null, null, null, false, page, pageSize);

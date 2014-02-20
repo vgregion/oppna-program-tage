@@ -174,10 +174,10 @@
 							<form:radiobutton id="radio1-50a24d8fd89f8" path="displayOption" value="<%= se.goteborg.retursidan.model.entity.Advertisement.DisplayOption.OWN_UNIT %>"/>
 							<label for="radio1-50a24d8fd89f8">Egen förvaltning</label>
 						</div>
-						<div class="radio alt">
+						<%--<div class="radio alt">
 							<form:radiobutton id="radio1-50a24d8fd8a55" path="displayOption" value="<%= se.goteborg.retursidan.model.entity.Advertisement.DisplayOption.ENTIRE_CITY %>"/>
 							<label for="radio1-50a24d8fd8a55">Hela staden</label>
-						</div>
+						</div>--%>
 					</div>
 				</fieldset>
 			</div>

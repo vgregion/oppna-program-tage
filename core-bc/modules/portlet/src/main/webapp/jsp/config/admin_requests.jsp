@@ -19,7 +19,7 @@
 
 <div id="content-primary" class="cf" role="main">
 	<p class="back-link"><a href="<portlet:renderURL/>">Tillbaka</a></p>
-	<div class="content-header cf">
+	<div class="content-header cf clearfix">
 		<h1>Administration - administrera efterlysningar</h1>
 	</div>
 	<c:if test="${fn:length(requests.list) gt 0}">

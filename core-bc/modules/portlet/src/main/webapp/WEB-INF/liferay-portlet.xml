@@ -29,4 +29,9 @@
     <instanceable>false</instanceable>
     <requires-namespaced-parameters>false</requires-namespaced-parameters>
   </portlet>
+  <portlet>
+    <portlet-name>Efterlysningar</portlet-name>
+    <instanceable>false</instanceable>
+    <requires-namespaced-parameters>false</requires-namespaced-parameters>
+  </portlet>
 </liferay-portlet-app>

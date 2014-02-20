@@ -2,6 +2,7 @@ package se.goteborg.retursidan.portlet.controller;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
+import org.springframework.web.portlet.context.PortletContextAware;
 import se.goteborg.retursidan.model.PhotoHolder;
 
 import javax.portlet.PortletContext;
@@ -12,7 +13,7 @@ import java.io.OutputStream;
 /**
  * @author Patrik Bergström
  */
-public abstract class PhotoBaseController extends BaseController {
+public abstract class PhotoBaseController extends BaseController implements PortletContextAware {
 
     protected void outputImage(ResourceResponse response, Integer id, boolean thumbnail) {
         if (id != null) {
