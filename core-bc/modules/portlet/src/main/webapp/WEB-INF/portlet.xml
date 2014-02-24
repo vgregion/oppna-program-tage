@@ -66,7 +66,7 @@
       </preference>
       <preference>
         <name>pocURIBase</name>
-        <value>/group/vgregion/tage?p_p_id=Retursidan_WAR_tageportlet</value>
+        <value>/group/vgregion/pub-tage?p_p_id=Retursidan_WAR_tageportlet</value>
         <!--<value>/wps/myportal/int?uri=gbglnk:intranat.tage</value>-->
       </preference>
       <preference>
@@ -91,11 +91,11 @@
       </preference>
       <preference>
         <name>bookingConfirmationText</name>
-        <value>Du har nu fått ett mejl med kontaktuppgifter till annonsören. Ta kontakt snarast och kom överrens om hur avhämtningen ska gå till. Tänk på att det är du som bokat som har huvudansvaret för att ordna transport.</value>
+        <value>Du har nu fått ett mejl med kontaktuppgifter till annonsören. Ta kontakt snarast och kom överens om hur avhämtningen ska gå till. Tänk på att det är du som bokat som har huvudansvaret för att ordna transport.</value>
       </preference>
       <preference>
         <name>mailSenderAddress</name>
-        <value>tage@goteborg.se</value>
+        <value>sdstab.tage.su@vgregion.se</value>
       </preference>
       <preference>
         <name>mailSubject</name>

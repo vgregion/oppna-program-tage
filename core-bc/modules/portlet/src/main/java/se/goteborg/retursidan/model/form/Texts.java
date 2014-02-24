@@ -30,7 +30,7 @@ public class Texts extends GeneralModelBean {
 		this.confirmRepublishText = prefs.getValue("confirmRepublishText", "");
 		this.confirmRemoveRequestText = prefs.getValue("confirmRemoveRequestText", "");
 		this.bookingConfirmationText = prefs.getValue("bookingConfirmationText", "");
-		this.mailSenderAddress = prefs.getValue("mailSenderAddress", "tage@goteborg.se");
+		this.mailSenderAddress = prefs.getValue("mailSenderAddress", "sdstab.tage.su@vgregion.se");
 		this.mailSubject = prefs.getValue("mailSubject", "Annons bokad!");
 		this.mailBody = prefs.getValue("mailBody", "");
 	}
