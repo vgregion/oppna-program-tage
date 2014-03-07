@@ -36,7 +36,7 @@ public class MailService {
 			helper.setFrom(sender);
 			helper.setTo(email);
 			helper.setSubject(subject);
-			helper.setText(mailText);
+			helper.setText(mailText.replace("{NEWLINE}", System.getProperty("line.separator")));
 			mailSender.send(message);
 			logger.info("Mail sent to " + Arrays.toString(email));
 		} catch (MessagingException e) {

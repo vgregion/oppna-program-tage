@@ -71,7 +71,7 @@
       </preference>
       <preference>
         <name>rulesUrl</name>
-        <value>http://link</value>
+        <value>http://portalen.vgregion.se/group/vgregion/pub-tage-start</value>
       </preference>
       <preference>
         <name>confirmCreateAdText</name>
@@ -95,30 +95,31 @@
       </preference>
       <preference>
         <name>mailSenderAddress</name>
-        <value>sdstab.tage.su@vgregion.se</value>
+        <value>tage@vgregion.se</value>
       </preference>
       <preference>
         <name>mailSubject</name>
         <value>Annons bokad!</value>
       </preference>
       <preference>
+        <!-- Use {NEWLINE} since there is problem to make Liferay save the preference with new lines.-->
         <name>mailBody</name>
         <value><![CDATA[
-Annons bokad: {title}.
--------------------------------------------------
-Bokare:
-{bookerName}
-{bookerPhone}
-{bookerMail}
-
-Annonsör:
-{advertiserName}
-{advertiserPhone}
-{advertiserMail}
--------------------------------------------------
-Klicka på länken för att gå till annonsen:
-{link}
-
+Annons bokad: {title}.{NEWLINE}
+-------------------------------------------------{NEWLINE}
+Bokare:{NEWLINE}
+{bookerName}{NEWLINE}
+{bookerPhone}{NEWLINE}
+{bookerMail}{NEWLINE}
+{NEWLINE}
+Annonsör:{NEWLINE}
+{advertiserName}{NEWLINE}
+{advertiserPhone}{NEWLINE}
+{advertiserMail}{NEWLINE}
+-------------------------------------------------{NEWLINE}
+Klicka på länken för att gå till annonsen:{NEWLINE}
+{link}{NEWLINE}
+{NEWLINE}
 Med vänliga hälsningar Tage
 				]]></value>
       </preference>
