@@ -64,12 +64,12 @@ public abstract class PhotoBaseController extends BaseController implements Port
     }
 
     @ResourceMapping("photo")
-    public void servePhoto(ResourceResponse response, @RequestParam int id) {
+    public void servePhoto(ResourceResponse response, @RequestParam("id") int id) {
         outputImage(response, id, false);
     }
 
     @ResourceMapping("thumbnail")
-    public void serveThumbnail(ResourceResponse response, @RequestParam(required=false) Integer id) {
+    public void serveThumbnail(ResourceResponse response, @RequestParam(required=false, value = "id") Integer id) {
         outputImage(response, id, true);
     }
 

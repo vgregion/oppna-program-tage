@@ -77,7 +77,7 @@ public class UploadController extends BaseController {
 	}
 	
 	@ResourceMapping("removePhoto") 
-	public void remove(ResourceResponse response, @RequestParam int id) {
+	public void remove(ResourceResponse response, @RequestParam("id") int id) {
 		try {
 			Photo photo = modelService.getPhoto(id);
 			modelService.removePhoto(photo);
