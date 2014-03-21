@@ -89,7 +89,7 @@ public class Advertisement extends GeneralEntityBean implements Serializable {
 	 * Fetch the photos lazy, we do not want to load the actual image data for each photo
 	 */
 	@OneToMany(fetch = FetchType.LAZY, cascade=javax.persistence.CascadeType.REMOVE)
-	@JoinTable(name = "vgr_tage_photoset")
+	@JoinTable(name = "vgr_tage_photoset") // todo Make sure this is cascaded when a photo is removed
 	@OrderBy("id ASC")
 	private List<Photo> photos;
 	

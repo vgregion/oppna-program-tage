@@ -46,6 +46,15 @@ div.cols-3 select {
     float: right;
 }
 
+.paging ul {
+    list-style: none;
+}
+
+.paging ul li {
+    float: left;
+    margin: 5px 8px 5px 8px;
+}
+
 table.statistics th, table.statistics td {
     border: 1px solid #AAA;
     padding: 3px;
@@ -82,3 +91,4 @@ ul.request-listing {
 ul.request-listing a {
     text-decoration: none;
 }
+

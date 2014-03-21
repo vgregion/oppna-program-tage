@@ -66,7 +66,7 @@
 			</c:forEach>
 		</ul>
 		<c:if test="${requests.numberOfPages > 1}">
-			<div class="paging cf">
+			<div class="paging cf clearfix">
 				<strong>Gå till sida:</strong>
 				<ul>
 					<c:if test="${requests.hasPrevious}">
