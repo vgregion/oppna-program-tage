@@ -17,6 +17,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import java.util.Date;
 
 @Controller
 @RequestMapping("EDIT")
@@ -54,6 +55,7 @@ public class AdminRequestsController extends BaseController {
 	public void republishAd(@RequestParam(value="requestId", required=true) Integer requestId, ActionResponse response) {
 		Request request = modelService.getRequest(requestId);
 		request.setStatus(Status.PUBLISHED);
+        request.setCreated(new Date());
 		modelService.updateRequest(request);
 		response.setRenderParameter("page", "adminRequests");
 	}		

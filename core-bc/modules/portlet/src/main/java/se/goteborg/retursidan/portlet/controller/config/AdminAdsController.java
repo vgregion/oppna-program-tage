@@ -11,10 +11,10 @@ import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import se.goteborg.retursidan.model.PagedList;
 import se.goteborg.retursidan.model.entity.Advertisement;
 import se.goteborg.retursidan.model.entity.Advertisement.Status;
-import se.goteborg.retursidan.portlet.controller.BaseController;
 import se.goteborg.retursidan.portlet.controller.PhotoBaseController;
 
 import javax.portlet.*;
+import java.util.Date;
 
 @Controller
 @RequestMapping("EDIT")
@@ -54,6 +54,7 @@ public class AdminAdsController extends PhotoBaseController {
 	public void republishAd(@RequestParam(value="advertisementId", required=true) Integer advertisementId, ActionResponse response) {
 		Advertisement ad = modelService.getAdvertisement(advertisementId);
 		ad.setStatus(Status.PUBLISHED);
+        ad.setCreated(new Date());
 		modelService.updateAd(ad);
 		response.setRenderParameter("page", "adminAds");
 	}
