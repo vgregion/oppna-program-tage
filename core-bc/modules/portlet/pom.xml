@@ -11,7 +11,7 @@ Generation time : 2014-01-21 08:45:01 CET
   <parent>
     <groupId>se.vgregion.tage</groupId>
     <artifactId>tage-core-bc</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
   <groupId>se.vgregion.tage</groupId>
@@ -38,7 +38,7 @@ Generation time : 2014-01-21 08:45:01 CET
     <dependency>
       <groupId>se.vgregion.tage</groupId>
       <artifactId>tage-core-bc-composite-svc</artifactId>
-      <version>1.1-SNAPSHOT</version>
+      <version>1.1</version>
     </dependency>
     <dependency>
       <groupId>javax.portlet</groupId>
