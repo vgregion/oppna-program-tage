@@ -82,7 +82,7 @@
 		<div class="row cols-1 cf">
 			<%--<div class="col medium col-1 submit-area">--%>
             <aui:button-row>
-				<aui:button cssClass="button rp-button" type="submit" value="Bekräfta bokningen" name="submit-50911f89c035a"/>
+				<aui:button cssClass="button rp-button" type="submit" value="Bekräfta bokningen" name="submit-50911f89c035a" onClick="this.disabled=true; this.form.submit()"/>
 				<a class="rp-link-button" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 			<%--</div>--%>

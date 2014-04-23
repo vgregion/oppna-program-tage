@@ -1093,7 +1093,6 @@ qq.UploadButton = function(o){
     // make button suitable container for input
     qq.css(this._element, {
         position: 'relative',
-        overflow: 'hidden',
         // Make sure browse button is in the right side
         // in Internet Explorer
         direction: 'ltr'
@@ -1137,11 +1136,11 @@ qq.UploadButton.prototype = {
             top: 0,
             fontFamily: 'Arial',
             // 4 persons reported this, the max values that worked for them were 243, 236, 236, 118
-            fontSize: '118px',
             margin: 0,
             padding: 0,
             cursor: 'pointer',
-            opacity: 0
+            opacity: 0,
+            height: '100px'
         });
 
         this._element.appendChild(input);

@@ -28,16 +28,16 @@ public class BookingService {
 	
 	public void bookAdvertisement(Integer advertisementId, Person contact, Texts texts, Config config, String adLink) {
 		logger.debug("Trying to book advertisement id=" + advertisementId + " for " + contact);
-	
-		Advertisement advertisement = advertisementDAO.findById(advertisementId);
+
+        // make sure only one thread can book at a time, place here to mitigate double-clicks.
+        synchronized(this) {
+            Advertisement advertisement = advertisementDAO.findById(advertisementId);
 		
-		if (advertisement == null) {
-			logger.warn("Could not find advertisement with id=" + advertisementId + " to book.");
-			throw new AdvertisementNotFoundException(advertisementId);
-		}
-					
-		// make sure only one thread can book at a time
-		synchronized(this) {
+            if (advertisement == null) {
+                logger.warn("Could not find advertisement with id=" + advertisementId + " to book.");
+                throw new AdvertisementNotFoundException(advertisementId);
+            }
+
 			if (Advertisement.Status.BOOKED.equals(advertisement.getStatus())) {
 				logger.warn("Advertisement with id=" + advertisementId + " is already booked.");
 				throw new AdvertisementAlreadyBookedException(advertisementId);
