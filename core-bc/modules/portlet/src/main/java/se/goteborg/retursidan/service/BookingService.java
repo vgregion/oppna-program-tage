@@ -62,7 +62,7 @@ public class BookingService {
 			mailBody = mailBody.replaceAll("\\{advertiserPhone\\}", advertisement.getContact().getPhone());
 			mailBody = mailBody.replaceAll("\\{advertiserMail\\}", advertisement.getContact().getEmail());
 			mailBody = mailBody.replaceAll("\\{link\\}", adLink);
-			mailBody = mailBody + "\n\nLänk till regelverk:" + config.getRulesUrl();
+			mailBody = mailBody + "\n\nLänk till regelverk: " + config.getRulesUrl();
 			mailService.sendMail(new String[] {bookerMail, advertiserMail}, texts.getMailSenderAddress(), texts.getMailSubject(), mailBody);
 		}
 	}
