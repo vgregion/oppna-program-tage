@@ -14,7 +14,7 @@ public class StringFormatter {
 	    Calendar now = Calendar.getInstance();
 	    DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
 	    DateFormat weekdayTimeFormatter = new SimpleDateFormat("EEEE HH:mm");
-	    DateFormat dateFormatter = new SimpleDateFormat("d MMMM hh:mm");
+	    DateFormat dateFormatter = new SimpleDateFormat("d MMMM HH:mm");
 	    DateFormat yearDateFormatter = new SimpleDateFormat("yyyy-M-d HH:mm");
 	    
 	    if (date.get(Calendar.YEAR) == now.get(Calendar.YEAR)) {
