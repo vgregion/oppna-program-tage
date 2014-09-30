@@ -93,3 +93,8 @@ ul.request-listing a {
     text-decoration: none;
 }
 
+/* Override Liferay default */
+div.row.cols-3{
+    margin-left: 0;
+}
+

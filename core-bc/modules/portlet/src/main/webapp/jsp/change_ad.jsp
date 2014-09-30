@@ -162,23 +162,6 @@
 				<hr>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
-			<div class="select medium col col-1">
-				<fieldset>
-					<legend class="wrap"><span>Visa annonsen för:</span></legend>
-					<div class="fieldset-content">
-						<div class="radio alt">
-							<form:radiobutton id="radio1-50a24d8fd89f8" path="displayOption" value="<%= se.goteborg.retursidan.model.entity.Advertisement.DisplayOption.OWN_UNIT %>"/>
-							<label for="radio1-50a24d8fd89f8">Egen förvaltning</label>
-						</div>
-						<div class="radio alt">
-							<form:radiobutton id="radio1-50a24d8fd8a55" path="displayOption" value="<%= se.goteborg.retursidan.model.entity.Advertisement.DisplayOption.ENTIRE_CITY %>"/>
-							<label for="radio1-50a24d8fd8a55">Alla</label>
-						</div>
-					</div>
-				</fieldset>				
-			</div>
-		</div>
 		<p><span class="author">Annonsen skapad av ${advertisement.creatorUid}.</span></p>
 		<div class="row cols-1 cf">
 			<%--<div class="col medium col-1 submit-area">--%>

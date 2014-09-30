@@ -19,8 +19,6 @@
 	<p>
 		Välj en administrationsåtgärd nedan:
 		<ul>
-			<li><a href="${changeConfigUrl}">Ändra konfigurationsdata</a></li>
-			<li><a href="${changeTextsUrl}">Ändra texter</a></li>
 			<li><a href="${adminUnitsUrl}">Administrera enheter</a></li>
 			<li><a href="${adminCategoriesUrl}">Administrera kategorier</a></li>
 			<li><a href="${adminAdsUrl}">Administrera annonser</a></li>
