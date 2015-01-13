@@ -17,10 +17,4 @@ public class StartController extends BaseController {
         return "config/start";
     }
 
-    @RenderMapping(params = "page=adminRequests")
-    public String adminRequests() {
-        return "config/admin_requests";
-    }
-
-
 }

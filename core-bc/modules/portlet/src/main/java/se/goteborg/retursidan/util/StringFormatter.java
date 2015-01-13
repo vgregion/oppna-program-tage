@@ -1,6 +1,8 @@
 
 package se.goteborg.retursidan.util;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,9 +26,9 @@ public class StringFormatter {
 	    		} else if(date.get(Calendar.DAY_OF_YEAR) == now.get(Calendar.DAY_OF_YEAR)-1) {
 	    			return "Igår " + timeFormatter.format(created);
 	    		} else {
-	    			return weekdayTimeFormatter.format(created);
-	    		}
-	    	} else {
+					return StringUtils.capitalize(weekdayTimeFormatter.format(created));
+				}
+			} else {
 	    		return dateFormatter.format(created);
 	    	}
 	    } else {

@@ -18,13 +18,11 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.logging.Level;
 
 /**
  * Base class for all controllers, implements common functionality
  *
  */
-@Controller
 public abstract class BaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 

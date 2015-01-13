@@ -89,12 +89,15 @@ ul.request-listing {
     list-style: none;
 }
 
-ul.request-listing a {
-    text-decoration: none;
-}
-
 /* Override Liferay default */
 div.row.cols-3{
     margin-left: 0;
 }
 
+ul.inventory-listing h3, .inventory-info h3 {
+    margin: 0;
+}
+
+.inventory-info h2 {
+    margin: 10px 0 0 0;
+}

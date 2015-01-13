@@ -20,7 +20,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Controller handling creating requests
@@ -77,7 +76,7 @@ public class CreateRequestController extends BaseController {
 	@ActionMapping("saveRequest")
 	public void saveAd(@Valid @ModelAttribute("request") Request requestAd, BindingResult bindingResult, ActionRequest request, ActionResponse response, Model model) {
 		requestAd.setCreatorUid(getUserId(request));
-		response.setRenderParameter("externalPage", "");
+		response.setRenderParameter("externalPage", "none");
 		if (!bindingResult.hasErrors()) {
 			logger.trace("Saving request: " + requestAd);
 			requestAd.setStatus(Request.Status.PUBLISHED);

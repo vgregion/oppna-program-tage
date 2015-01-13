@@ -77,7 +77,10 @@
                 </c:if>
                 <a href="<portlet:renderURL/>" class="rp-link-button button">Tillbaka till startsidan</a>
             </aui:button-row>
-        </div>
+			<c:if test="${userId eq advertisement.creatorUid}">
+				Behöver du ta bort annonsen, maila funktionsbrevlåda: <a href="mailto:tage@vgregion.se">tage@vgregion.se</a>
+			</c:if>
+	</div>
 	</div>
 </c:if>
 <c:if test="${empty advertisement}">

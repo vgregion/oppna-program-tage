@@ -28,7 +28,7 @@ import java.util.logging.Level;
 
 /**
  * Default controller, handling all requests that are not handled by another controller.
- * Placed in its own package just to avoid a strange bug/feature of Spring that puts the 
+ * Placed in its own package just to avoid a strange bug/feature of Spring that puts the
  * controllers in a list ordered by their name and if the controller with a "catch all"
  * render mapping is placed before other controllers, it will consume requests that really
  * should have been handled by the controller further down in the list.
@@ -41,25 +41,25 @@ public class ListAdsController extends BaseController {
 
 	@Autowired
 	private ModelService modelService;
-	
+
 	@ModelAttribute
 	public SearchFilter createSearchFilter() {
 		return new SearchFilter();
 	}
-	
+
 	@RenderMapping
 	public String listAds(@ModelAttribute SearchFilter searchFilter, @RequestParam(value="pageIdx", required=false) Integer pageIdx, RenderRequest request, RenderResponse response, Model model) {
 		List<Unit> units = modelService.getUnits();
 		model.addAttribute("units", units);
-	
+
 		List<Category> topCategories = modelService.getTopCategories();
 		model.addAttribute("topCategories", topCategories);
 
 		if (searchFilter.getTopCategory() != null && searchFilter.getTopCategory().getId() > 0) {
 			List<Category> subCategories = modelService.getSubCategories(searchFilter.getTopCategory().getId());
-			model.addAttribute("subCategories", subCategories);		
+			model.addAttribute("subCategories", subCategories);
 		}
-		
+
 		if (!model.containsAttribute("ads")) {
 			PagedList<Advertisement> pagedList = modelService.getAllAdvertisements(Advertisement.Status.PUBLISHED, (pageIdx != null) ? pageIdx : 1, getConfig(request).getPageSizeInt());
 			model.addAttribute("ads", pagedList);
@@ -67,6 +67,10 @@ public class ListAdsController extends BaseController {
 		return "list_ads";
 	}
 
+	@RenderMapping(params="page=startPage")
+	public String backToListAds(@ModelAttribute SearchFilter searchFilter, @RequestParam(value="pageIdx", required=false) Integer pageIdx, RenderRequest request, RenderResponse response, Model model) {
+		return listAds(searchFilter, pageIdx, request, response, model);
+	}
 
 	@RenderMapping(params="page=listMyAds")
 	public String listMyAds(@ModelAttribute("userId") String userId, @ModelAttribute SearchFilter searchFilter, @RequestParam(value="pageIdx", required=false) Integer pageIdx, RenderRequest request, RenderResponse response, Model model) {
@@ -75,16 +79,16 @@ public class ListAdsController extends BaseController {
 
 		if (searchFilter.getTopCategory() != null && searchFilter.getTopCategory().getId() > 0) {
 			List<Category> subCategories = modelService.getSubCategories(searchFilter.getTopCategory().getId());
-			model.addAttribute("subCategories", subCategories);		
+			model.addAttribute("subCategories", subCategories);
 		}
-		
+
 		if (!model.containsAttribute("ads")) {
 			PagedList<Advertisement> pagedList = modelService.getAllAdvertisementsForUid(userId, (pageIdx != null) ? pageIdx : 1, getConfig(request).getPageSizeInt());
 			model.addAttribute("ads", pagedList);
 		}
-		return "list_my_ads";		
+		return "list_my_ads";
 	}
-	
+
 	@ActionMapping("filterAds")
 	public void filterAds(@ModelAttribute SearchFilter searchFilter, @RequestParam(value="pageIdx", required=false) Integer pageIdx, Model model, ActionRequest request, ActionResponse response) {
 		PagedList<Advertisement> pagedList = modelService.getAllFilteredAdvertisements(Advertisement.Status.PUBLISHED, searchFilter.getTopCategory(), searchFilter.getSubCategory(), searchFilter.getUnit(), (pageIdx != null) ? pageIdx : 1, getConfig(request).getPageSizeInt());

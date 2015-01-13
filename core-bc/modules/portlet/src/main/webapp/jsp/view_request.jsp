@@ -3,7 +3,10 @@
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
 %><%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %><%
-%><%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%
+%><%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="liferay" uri="http://liferay.com/tld/portlet" %>
+
+<%
 %><portlet:defineObjects/>
 
 <c:if test="${config.useInternalResources}">
@@ -12,14 +15,21 @@
 </c:if>
 
 <portlet:renderURL var="cancelUrl">
-    <portlet:param name="externalPage" value=""/>
+    <portlet:param name="externalPage" value="none"/>
 </portlet:renderURL>
 
-<portlet:renderURL var="backUrl">
+<liferay:renderURL var="backUrlLiferay" portletName="Retursidan_WAR_tageportlet">
 	<c:if test="${not empty previousPage}">
 		<portlet:param name="page" value="${previousPage}"/>
 	</c:if>
-	<portlet:param name="externalPage" value=""/>
+	<portlet:param name="externalPage" value="none"/>
+</liferay:renderURL>
+
+<portlet:renderURL var="backUrl" >
+	<c:if test="${not empty previousPage}">
+		<portlet:param name="page" value="${previousPage}"/>
+	</c:if>
+	<portlet:param name="externalPage" value="none"/>
 </portlet:renderURL>
 
 <c:if test="${not empty request}">

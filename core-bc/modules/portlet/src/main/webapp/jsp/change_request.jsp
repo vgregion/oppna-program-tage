@@ -1,13 +1,15 @@
 <%@page import="org.springframework.validation.ObjectError"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
-%><%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%><%
+%><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
 %><%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %><%
 %><%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="aui" uri="http://liferay.com/tld/aui" %>
 <%
-%><portlet:renderURL var="cancelUrl"><portlet:param name="externalPage" value=""/></portlet:renderURL><%
+%><portlet:renderURL var="cancelUrl">
+	<portlet:param name="externalPage" value="none"/>
+</portlet:renderURL><%
 %><portlet:actionURL name="updateRequest" var="updateRequestUrl"/><%
 %><portlet:resourceURL id="subCategories" cacheability="cacheLevelFull" var="subCatUrl"/><%
 %><portlet:defineObjects/>

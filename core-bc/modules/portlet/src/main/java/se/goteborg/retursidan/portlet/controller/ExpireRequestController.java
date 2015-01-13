@@ -13,7 +13,6 @@ import se.goteborg.retursidan.model.entity.Request;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
-import java.util.logging.Level;
 
 /**
  * Controller handling manual expire of requests
@@ -39,6 +38,6 @@ public class ExpireRequestController extends BaseController {
 		logger.trace("Expiring request with id=" + request.getId());
 		request.setStatus(Request.Status.EXPIRED);
 		modelService.updateRequest(request);
-		portletResponse.setRenderParameter("externalPage", "");
+		portletResponse.setRenderParameter("externalPage", "none");
 	}
 }
