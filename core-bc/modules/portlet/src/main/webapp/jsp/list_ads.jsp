@@ -23,7 +23,7 @@
         <a href="${createAdUrl}" class="rp-link-button">Lägg in annons</a>
         <a href="${listMyAdsUrl}" class="rp-link-button">Mina annonser</a>
 	</div>
-	<p>Här kan du annonsera ut överblivna möbler och utrustning som du vill skänka för återanvändning till andra verksamheter inom Sahlgrenska Universitetssjukhuset. Du kan även efterlysa möbler och utrustning din verksamhet har behov av. Det kostar inget att annonsera på Tage.</p>
+	<p>Här kan du annonsera ut överblivna möbler och utrustning som du vill skänka för återanvändning till andra verksamheter inom VGR. Du kan även efterlysa möbler och utrustning din verksamhet har behov av. Det kostar inget att annonsera på Tage.</p>
 	<p>Vi gör det här för att öka återvändningen och minska resursförbrukningen.</p>
 	<form:form id="search-inventory-form" cssClass="form-general" modelAttribute="searchFilter" action="${filterUrl}" >
 		<div class="row cols-3 cf clearfix">
