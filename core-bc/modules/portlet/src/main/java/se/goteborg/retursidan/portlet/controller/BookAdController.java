@@ -53,12 +53,24 @@ public class BookAdController extends BaseController {
 	}
 	
 	@ModelAttribute("booking")
-	public Booking getBooking(@ModelAttribute("advertisement") Advertisement advertisement, PortletRequest request) {
+	public Booking getBooking(
+			@ModelAttribute("advertisement") Advertisement advertisement,
+			@RequestParam(value="advertisementId", required=false) Integer advertisementId,
+			PortletRequest request) {
 		Booking booking = new Booking();
-		if (advertisement != null) {
+		if (advertisement != null && advertisement.getId() > 0) {
 			booking.setAdvertisementId(advertisement.getId());
 			booking.setAdvertisementTitle(advertisement.getTitle());
+		} else if (advertisementId != null) {
+			// Fall back on another parameter.
+			logger.trace("loading advertisement id=" + advertisementId);
+			Advertisement loaded = modelService.getAdvertisement(advertisementId);
+			logger.trace("advertisement=" + loaded);
+
+			booking.setAdvertisementId(loaded.getId());
+			booking.setAdvertisementTitle(loaded.getTitle());
 		}
+
 		String uid = getUserId(request);
 		Person contact = modelService.getPerson(uid);
 		if (contact != null) {
