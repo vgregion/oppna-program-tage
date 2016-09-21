@@ -8,12 +8,11 @@
 %><portlet:renderURL var="backUrl" /><%
 %><portlet:defineObjects/>
 
-<%--<c:if test="${config.useInternalResources}">--%>
-	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
-<%--</c:if>--%>
+<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 
 <div id="content-primary" class="article cf" role="main">
-	<p class="back-link"><a href="${backUrl}">Tillbaka</a></p>
+	<p class="back-link"><a class="btn btn-default" href="${backUrl}">Tillbaka</a></p>
 	<h1>Ett fel uppstod när ${advertisement.title} skulle bokas</h1>
 	<div class="system-info confirmation-message">
 		<h2>${errorMessage}</h2>

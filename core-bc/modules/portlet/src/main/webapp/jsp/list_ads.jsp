@@ -20,8 +20,8 @@
 <div id="content-primary" class="cf" role="main">
 	<div class="content-header cf clearfix">
 		<h1>Tage</h1>
-        <a href="${createAdUrl}" class="rp-link-button">Lägg in annons</a>
-        <a href="${listMyAdsUrl}" class="rp-link-button">Mina annonser</a>
+        <a href="${createAdUrl}" class="btn btn-primary">Lägg in annons</a>
+        <a href="${listMyAdsUrl}" class="btn btn-primary">Mina annonser</a>
 	</div>
 	<p>Här kan du annonsera ut överblivna möbler och utrustning som du vill skänka för återanvändning till andra verksamheter inom VGR. Du kan även efterlysa möbler och utrustning din verksamhet har behov av. Det kostar inget att annonsera på Tage.</p>
 	<p>Vi gör det här för att öka återvändningen och minska resursförbrukningen.</p>
@@ -53,7 +53,7 @@
             <div class="row cols-1 cf">
                 <%--<div class="col small col-1">--%>
                 <aui:button-row>
-                    <aui:button cssClass="rp-button" type="submit" value="Visa" name="submit-508e6b767c18f"/>
+                    <aui:button cssClass="btn btn-primary" type="submit" value="Visa" name="submit-508e6b767c18f"/>
                 </aui:button-row>
                 <%--</div>--%>
             </div>

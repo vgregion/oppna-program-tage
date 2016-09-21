@@ -12,6 +12,8 @@
 %><portlet:renderURL var="cancelUrl"/><%
 %><portlet:defineObjects/>
 
+<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
+
 <% 
 	org.springframework.validation.BindingResult bindingResult = 
 		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.config"); 
@@ -63,7 +65,7 @@
 			</div>
 --%>
             <aui:button-row>
-                <aui:button cssClass="rp-button button" type="submit" value="Lägg till ny kategori"/>
+                <aui:button cssClass="btn btn-primary" type="submit" value="Lägg till ny kategori"/>
             </aui:button-row>
 		</div>
 	</form:form>
@@ -99,7 +101,7 @@
 			</div>
 --%>
             <aui:button-row>
-                <aui:button cssClass="rp-button button" type="submit" value="Ta bort vald kategori" />
+                <aui:button cssClass="btn btn-primary" type="submit" value="Ta bort vald kategori" />
             </aui:button-row>
 		</div>		
 	</form:form>

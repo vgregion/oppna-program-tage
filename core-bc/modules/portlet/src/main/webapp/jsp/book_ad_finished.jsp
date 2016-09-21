@@ -10,10 +10,11 @@
 
 <c:if test="${config.useInternalResources}">
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 </c:if>
 
 <div id="content-primary" class="article cf" role="main">
-	<p class="back-link"><a href="${backUrl}">Tillbaka</a></p>
+	<p class="back-link"><a class="btn btn-default" href="${backUrl}">Tillbaka</a></p>
 	<h1>Boka ${advertisement.title}</h1>
 	<div class="system-info confirmation-message">
 		<h2>Du har bokat ${advertisement.title}</h2>

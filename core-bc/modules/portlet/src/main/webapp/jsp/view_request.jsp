@@ -53,15 +53,15 @@
 						<portlet:param name="page" value="expireRequest"/>
 						<portlet:param name="requestId" value="${request.id}"/>
 					</portlet:renderURL>
-					<a href="${expireRequestUrl}" class="button rp-link-button">Ta bort efterlysning</a>
+					<a href="${expireRequestUrl}" class="btn btn-danger">Ta bort efterlysning</a>
 				</c:if>
 				<portlet:actionURL name="loadRequest" var="changeRequestUrl">
 					<portlet:param name="requestId" value="${request.id}"/>
 				</portlet:actionURL>
-				<a href="${changeRequestUrl}" class="button rp-link-button">Redigera</a>
+				<a href="${changeRequestUrl}" class="btn btn-primary">Redigera</a>
 			</c:if>
 		</div>
-		<a href="${cancelUrl}" class="button rp-link-button">Tillbaka till startsidan</a>
+		<a href="${cancelUrl}" class="btn btn-default">Tillbaka till startsidan</a>
 	</div>
 </c:if>
 <c:if test="${empty request}">

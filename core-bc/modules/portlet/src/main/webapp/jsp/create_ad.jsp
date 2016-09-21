@@ -169,8 +169,8 @@
 		<div class="row cols-1 cf">
 			<%--<div class="col medium col-1 submit-area">--%>
             <aui:button-row>
-				<aui:button type="submit" id="addAdSubmit" cssClass="rp-button button" value="Lägg upp annons" name="submit-5086c4a3b380d"/>
-				<a class="rp-link-button" href="${cancelUrl}">Avbryt</a>
+				<aui:button type="submit" id="addAdSubmit" cssClass="btn btn-primary" value="Lägg upp annons" name="submit-5086c4a3b380d"/>
+				<a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
                 <%--<aui:button type="submit" href="#" id="submit-5097936784ac4" cssClass="rp-button button" value="Fortsätt"/>--%>
                 <%--<a class="rp-link-button" href="${cancelUrl}">Avbryt</a>--%>
             </aui:button-row>

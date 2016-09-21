@@ -13,8 +13,10 @@
 %><portlet:renderURL var="statisticsUrl"><portlet:param name="page" value="statistics"/></portlet:renderURL><%
 %><portlet:defineObjects/>
 
+<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
+
 <div id="content-primary" class="article cf" role="main">
-	<p class="back-link"><a href="<portlet:renderURL portletMode="VIEW"/>">Avsluta administrationen</a></p>
+	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL portletMode="VIEW"/>">Avsluta administrationen</a></p>
 	<h1>Administration</h1>
 	<p>
 		Välj en administrationsåtgärd nedan:

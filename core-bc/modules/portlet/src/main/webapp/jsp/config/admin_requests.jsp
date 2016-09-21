@@ -7,6 +7,8 @@
 %><portlet:resourceURL id="thumbnail" cacheability="cacheLevelFull" var="thumbnailUrl"/><%
 %><portlet:defineObjects/>
 
+<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
+
 <style type="text/css">
     ul.inventory-listing li.cf {
         border: 1px grey solid;
@@ -18,7 +20,7 @@
 </style>
 
 <div id="content-primary" class="cf" role="main">
-	<p class="back-link"><a href="<portlet:renderURL/>">Tillbaka</a></p>
+	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL/>">Tillbaka</a></p>
 	<div class="content-header cf clearfix">
 		<h1>Administration - administrera efterlysningar</h1>
 	</div>
@@ -53,12 +55,12 @@
 						<div class="meta"><span class="category">${request.category.parent.title} <span class="sep">&gt;</span> ${request.category.title}</span></div>
 						<div class="meta">Status: <strong>${statusTitle}</strong></div>
 						<div class="meta">
-							<a href="${removeRequestUrl}" class="button rp-link-button">Ta bort</a>
+							<a href="${removeRequestUrl}" class="btn btn-danger">Ta bort</a>
 							<c:if test="${request.published}">
-								<a href="${expireRequestUrl}" class="button rp-link-button">Sätt som utgången</a>
+								<a href="${expireRequestUrl}" class="btn btn-primary">Sätt som utgången</a>
 							</c:if>				
 							<c:if test="${!request.published}">
-								<a href="${republishRequestUrl}" class="button rp-link-button">Återpublicera</a>
+								<a href="${republishRequestUrl}" class="btn btn-primary">Återpublicera</a>
 							</c:if>
 						</div>
 					</div>

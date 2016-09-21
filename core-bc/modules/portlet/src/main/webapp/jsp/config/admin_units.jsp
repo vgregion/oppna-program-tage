@@ -12,6 +12,8 @@
 %><portlet:renderURL var="cancelUrl"/><%
 %><portlet:defineObjects/>
 
+<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
+
 <% 
 	org.springframework.validation.BindingResult bindingResult = 
 		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.config"); 
@@ -54,7 +56,7 @@
 				<input type="submit" value="Lägg till ny enhet">
 			</div>--%>
             <aui:button-row>
-                <aui:button cssClass="rp-button button" type="submit" value="Lägg till ny enhet"/>
+                <aui:button cssClass="btn btn-primary" type="submit" value="Lägg till ny enhet"/>
             </aui:button-row>
 		</div>	
 	</form:form>
@@ -81,7 +83,7 @@
 			</div>
 --%>
             <aui:button-row>
-                <aui:button cssClass="rp-button button" type="submit" value="Ta bort vald enhet"/>
+                <aui:button cssClass="btn btn-danger" type="submit" value="Ta bort vald enhet"/>
             </aui:button-row>
 		</div>		
 	</form:form>

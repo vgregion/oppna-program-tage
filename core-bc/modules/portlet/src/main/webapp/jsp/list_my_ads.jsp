@@ -20,7 +20,7 @@
 <div id="content-primary" class="cf clearfix" role="main">
 	<div class="content-header cf clearfix">
 		<h1>Mina annonser</h1>
-		<a href="${cancelUrl}" class="button rp-link-button">Tillbaka</a>
+		<a href="${cancelUrl}" class="btn btn-default">Tillbaka</a>
 	</div>
 	<p>Här visas de annonser som du har lagt upp i Tage, både annonser som är publicerade och annonser som är bokade.</p>
 	<form:form id="search-inventory-form" cssClass="form-general" modelAttribute="searchFilter" action="${filterUrl}" >
@@ -44,7 +44,7 @@
             <div class="row cols-1 cf clearfix">
                 <%--<div class="col small col-1 submit-area">--%>
                 <aui:button-row>
-                    <aui:button cssClass="rp-button button" type="submit" value="Visa" name="submit-508e6b767c18f"/>
+                    <aui:button cssClass="btn btn-primary" type="submit" value="Visa" name="submit-508e6b767c18f"/>
                 </aui:button-row>
                 <%--</div>--%>
             </div>

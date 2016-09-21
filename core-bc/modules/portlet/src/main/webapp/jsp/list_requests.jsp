@@ -15,7 +15,7 @@
 <div id="m-requested-items" class="m m-link-list">
 	<div class="m-h clearfix content-header">
 		<h2>Efterlysningar</h2>
-        <a href="${createRequestUrl}" class="button rp-link-button">Skapa</a>
+        <a href="${createRequestUrl}" class="btn btn-primary">Skapa</a>
 	</div>
 	<div class="m-c">
 		<c:if test="${fn:length(requests) gt 0}">

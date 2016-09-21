@@ -24,8 +24,32 @@
 
 <c:if test="${not empty advertisement}">
 	<div id="content-primary" class="article cf" role="main">
-		<p class="back-link"><a href="${backUrl}">Tillbaka</a></p>
+		<aui:button-row>
+			<c:if test="${!advertisement.booked}">
+				<portlet:renderURL var="bookUrl">
+					<portlet:param name="page" value="bookAd"/>
+					<portlet:param name="advertisementId" value="${advertisement.id}"/>
+				</portlet:renderURL>
+				<a href="${bookUrl}" class="btn btn-primary">Boka</a>
+			</c:if>
+			<c:if test="${userId eq advertisement.creatorUid}">
+				<c:if test="${!advertisement.published}">
+					<portlet:renderURL var="republishAdUrl">
+						<portlet:param name="page" value="republishAd"/>
+						<portlet:param name="advertisementId" value="${advertisement.id}"/>
+					</portlet:renderURL>
+					<a href="${republishAdUrl}" class="btn btn-primary">Återpublicera</a>
+				</c:if>
+				<portlet:actionURL name="loadAd" var="changeAdUrl">
+					<portlet:param name="advertisementId" value="${advertisement.id}"/>
+				</portlet:actionURL>
+				<a href="${changeAdUrl}" class="btn btn-primary">Redigera</a>
+			</c:if>
+			<a href="<portlet:renderURL/>" class="btn btn-default">Tillbaka till startsidan</a>
+		</aui:button-row>
+
 		<h1>${advertisement.title}</h1>
+
 		<div class="inventory-info">
 			<c:if test="${fn:length(advertisement.photos) ne 0}">
 				<div class="flexslider">
@@ -60,7 +84,7 @@
                         <portlet:param name="page" value="bookAd"/>
                         <portlet:param name="advertisementId" value="${advertisement.id}"/>
                     </portlet:renderURL>
-                    <a href="${bookUrl}" class="rp-link-button button">Boka</a>
+                    <a href="${bookUrl}" class="btn btn-primary">Boka</a>
                 </c:if>
                 <c:if test="${userId eq advertisement.creatorUid}">
                     <c:if test="${!advertisement.published}">
@@ -68,14 +92,14 @@
                             <portlet:param name="page" value="republishAd"/>
                             <portlet:param name="advertisementId" value="${advertisement.id}"/>
                         </portlet:renderURL>
-                        <a href="${republishAdUrl}" class="rp-link-button button">Återpublicera</a>
+                        <a href="${republishAdUrl}" class="btn btn-primary">Återpublicera</a>
                     </c:if>
                     <portlet:actionURL name="loadAd" var="changeAdUrl">
                         <portlet:param name="advertisementId" value="${advertisement.id}"/>
                     </portlet:actionURL>
-                    <a href="${changeAdUrl}" class="rp-link-button button">Redigera</a>
+                    <a href="${changeAdUrl}" class="btn btn-primary">Redigera</a>
                 </c:if>
-                <a href="<portlet:renderURL/>" class="rp-link-button button">Tillbaka till startsidan</a>
+                <a href="<portlet:renderURL/>" class="btn btn-default">Tillbaka till startsidan</a>
             </aui:button-row>
 			<c:if test="${userId eq advertisement.creatorUid}">
 				Behöver du ta bort annonsen, maila funktionsbrevlåda: <a href="mailto:tage@vgregion.se">tage@vgregion.se</a>

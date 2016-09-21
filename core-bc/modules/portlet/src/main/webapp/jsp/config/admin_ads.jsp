@@ -7,6 +7,8 @@
 %><portlet:resourceURL id="thumbnail" cacheability="cacheLevelFull" var="thumbnailUrl"/><%
 %><portlet:defineObjects/>
 
+<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
+
 <style type="text/css">
     ul.inventory-listing li.cf {
         border: 1px grey solid;
@@ -68,12 +70,12 @@
 						<div class="meta"><span class="author">Upplagd av ${ad.unit.name}</span>. Status: <strong>${statusTitle}</strong></div>
 						<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
 						<div class="meta">
-							<a href="${removeAdUrl}" class="button rp-link-button">Ta bort</a>
+							<a href="${removeAdUrl}" class="btn btn-danger">Ta bort</a>
 							<c:if test="${ad.published}">
-								<a href="${expireAdUrl}" class="button rp-link-button">Sätt som utgången</a>
+								<a href="${expireAdUrl}" class="btn btn-primary">Sätt som utgången</a>
 							</c:if>				
 							<c:if test="${!ad.published}">
-								<a href="${republishAdUrl}" class="button rp-link-button">Återpublicera</a>
+								<a href="${republishAdUrl}" class="btn btn-primary">Återpublicera</a>
 							</c:if>
 						</div>
 					</div>

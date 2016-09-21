@@ -104,6 +104,7 @@ public class BookAdController extends BaseController {
 				bookingService.bookAdvertisement(booking.getAdvertisementId(), booking.getContact(), getTexts(request), getConfig(request), adLink);
 				response.setRenderParameter("page", "bookAdFinished");
 			} catch(AdvertisementException e) {
+				logger.error("Error when booking ad with id=" + booking.getAdvertisementId() + ", title=" + booking.getAdvertisementTitle(), e);
 				model.addAttribute("errorMessage", messageSource.getMessage(e.getMessageCode(), new Object[]{e.getAdvertisementId()}, request.getLocale()));
 				response.setRenderParameter("page", "bookAdError");
 			}

@@ -122,8 +122,8 @@
 			</div>
 --%>
             <aui:button-row>
-                <aui:button cssClass="rp-button button" type="submit" value="Uppdatera efterlysning" name="submit-509ae872593b6"/>
-                <a class="rp-link-button" href="${cancelUrl}">Avbryt</a>
+                <aui:button cssClass="btn btn-primary" type="submit" value="Uppdatera efterlysning" name="submit-509ae872593b6"/>
+                <a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 		</div>
 	</form:form>

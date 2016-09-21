@@ -26,7 +26,8 @@
 	<context:component-scan base-package="se.goteborg.retursidan.model.form"/>
 	<context:component-scan base-package="se.goteborg.retursidan.service"/>		
 		
-	<jee:jndi-lookup expected-type="javax.sql.DataSource" id="bytessidanDS" jndi-name="jdbc/PortalDbPool" resource-ref="true"/>
+	<jee:jndi-lookup expected-type="javax.sql.DataSource" id="bytessidanDS" jndi-name="jdbc/HotellDbPool" resource-ref="true"/>
+	<!--<jee:jndi-lookup expected-type="javax.sql.DataSource" id="bytessidanDS" jndi-name="jdbc/PortalDbPool" resource-ref="true"/>-->
 	<!--<jee:jndi-lookup expected-type="javax.sql.DataSource" id="bytessidanDS" jndi-name="jdbc/bytessidan" resource-ref="true"/>-->
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

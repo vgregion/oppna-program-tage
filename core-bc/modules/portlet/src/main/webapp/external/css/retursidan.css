@@ -47,6 +47,23 @@ div.cols-3 select {
     float: right;
 }
 
+.content-header a.btn {
+    float: right;
+}
+
+html.aui a.btn {
+    margin: 0 10px 5px 5px;
+    text-decoration: none;
+}
+
+html.aui a.btn-primary, html.aui a.btn-danger {
+    color: #ffffff;
+}
+
+html.aui a.btn-default {
+    color: #333333;
+}
+
 .paging ul {
     list-style: none;
 }

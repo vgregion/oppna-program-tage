@@ -27,6 +27,7 @@
 </script>
 
 <c:if test="${config.useInternalResources}">
+	<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/js/photo_handling.js") %>" type="text/javascript"></script>
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/js/fileuploader.js") %>" type="text/javascript"></script>
@@ -166,8 +167,8 @@
 		<div class="row cols-1 cf">
 			<%--<div class="col medium col-1 submit-area">--%>
             <aui:button-row>
-				<aui:button cssClass="button rp-button" type="submit" value="Uppdatera annons" name="submit-5086c4a3b380d"/>
-				<a class="rp-link-button" href="${cancelUrl}">Avbryt</a>
+				<aui:button cssClass="btn btn-primary" type="submit" value="Uppdatera annons" name="submit-5086c4a3b380d"/>
+				<a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 			<%--</div>--%>
 		</div>

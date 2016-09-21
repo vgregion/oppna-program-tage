@@ -11,6 +11,8 @@
 %><portlet:renderURL var="cancelUrl"/><%
 %><portlet:defineObjects/>
 
+<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
+
 <% 
 	org.springframework.validation.BindingResult bindingResult = 
 		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.config"); 
@@ -121,8 +123,8 @@
 				<a href="${cancelUrl}">Avbryt</a>
 			</div>--%>
             <aui:button-row>
-                <aui:button cssClass="rp-button button" type="submit" value="Uppdatera konfigurationen" name="submit-5086c4a3b380d"/>
-                <a class="rp-link-button" href="${cancelUrl}">Avbryt</a>
+                <aui:button cssClass="btn btn-primary" type="submit" value="Uppdatera konfigurationen" name="submit-5086c4a3b380d"/>
+                <a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 		</div>
 	</form:form>	

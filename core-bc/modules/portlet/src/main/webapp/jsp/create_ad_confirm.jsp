@@ -13,6 +13,7 @@
 
 <c:if test="${config.useInternalResources}">
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 </c:if>
 
 <div id="content-primary" class="article cf" role="main">
@@ -30,8 +31,8 @@
 	<div class="row cols-1 cf">
 		<%--<div class="col medium col-1 submit-area">--%>
             <aui:button-row>
-                <aui:button type="submit" href="#" id="submit-5097936784ac4" cssClass="rp-button button" value="Fortsätt"/>
-                <a class="rp-link-button" href="${cancelUrl}">Avbryt</a>
+                <aui:button type="submit" href="#" id="submit-5097936784ac4" cssClass="btn btn-primary" value="Fortsätt"/>
+                <a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 		<%--</div>--%>
 	</div>
