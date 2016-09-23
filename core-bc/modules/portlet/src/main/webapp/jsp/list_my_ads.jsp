@@ -71,7 +71,7 @@
 	
 				<li class="cf clearfix">
 					<div class="image">
-						<a href="${viewAdUrl}"><img src="${imageUrl}" alt=""></a>
+						<a href="${viewAdUrl}"><img class="thumbnail" src="${imageUrl}" alt=""></a>
 					</div>
 					<div class="content">
 						<div class="meta"><span class="date">${ad.formattedCreatedDate}</span></div>

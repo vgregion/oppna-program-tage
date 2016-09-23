@@ -34,7 +34,7 @@ function initFileUploader(loadingImage) {
 		for (n in window.photoIds ) {
 			window.photoIds[n] = parseInt(window.photoIds[n]);
 			$("#thumbnails").append(
-				"<div data-photoid=\"" + window.photoIds[n] + "\" id=\"uploadedphoto\"><img src=\"" + window.urlConfig.thumbnailUrl + "&id=" + window.photoIds[n] + "\"><br/><a href=\"#\" onclick=\"removePhoto(" + window.photoIds[n] + ");\">ta bort</a></div>"
+				"<div data-photoid=\"" + window.photoIds[n] + "\" id=\"uploadedphoto\"><img class=\"thumbnail\" src=\"" + window.urlConfig.thumbnailUrl + "&id=" + window.photoIds[n] + "\"><br/><a href=\"#\" onclick=\"removePhoto(" + window.photoIds[n] + ");\">ta bort</a></div>"
 			);
 		}
 	} else {
@@ -66,7 +66,7 @@ function initFileUploader(loadingImage) {
 		showMessage: function(message){
 		},
 		onUpload: function(id, fileName) {
-			$("#upload-info").html("laddar upp <b>" + fileName + "</b> <img src='" + loadingImage + "'>");
+			$("#upload-info").html("laddar upp <b>" + fileName + "</b> <img class=\"thumbnail\" src='" + loadingImage + "'>");
 		},         
 	    onComplete: function(id, fileName, result){
 			$("#upload-info").html("");
@@ -74,7 +74,7 @@ function initFileUploader(loadingImage) {
 				window.photoIds.push(result.id);
 				$("#photos").val(window.photoIds);
 				$("#thumbnails").append(
-					"<div data-photoid=\"" + result.id + "\" data-photowidth=\"" + result.width + "\" data-photoheight=\"" + result.height + "\" data-filename=\"" + fileName + "\" id=\"uploadedphoto\"><img src=\"" + window.urlConfig.thumbnailUrl + "&id=" + result.id + "\"><br/><a href=\"#\" onclick=\"removePhoto(" + result.id + ");\">ta bort</a></div>"
+					"<div data-photoid=\"" + result.id + "\" data-photowidth=\"" + result.width + "\" data-photoheight=\"" + result.height + "\" data-filename=\"" + fileName + "\" id=\"uploadedphoto\"><img class=\"thumbnail\" src=\"" + window.urlConfig.thumbnailUrl + "&id=" + result.id + "\"><br/><a href=\"#\" onclick=\"removePhoto(" + result.id + ");\">ta bort</a></div>"
 				);
 			}
 		},

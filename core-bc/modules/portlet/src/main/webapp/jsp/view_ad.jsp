@@ -56,7 +56,7 @@
 					<ul class="slides cf" style="list-style: none">
 						<c:forEach items="${advertisement.photos}" var="photo">
 							<li data-thumb="${thumbnailUrl}&id=${photo.id}">
-								<img src="${photoUrl}&id=${photo.id}" alt="" />
+								<img class="thumbnail" src="${photoUrl}&id=${photo.id}" alt="" />
 							</li>
 						</c:forEach>				
 					</ul>

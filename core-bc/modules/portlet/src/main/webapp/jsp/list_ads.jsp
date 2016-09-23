@@ -14,7 +14,7 @@
 
 <c:if test="${config.useInternalResources}">
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
+    <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css?a=b")%>"/>
 </c:if>
 
 <div id="content-primary" class="cf" role="main">
@@ -78,16 +78,17 @@
 				</c:if>
 	
 				<li class="cf clearfix">
-					<div class="image">
-						<a href="${viewAdUrl}"><img src="${imageUrl}" alt=""></a>
-					</div>
-					<div class="content">
-						<div class="meta"><span class="date">${ad.formattedCreatedDate}</span></div>
-						<h3><a href="${viewAdUrl}">${ad.title}</a></h3>
-						<div class="meta"><span class="author">Upplagd av ${ad.unit.name}</span></div>
-						<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
-					</div>
-				</li>
+					<a class="ad-link" href="${viewAdUrl}">
+						<div class="image">
+							<img class="thumbnail" src="${imageUrl}" alt="">
+						</div>
+						<div class="content">
+							<div class="meta"><span class="date">${ad.formattedCreatedDate}</span></div>
+							<h3>${ad.title}</h3>
+							<div class="meta"><span class="author">Upplagd av ${ad.unit.name}</span></div>
+							<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
+						</div>
+					</a></li>
 			</c:forEach>
 		</ul>
 		<c:if test="${ads.numberOfPages > 1}">
