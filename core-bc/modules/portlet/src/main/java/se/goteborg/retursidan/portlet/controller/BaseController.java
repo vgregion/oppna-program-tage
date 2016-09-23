@@ -2,10 +2,8 @@ package se.goteborg.retursidan.portlet.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.portlet.ModelAndView;
@@ -13,6 +11,7 @@ import se.goteborg.retursidan.model.form.Config;
 import se.goteborg.retursidan.model.form.Texts;
 import se.goteborg.retursidan.portlet.controller.util.P3PUtil;
 import se.goteborg.retursidan.service.ModelService;
+import se.goteborg.retursidan.service.UserDirectoryService;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -28,10 +27,13 @@ public abstract class BaseController {
 
     @Autowired
 	protected ModelService modelService;
-	
+
 	@Autowired
 	protected MessageSource messageSource;
-	
+
+	@Autowired
+	protected UserDirectoryService userDirectoryService;
+
 	@ModelAttribute("userId")
 	public String getUserId(PortletRequest request) {
         /*if (request.getUserPrincipal() != null) {
@@ -41,7 +43,7 @@ public abstract class BaseController {
 		}*/
         return P3PUtil.getUserId(request);
     }
-	
+
 	@ModelAttribute("config")
 	public Config getConfig(PortletRequest request) {
 		PortletPreferences prefs = request.getPreferences();
@@ -57,7 +59,7 @@ public abstract class BaseController {
 	/**
 	 * Handle any uncaught exceptions during the request by redirecting
 	 * the user to an error view where the exception is presented in a
-	 * graceful way. 
+	 * graceful way.
 	 * @param t The exception
 	 * @return A ModelView object redirecting the user to the error view
 	 */

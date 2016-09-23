@@ -17,7 +17,12 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<!-- 
+	<!--<context:property-placeholder location="file:${user.home}/.hotell/blandbarhet/datasource.properties"/>-->
+
+	<context:property-placeholder location="file:${user.home}/.hotell/tage/application.properties"
+								  ignore-resource-not-found="false" ignore-unresolvable="false"/>
+
+	<!--
 		Enable class path scanning of Spring components 
 	-->
 	<!--<context:component-scan base-package="se.goteborg.retursidan.config"/>-->

@@ -13,15 +13,17 @@ import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import se.goteborg.retursidan.model.entity.Advertisement;
 import se.goteborg.retursidan.model.entity.Category;
+import se.goteborg.retursidan.model.entity.Person;
 import se.goteborg.retursidan.model.entity.Unit;
 import se.goteborg.retursidan.portlet.binding.PhotoListPropertyEditor;
 import se.goteborg.retursidan.portlet.validation.AdValidator;
+import se.vgregion.ldapservice.LdapUser;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletRequest;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Controller handling creating ads
@@ -51,7 +53,7 @@ public class CreateAdController extends BaseController {
 
 	
 	@RenderMapping(params="page=createAd")
-	public String createAd(Model model) {
+	public String createAd(PortletRequest request, Model model) {
 		// work-around for Spring form bug/misbehavior, errors are not persisted in model 
 		Advertisement advertisement;
 		if(model.containsAttribute("advertisement")) {
@@ -70,7 +72,26 @@ public class CreateAdController extends BaseController {
 			List<Category> subCategories = modelService.getSubCategories(advertisement.getTopCategory().getId());
 			model.addAttribute("subCategories", subCategories);		
 		}
-			
+
+		String userId = getUserId(request);
+
+		LdapUser ldapUser = userDirectoryService.getLdapUserByUid(userId);
+
+		String displayname = ldapUser.getAttributeValue("displayname");
+		String mail = ldapUser.getAttributeValue("mail");
+
+		if (advertisement.getContact() == null) {
+			advertisement.setContact(new Person());
+		}
+
+        if (advertisement.getContact().getName() == null) {
+            advertisement.getContact().setName(displayname);
+        }
+
+        if (advertisement.getContact().getEmail() == null) {
+            advertisement.getContact().setEmail(mail);
+        }
+
 		return "create_ad";
 	}
 
