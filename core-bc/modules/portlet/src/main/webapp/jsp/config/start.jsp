@@ -7,6 +7,7 @@
 %><portlet:renderURL var="changeConfigUrl"><portlet:param name="page" value="changeConfig"/></portlet:renderURL><%
 %><portlet:renderURL var="changeTextsUrl"><portlet:param name="page" value="changeTexts"/></portlet:renderURL><%
 %><portlet:renderURL var="adminUnitsUrl"><portlet:param name="page" value="adminUnits"/></portlet:renderURL><%
+%><portlet:renderURL var="adminAreasUrl"><portlet:param name="page" value="adminAreas"/></portlet:renderURL><%
 %><portlet:renderURL var="adminCategoriesUrl"><portlet:param name="page" value="adminCategories"/></portlet:renderURL><%
 %><portlet:renderURL var="adminAdsUrl"><portlet:param name="page" value="adminAds"/></portlet:renderURL><%
 %><portlet:renderURL var="adminRequestsUrl"><portlet:param name="page" value="adminRequests"/></portlet:renderURL><%
@@ -22,6 +23,7 @@
 		Välj en administrationsåtgärd nedan:
 		<ul>
 			<li><a href="${adminUnitsUrl}">Administrera enheter</a></li>
+			<li><a href="${adminAreasUrl}">Administrera geografiska områden</a></li>
 			<li><a href="${adminCategoriesUrl}">Administrera kategorier</a></li>
 			<li><a href="${adminAdsUrl}">Administrera annonser</a></li>
 			<li><a href="${adminRequestsUrl}">Administrera efterlysningar</a></li>

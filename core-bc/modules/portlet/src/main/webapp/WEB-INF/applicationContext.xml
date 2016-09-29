@@ -43,6 +43,7 @@
 				<value>se.goteborg.retursidan.model.entity.Request</value>
 				<value>se.goteborg.retursidan.model.entity.Category</value>
 				<value>se.goteborg.retursidan.model.entity.Unit</value>
+				<value>se.goteborg.retursidan.model.entity.Area</value>
 				<value>se.goteborg.retursidan.model.entity.Person</value>
 				<value>se.goteborg.retursidan.model.entity.Photo</value>
 				<value>se.goteborg.retursidan.model.entity.Visit</value>

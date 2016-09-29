@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import se.goteborg.retursidan.dao.AdvertisementDAO;
+import se.goteborg.retursidan.dao.AreaDAO;
 import se.goteborg.retursidan.dao.CategoryDAO;
 import se.goteborg.retursidan.dao.PersonDAO;
 import se.goteborg.retursidan.dao.PhotoDAO;
@@ -21,6 +22,7 @@ import se.goteborg.retursidan.dao.UnitDAO;
 import se.goteborg.retursidan.model.PagedList;
 import se.goteborg.retursidan.model.PhotoHolder;
 import se.goteborg.retursidan.model.entity.Advertisement;
+import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Category;
 import se.goteborg.retursidan.model.entity.Person;
 import se.goteborg.retursidan.model.entity.Photo;
@@ -41,6 +43,9 @@ public class ModelService {
 
 	@Autowired
 	private UnitDAO unitDAO;	
+
+	@Autowired
+	private AreaDAO areaDAO;
 
 	@Autowired
 	private PersonDAO personDAO;		
@@ -70,6 +75,13 @@ public class ModelService {
 	}
 	public List<Unit> getUnits() {
 		return unitDAO.findAll();
+	}
+
+	public void addArea(Area area) {
+		areaDAO.add(area);
+	}
+	public List<Area> getAreas() {
+		return areaDAO.findAll();
 	}
 
 	public void addPerson(Person person) {
@@ -190,6 +202,9 @@ public class ModelService {
 	}
 	public void removeUnit(Unit unit) {
 		unitDAO.delete(unit);
+	}
+	public void removeArea(Area area) {
+		areaDAO.delete(area);
 	}
 	public void removeCategory(Category category) {
 		categoryDAO.delete(category);
