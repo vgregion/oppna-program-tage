@@ -92,8 +92,9 @@
 						<div class="content">
 							<div class="meta"><span class="date">${ad.formattedCreatedDate}</span></div>
 							<h3>${ad.title}</h3>
-							<div class="meta"><span class="author">Upplagd av ${ad.unit.name}</span></div>
-							<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
+							<div class="meta"><span class="author">Upplagd av <strong>${ad.unit.name}</strong></span></div>
+							<c:if test="${not empty ad.area}"><div class="meta"><span class="">Geografiskt område <strong>${ad.area.name}</strong></span></div></c:if>
+                            <div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
 						</div>
 					</a>
 				</li>
