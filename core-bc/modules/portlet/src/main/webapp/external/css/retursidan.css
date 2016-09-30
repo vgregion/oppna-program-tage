@@ -3,7 +3,7 @@ form.form-general div.row {
     padding-top: 10px;
 }
 
-div.cols-2 div.select {
+div.cols-2 div.select, div.cols-2 div.col-table {
     float: left;
     padding: 10px 0 10px 0;
     width: 50%;
@@ -17,7 +17,7 @@ div.cols-2 .mandatory label, div.cols-1 .mandatory label {
     font-weight: bold;
 }
 
-div.cols-3 {
+div.cols-3, div.cols-4 {
     background-color: #f6f6f6;
     border: 1px solid #AAAAAA;
     border-radius: 3px;
@@ -25,13 +25,19 @@ div.cols-3 {
 }
 
 div.cols-3 div.select {
-    /*background-color: #f6f6f6;*/
-    float: left;
-    padding: 10px 0 10px 0;
     width: 32%;
 }
 
-div.cols-3 select {
+div.cols-4 div.select {
+    width: 24%;
+}
+
+div.cols-3 div.select, div.cols-4 div.select {
+    float: left;
+    padding: 10px 0 10px 0;
+}
+
+div.cols-3 select, div.cols-4 select {
     width: 95%;
 }
 

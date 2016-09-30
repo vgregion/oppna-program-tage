@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import se.goteborg.retursidan.model.PagedList;
 import se.goteborg.retursidan.model.entity.Advertisement;
 import se.goteborg.retursidan.model.entity.Advertisement.Status;
+import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Category;
 import se.goteborg.retursidan.model.entity.Photo;
 import se.goteborg.retursidan.model.entity.Unit;
@@ -63,7 +64,7 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	 * @return a PagedList containing the results
 	 */
 	@SuppressWarnings("unchecked")
-	public PagedList<Advertisement> find(String creatorUid, Status status, Category topCategory, Category category, Unit unit, boolean usingDisplayOption, int page, int pageSize) {
+	public PagedList<Advertisement> find(String creatorUid, Status status, Category topCategory, Category category, Unit unit, Area area, boolean usingDisplayOption, int page, int pageSize) {
 		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
 		if (creatorUid != null) {
 			criteria.add(Restrictions.eq("creatorUid", creatorUid));
@@ -83,6 +84,10 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 			criteria.add(Restrictions.eq("displayOption", Advertisement.DisplayOption.ENTIRE_CITY));
 		}
 		
+		if (area  != null && area.getId() != -1) {
+			criteria.add(Restrictions.eq("area", area));
+		}
+
 		// get the row count for this query
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		criteria.setProjection(Projections.rowCount());
@@ -139,7 +144,7 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	 * @return the number of advertisements
 	 */
 	public Integer count() {
-		return count(null, null);
+		return count(null, (Unit) null);
 	}
 
 	/**
@@ -157,7 +162,7 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	 * @return the number of advertisements
 	 */
 	public Integer count(Status status) {
-		return count(status, null);
+		return count(status, (Unit) null);
 	}
 
 	/**
@@ -191,5 +196,28 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 		query.setParameter("publishStatus", Status.PUBLISHED);
 		query.setDate("maxDate", maxDate);
 		return query.executeUpdate();
+	}
+
+	public Integer countNonNullArea(Status status) {
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
+
+		criteria.add(Restrictions.isNotNull("area"));
+
+		if (status != null) {
+			criteria.add(Restrictions.eq("status", status));
+		}
+
+		return ((Number) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+	}
+
+	public Integer count(Status status, Area area) {
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
+		if (area != null) {
+			criteria.add(Restrictions.eq("area", area));
+		}
+		if (status != null) {
+			criteria.add(Restrictions.eq("status", status));
+		}
+		return ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
 	}
 }

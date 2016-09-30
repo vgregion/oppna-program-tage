@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
+import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Category;
 import se.goteborg.retursidan.model.entity.Request;
 import se.goteborg.retursidan.model.entity.Unit;
@@ -43,6 +44,9 @@ public class CreateRequestController extends BaseController {
 		List<Unit> units = modelService.getUnits();
 		model.addAttribute("units", units);
 	
+		List<Area> areas = modelService.getAreas();
+		model.addAttribute("areas", areas);
+
 		List<Category> topCategories = modelService.getTopCategories();
 		model.addAttribute("topCategories", topCategories);
 
@@ -62,7 +66,10 @@ public class CreateRequestController extends BaseController {
 		
 		List<Unit> units = modelService.getUnits();
 		model.addAttribute("units", units);
-	
+
+		List<Area> areas = modelService.getAreas();
+		model.addAttribute("areas", areas);
+
 		List<Category> topCategories = modelService.getTopCategories();
 		model.addAttribute("topCategories", topCategories);
 

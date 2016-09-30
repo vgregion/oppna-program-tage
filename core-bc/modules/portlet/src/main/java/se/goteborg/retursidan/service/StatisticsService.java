@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import se.goteborg.retursidan.dao.AdvertisementDAO;
 import se.goteborg.retursidan.dao.RequestDAO;
 import se.goteborg.retursidan.model.entity.Advertisement.Status;
+import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Unit;
 
 @Service
@@ -50,4 +51,27 @@ public class StatisticsService {
 		return advertisementDAO.count(Status.EXPIRED);
 	}
 
+	public Integer getTotalNumberOfAdsWithArea() {
+		return advertisementDAO.countNonNullArea(null);
+	}
+
+	public Integer getTotalNumberOfRequestsWithArea() {
+		return requestDAO.countNonNullArea();
+	}
+
+	public Integer getTotalAdsForArea(Area area) {
+		return advertisementDAO.count(null, area);
+	}
+
+	public Integer getTotalRequestsForArea(Area area) {
+		return requestDAO.count(area);
+	}
+
+	public Integer getTotalNumberOfBookedAdsWithArea() {
+		return advertisementDAO.countNonNullArea(Status.BOOKED);
+	}
+
+	public Integer getBookedAdsForArea(Area area) {
+		return advertisementDAO.count(Status.BOOKED, area);
+	}
 }

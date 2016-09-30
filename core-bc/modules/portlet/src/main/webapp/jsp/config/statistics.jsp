@@ -17,59 +17,132 @@
     </div>
     <div style="font-size: 12pt;">Antal unika besökare på funktionen: <strong>${uniqueVisitors}</strong></div>
     <h2>Upplagda annonser</h2>
-	<table class="statistics" style="border: 1px solid #AAA">
-		<tr>
-			<th>Förvaltning</th>
-			<th>Antal</th>
-		</tr>
-		<c:forEach items="${units}" var="unit" varStatus="status">
-			<tr>
-				<td>${unit.name}</td>
-				<td><strong>${unitAdCount[status.index]}</strong></td>
-			</tr>
-		</c:forEach>
-		<tr>
-			<td>TOTALT</td>
-			<td><strong>${totalNumberOfAds}</strong></td>
-		</tr>
-	</table>	
-	
+
+	<div class="cols-2 clearfix">
+		<div class="col-table col col-1">
+			<table class="statistics" style="border: 1px solid #AAA">
+				<tr>
+					<th>Förvaltning</th>
+					<th>Antal</th>
+				</tr>
+				<c:forEach items="${units}" var="unit" varStatus="status">
+					<tr>
+						<td>${unit.name}</td>
+						<td><strong>${unitAdCount[status.index]}</strong></td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td>TOTALT</td>
+					<td><strong>${totalNumberOfAds}</strong></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="col-table col col-2">
+			<table class="statistics" style="border: 1px solid #AAA">
+				<tr>
+					<th>Geografiskt område</th>
+					<th>Antal</th>
+				</tr>
+				<c:forEach items="${areas}" var="area" varStatus="status">
+					<tr>
+						<td>${area.name}</td>
+						<td><strong>${areaAdCount[status.index]}</strong></td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td>TOTALT</td>
+					<td><strong>${totalNumberOfAreaAds}</strong></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
 	<h2>Upplagda efterlysningar</h2>
-	<table class="statistics" style="border: 1px solid #AAA">
-		<tr>
-			<th>Förvaltning</th>
-			<th>Antal</th>
-		</tr>
-		<c:forEach items="${units}" var="unit" varStatus="status">
-			<tr>
-				<td>${unit.name}</td>
-				<td><strong>${unitRequestCount[status.index]}</strong></td>
-			</tr>
-		</c:forEach>
-		<tr>
-			<td>TOTALT</td>
-			<td><strong>${totalNumberOfRequests}</strong></td>
-		</tr>
-	</table>	
-	
+	<div class="cols-2 clearfix">
+		<div class="col-table col col-1">
+			<table class="statistics" style="border: 1px solid #AAA">
+				<tr>
+					<th>Förvaltning</th>
+					<th>Antal</th>
+				</tr>
+				<c:forEach items="${units}" var="unit" varStatus="status">
+					<tr>
+						<td>${unit.name}</td>
+						<td><strong>${unitRequestCount[status.index]}</strong></td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td>TOTALT</td>
+					<td><strong>${totalNumberOfRequests}</strong></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="col-table col col-2">
+			<table class="statistics" style="border: 1px solid #AAA">
+				<tr>
+					<th>Geografiskt område</th>
+					<th>Antal</th>
+				</tr>
+				<c:forEach items="${areas}" var="area" varStatus="status">
+					<tr>
+						<td>${area.name}</td>
+						<td><strong>${areaRequestCount[status.index]}</strong></td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td>TOTALT</td>
+					<td><strong>${totalNumberOfAreaRequests}</strong></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
 	<h2>Bokade annonser</h2>
-	<table class="statistics" style="border: 1px solid #AAA">
-		<tr>
-			<th>Förvaltning</th>
-			<th>Antal</th>
-		</tr>
-		<c:forEach items="${units}" var="unit" varStatus="status">
-			<tr>
-				<td>${unit.name}</td>
-				<td><strong>${unitBookedCount[status.index]}</strong></td>
-			</tr>
-		</c:forEach>
-		<tr>
-			<td>TOTALT</td>
-			<td><strong>${totalNumberOfBookedAds}</strong></td>
-		</tr>
-	</table>	
-	
+	<div class="cols-2 clearfix">
+
+		<div class="col-table col col-1">
+
+			<table class="statistics" style="border: 1px solid #AAA">
+				<tr>
+					<th>Förvaltning</th>
+					<th>Antal</th>
+				</tr>
+				<c:forEach items="${units}" var="unit" varStatus="status">
+					<tr>
+						<td>${unit.name}</td>
+						<td><strong>${unitBookedCount[status.index]}</strong></td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td>TOTALT</td>
+					<td><strong>${totalNumberOfBookedAds}</strong></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="col-table col col-2">
+			<table class="statistics" style="border: 1px solid #AAA">
+				<tr>
+					<th>Geografiskt område</th>
+					<th>Antal</th>
+				</tr>
+				<c:forEach items="${areas}" var="area" varStatus="status">
+					<tr>
+						<td>${area.name}</td>
+						<td><strong>${areaBookedCount[status.index]}</strong></td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td>TOTALT</td>
+					<td><strong>${totalNumberOfBookedAreaAds}</strong></td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+
 	<h2>Övrigt</h2>
 	Antal icke bokade men utgångna annonser: <strong>${totalNumberOfExpiredAds}</strong>
 </div>

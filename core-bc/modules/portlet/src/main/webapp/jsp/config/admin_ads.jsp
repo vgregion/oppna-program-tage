@@ -9,16 +9,6 @@
 
 <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 
-<style type="text/css">
-    ul.inventory-listing li.cf {
-        border: 1px grey solid;
-        box-shadow: 1px 1px 7px;
-        list-style: none;
-        margin: 16px 0;
-        padding: 6px;
-    }
-</style>
-
 <div id="content-primary" class="cf" role="main">
 	<p class="back-link"><a href="<portlet:renderURL/>">Tillbaka</a></p>
 	<div class="content-header cf clearfix">

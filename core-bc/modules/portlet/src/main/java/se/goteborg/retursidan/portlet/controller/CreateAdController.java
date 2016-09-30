@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import se.goteborg.retursidan.model.entity.Advertisement;
+import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Category;
 import se.goteborg.retursidan.model.entity.Person;
 import se.goteborg.retursidan.model.entity.Unit;
@@ -65,6 +66,9 @@ public class CreateAdController extends BaseController {
 		List<Unit> units = modelService.getUnits();
 		model.addAttribute("units", units);
 	
+		List<Area> areas = modelService.getAreas();
+		model.addAttribute("areas", areas);
+
 		List<Category> topCategories = modelService.getTopCategories();
 		model.addAttribute("topCategories", topCategories);
 
@@ -75,22 +79,26 @@ public class CreateAdController extends BaseController {
 
 		String userId = getUserId(request);
 
-		LdapUser ldapUser = userDirectoryService.getLdapUserByUid(userId);
+		try {
+			LdapUser ldapUser = userDirectoryService.getLdapUserByUid(userId);
 
-		String displayname = ldapUser.getAttributeValue("displayname");
-		String mail = ldapUser.getAttributeValue("mail");
+			String displayname = ldapUser.getAttributeValue("displayname");
+			String mail = ldapUser.getAttributeValue("mail");
 
-		if (advertisement.getContact() == null) {
-			advertisement.setContact(new Person());
+			if (advertisement.getContact() == null) {
+				advertisement.setContact(new Person());
+			}
+
+			if (advertisement.getContact().getName() == null) {
+				advertisement.getContact().setName(displayname);
+			}
+
+			if (advertisement.getContact().getEmail() == null) {
+				advertisement.getContact().setEmail(mail);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 		}
-
-        if (advertisement.getContact().getName() == null) {
-            advertisement.getContact().setName(displayname);
-        }
-
-        if (advertisement.getContact().getEmail() == null) {
-            advertisement.getContact().setEmail(mail);
-        }
 
 		return "create_ad";
 	}

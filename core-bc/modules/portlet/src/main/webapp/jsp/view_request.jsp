@@ -34,11 +34,14 @@
 
 <c:if test="${not empty request}">
 	<div id="content-primary" class="article cf clearfix" role="main">
-		<p class="back-link"><a href="${backUrl}">Tillbaka</a></p>
+		<p class="back-link"><a class="btn btn-default" href="${backUrl}">Tillbaka till startsidan</a></p>
 		<h1>${request.title}</h1>
 		<div class="inventory-info">
 			<p class="meta"><span class="date">${request.formattedCreatedDate}</span> | <span class="category">${request.category.parent.title} <span class="sep">&gt;</span> ${request.category.title}</span></p>
 			<p class="meta">Efterlyses av <strong>${request.unit.name}</strong></p>
+			<c:if test="${not empty request.area.name}">
+				<p class="meta">Geografiskt område <strong>${request.area.name}</strong></p>
+			</c:if>
 			<p>${request.description}</p>
 			<h2>Kontaktperson</h2>
 			<div class="contact-person">
@@ -60,8 +63,8 @@
 				</portlet:actionURL>
 				<a href="${changeRequestUrl}" class="btn btn-primary">Redigera</a>
 			</c:if>
+			<a href="${cancelUrl}" class="btn btn-default">Tillbaka till startsidan</a>
 		</div>
-		<a href="${cancelUrl}" class="btn btn-default">Tillbaka till startsidan</a>
 	</div>
 </c:if>
 <c:if test="${empty request}">

@@ -77,6 +77,9 @@ public class Advertisement extends GeneralEntityBean implements Serializable {
 	@ManyToOne(optional=false)
 	private Unit unit;
 	
+	@ManyToOne(optional=true)
+	private Area area;
+
 	@Column(nullable=false)
 	private String pickupAddress;
 	
@@ -173,6 +176,14 @@ public class Advertisement extends GeneralEntityBean implements Serializable {
 
 	public void setUnit(Unit unit) {
 		this.unit = unit;
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
 	}
 
 	public String getPickupAddress() {

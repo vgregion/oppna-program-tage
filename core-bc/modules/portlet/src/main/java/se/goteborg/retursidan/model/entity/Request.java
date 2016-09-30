@@ -54,6 +54,9 @@ public class Request extends GeneralEntityBean implements Serializable {
 	@ManyToOne(optional=false)
 	private Unit unit;
 	
+	@ManyToOne(optional=true)
+	private Area area;
+
 	public String getTitle() {
 		return title;
 	}
@@ -111,6 +114,15 @@ public class Request extends GeneralEntityBean implements Serializable {
 	public void setUnit(Unit unit) {
 		this.unit = unit;
 	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+
 	public boolean isPublished() {
 		return Status.PUBLISHED.equals(status);
 	}

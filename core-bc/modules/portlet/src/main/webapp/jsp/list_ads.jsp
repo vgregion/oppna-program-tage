@@ -26,7 +26,7 @@
 	<p>Här kan du annonsera ut överblivna möbler och utrustning som du vill skänka för återanvändning till andra verksamheter inom VGR. Du kan även efterlysa möbler och utrustning din verksamhet har behov av. Det kostar inget att annonsera på Tage.</p>
 	<p>Vi gör det här för att öka återvändningen och minska resursförbrukningen.</p>
 	<form:form id="search-inventory-form" cssClass="form-general" modelAttribute="searchFilter" action="${filterUrl}" >
-		<div class="row cols-3 cf clearfix">
+		<div class="row cols-4 cf clearfix">
 			<div class="select medium col col-1">
 				<label for="508e6b767babe">Kategori</label>
 				<form:select id="508e6b767babe" path="topCategory.id">
@@ -48,6 +48,13 @@
 				<form:select id="508e6b767bd2c" path="unit.id">
 					<option value="-1" selected="selected">Alla</option>
 					<form:options items="${units}" itemLabel="name" itemValue="id"/>
+				</form:select>
+			</div>
+            <div class="select medium col col-4">
+				<label for="508e6b767bd2c">Geografiskt område</label>
+				<form:select id="435abeae3252b" path="area.id">
+					<option value="-1" selected="selected">Alla</option>
+					<form:options items="${areas}" itemLabel="name" itemValue="id"/>
 				</form:select>
 			</div>
             <div class="row cols-1 cf">
@@ -88,7 +95,8 @@
 							<div class="meta"><span class="author">Upplagd av ${ad.unit.name}</span></div>
 							<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
 						</div>
-					</a></li>
+					</a>
+				</li>
 			</c:forEach>
 		</ul>
 		<c:if test="${ads.numberOfPages > 1}">

@@ -1,20 +1,20 @@
 package se.goteborg.retursidan.dao;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-
 import se.goteborg.retursidan.model.PagedList;
+import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Request;
 import se.goteborg.retursidan.model.entity.Request.Status;
 import se.goteborg.retursidan.model.entity.Unit;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  *  Data access object for the Request entity objects
@@ -87,7 +87,7 @@ public class RequestDAO extends BaseDAO<Request> {
 	 * @return the number of requests found
 	 */
 	public Integer count() {
-		return count(null);
+		return count((Unit) null);
 	}
 
 	/**
@@ -118,4 +118,21 @@ public class RequestDAO extends BaseDAO<Request> {
 		query.setDate("maxDate", maxDate);
 		return query.executeUpdate();
 	}
+
+	public Integer countNonNullArea() {
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Request.class);
+
+		criteria.add(Restrictions.isNotNull("area"));
+
+		return ((Number) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+	}
+
+	public Integer count(Area area) {
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Request.class);
+		if (area != null) {
+			criteria.add(Restrictions.eq("area", area));
+		}
+		return ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+	}
+
 }

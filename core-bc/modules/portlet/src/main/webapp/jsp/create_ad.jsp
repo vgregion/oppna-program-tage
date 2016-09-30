@@ -110,6 +110,12 @@
 			</div>
 		</div>
 		<div class="row cols-1 cf">
+			<div class="select large col col-1 mandatory">
+				<label for="3245987abaed8">Geografiskt område <em>(obligatoriskt)</em></label>
+				<form:select id="3245987abaed8" items="${areas}" itemValue="id" itemLabel="name" path="area.id"></form:select>
+			</div>
+		</div>
+		<div class="row cols-1 cf">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.name") ? "error" : "" %>">
 				<label for="5086c4a3b306c">Kontaktperson <em>(obligatoriskt)</em> <strong><form:errors path="contact.name"/></strong></label>
 				<form:input path="contact.name" id="5086c4a3b306c"/>

@@ -64,6 +64,9 @@
 			</c:if>			
 			<p class="meta"><span class="date">${advertisement.formattedCreatedDate}</span> | <span class="category">${advertisement.category.parent.title} <span class="sep">&gt;</span> ${advertisement.category.title}</span></p>
 			<p class="meta">Bortskänkes av <strong>${advertisement.unit.name}</strong></p>
+			<c:if test="${not empty advertisement.area.name}">
+				<p class="meta">Geografiskt område <strong>${advertisement.area.name}</strong></p>
+			</c:if>
 			<p>${advertisement.description}</p>
 			<div class="info-box">
 				<h3>Hämtningsadress</h3>

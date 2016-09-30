@@ -28,8 +28,8 @@
 		</div>
 		<div class="row cols-1 cf">
 			<div class="col medium col-1 submit-area">
-				<a href="#" id="submit-5097936784ac4" class="button">Fortsätt</a>
-				<a href="${cancelUrl}">Avbryt</a>
+				<a href="#" id="submit-5097936784ac4" class="btn btn-danger">Fortsätt</a>
+				<a href="${cancelUrl}" class="btn btn-default">Avbryt</a>
 			</div>
 		</div>
 	</form>

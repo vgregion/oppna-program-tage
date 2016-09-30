@@ -146,17 +146,17 @@ public class ModelService {
 	public Advertisement getAdvertisement(int id) {
 		return advertisementDAO.findById(id);
 	}
-	public PagedList<Advertisement> getAllFilteredAdvertisements(Advertisement.Status status, Category topCategory, Category category, Unit unit, int page, int pageSize) {
-		return advertisementDAO.find(null, status, topCategory, category, unit, false, page, pageSize);
+	public PagedList<Advertisement> getAllFilteredAdvertisements(Advertisement.Status status, Category topCategory, Category category, Unit unit, Area area, int page, int pageSize) {
+		return advertisementDAO.find(null, status, topCategory, category, unit, area, false, page, pageSize);
 	}
 	public PagedList<Advertisement> getAllAdvertisements(Advertisement.Status status, int page, int pageSize) {
-		return advertisementDAO.find(null, status, null, null, null, false, page, pageSize);
+		return advertisementDAO.find(null, status, null, null, null, null, false, page, pageSize);
 	}
 	public PagedList<Advertisement> getAllAdvertisementsForUid(String uid, int page, int pageSize) {
-		return advertisementDAO.find(uid, null, null, null, null, false, page, pageSize);
+		return advertisementDAO.find(uid, null, null, null, null, null, false, page, pageSize);
 	}
-	public PagedList<Advertisement> getAllFilteredAdvertisementsForUid(String uid, Category topCategory, Category category, Unit unit, int page, int pageSize) {
-		return advertisementDAO.find(uid, null, topCategory, category, unit, false, page, pageSize);
+	public PagedList<Advertisement> getAllFilteredAdvertisementsForUid(String uid, Category topCategory, Category category, Unit unit, Area area, int page, int pageSize) {
+		return advertisementDAO.find(uid, null, topCategory, category, unit, area, false, page, pageSize);
 	}
 	
 	public void removeAdvertisement(Advertisement advertisement) {
