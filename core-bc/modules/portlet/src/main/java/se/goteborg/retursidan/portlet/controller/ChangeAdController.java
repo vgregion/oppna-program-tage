@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import se.goteborg.retursidan.model.entity.Advertisement;
+import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Category;
 import se.goteborg.retursidan.model.entity.Unit;
 import se.goteborg.retursidan.portlet.binding.PhotoListPropertyEditor;
@@ -22,7 +23,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Controller handling changing ads
@@ -53,6 +53,9 @@ public class ChangeAdController extends BaseController {
 		List<Unit> units = modelService.getUnits();
 		model.addAttribute("units", units);
 	
+		List<Area> areas = modelService.getAreas();
+		model.addAttribute("areas", areas);
+
 		List<Category> topCategories = modelService.getTopCategories();
 		model.addAttribute("topCategories", topCategories);
 

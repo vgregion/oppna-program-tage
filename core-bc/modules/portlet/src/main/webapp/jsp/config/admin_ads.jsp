@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 
 <div id="content-primary" class="cf" role="main">
-	<p class="back-link"><a href="<portlet:renderURL/>">Tillbaka</a></p>
+	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL/>">Tillbaka</a></p>
 	<div class="content-header cf clearfix">
 		<h1>Administration - administrera annonser</h1>
 	</div>

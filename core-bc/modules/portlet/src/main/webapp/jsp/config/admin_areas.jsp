@@ -20,7 +20,7 @@
 %>
 
 <div id="content-primary" class="article cf" role="main">
-	<p class="back-link"><a href="<portlet:renderURL/>">Tillbaka</a></p>
+	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL/>">Tillbaka</a></p>
 	<h1>Administration - administrera geografiska områden</h1>
 	
 <%

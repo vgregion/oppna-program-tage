@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<!-- Copyright 2010 Västra Götalandsregionen This library is free software; you can redistribute it and/or modify it
+ under the terms of version 2.1 of the GNU Lesser General Public License as published by the Free Software Foundation.
+ This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+ You should have received a copy of the GNU Lesser General Public License along with this library; if not, write to the
+ Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA -->
+
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_0_0.dtd">
+
+<routes>
+    
+	<route>
+		<pattern>/ad/{advertisementId}</pattern>
+		<implicit-parameter name="page">viewAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/filterAds</pattern>
+		<implicit-parameter name="javax.portlet.action">filterAds</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/performBooking</pattern>
+		<implicit-parameter name="javax.portlet.action">performBooking</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/saveAd</pattern>
+		<implicit-parameter name="javax.portlet.action">saveAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/updateAd</pattern>
+		<implicit-parameter name="javax.portlet.action">updateAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/loadAd/{advertisementId}</pattern>
+		<implicit-parameter name="javax.portlet.action">loadAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/createAdConfirm</pattern>
+		<implicit-parameter name="page">createAdConfirm</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/createAd</pattern>
+		<implicit-parameter name="page">createAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/bookAd/{advertisementId}</pattern>
+		<implicit-parameter name="page">bookAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/listMyAds</pattern>
+		<implicit-parameter name="page">listMyAds</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/saveUnit</pattern>
+		<implicit-parameter name="javax.portlet.action">saveUnit</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/saveArea</pattern>
+		<implicit-parameter name="javax.portlet.action">saveArea</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/saveCategory</pattern>
+		<implicit-parameter name="javax.portlet.action">saveCategory</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/removeUnit</pattern>
+		<implicit-parameter name="javax.portlet.action">removeUnit</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/removeArea</pattern>
+		<implicit-parameter name="javax.portlet.action">removeArea</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/removeCategory</pattern>
+		<implicit-parameter name="javax.portlet.action">removeCategory</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/removeAd/{advertisementId}</pattern>
+		<implicit-parameter name="javax.portlet.action">removeAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/republishAd/{advertisementId}</pattern>
+		<implicit-parameter name="javax.portlet.action">republishAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/expireAd/{advertisementId}</pattern>
+		<implicit-parameter name="javax.portlet.action">expireAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/removeRequest/{requestId}</pattern>
+		<implicit-parameter name="javax.portlet.action">removeRequest</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/republishRequest/{requestId}</pattern>
+		<implicit-parameter name="javax.portlet.action">republishRequest</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/expireRequest/{requestId}</pattern>
+		<implicit-parameter name="javax.portlet.action">expireRequest</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/units</pattern>
+		<implicit-parameter name="page">adminUnits</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/areas</pattern>
+		<implicit-parameter name="page">adminAreas</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/categories</pattern>
+		<implicit-parameter name="page">adminCategories</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/ads</pattern>
+		<implicit-parameter name="page">adminAds</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/requests</pattern>
+		<implicit-parameter name="page">adminRequests</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin/statistics</pattern>
+		<implicit-parameter name="page">statistics</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/admin</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/listAds</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+	</route>
+
+</routes>
