@@ -47,6 +47,12 @@
 	</route>
 
 	<route>
+		<pattern>/performRepublishing/{advertisementId}</pattern>
+		<implicit-parameter name="javax.portlet.action">performRepublishing</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+	</route>
+
+	<route>
 		<pattern>/createAdConfirm</pattern>
 		<implicit-parameter name="page">createAdConfirm</implicit-parameter>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
@@ -55,6 +61,12 @@
 	<route>
 		<pattern>/createAd</pattern>
 		<implicit-parameter name="page">createAd</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/republishAd/{advertisementId}</pattern>
+		<implicit-parameter name="page">republishAd</implicit-parameter>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 	</route>
 

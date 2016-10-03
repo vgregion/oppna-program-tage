@@ -28,8 +28,8 @@
 		</div>
 		<div class="row cols-1 cf">
 			<div class="col medium col-1 submit-area">
-				<input type="button" value="Fortsätt" name="submit-5097936784ac4" id="submit-5097936784ac4">
-				<a href="${cancelUrl}">Avbryt</a>
+				<input class="btn btn-primary" type="button" value="Fortsätt" name="submit-5097936784ac4" id="submit-5097936784ac4">
+				<a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
 			</div>
 		</div>
 	</form>

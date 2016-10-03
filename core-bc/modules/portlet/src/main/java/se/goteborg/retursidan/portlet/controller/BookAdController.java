@@ -100,7 +100,7 @@ public class BookAdController extends BaseController {
 		if (!bindingResult.hasErrors()) {
 			booking.getContact().setUserId(getUserId(request));
 			try {
-				String adLink = CreateURLHelper.createHttpBaseURL(request) + getConfig(request).getPocURIBase() +  "&page=viewAd&advertisementId=" + booking.getAdvertisementId();
+				String adLink = CreateURLHelper.createHttpBaseURL(request) + getConfig(request).getPocURIBase() +  "ad/" + booking.getAdvertisementId();
 				bookingService.bookAdvertisement(booking.getAdvertisementId(), booking.getContact(), getTexts(request), getConfig(request), adLink);
 				response.setRenderParameter("page", "bookAdFinished");
 			} catch(AdvertisementException e) {

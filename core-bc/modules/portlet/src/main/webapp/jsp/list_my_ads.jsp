@@ -70,15 +70,18 @@
 				</c:if>
 	
 				<li class="cf clearfix">
-					<div class="image">
-						<a href="${viewAdUrl}"><img class="thumbnail" src="${imageUrl}" alt=""></a>
-					</div>
-					<div class="content">
-						<div class="meta"><span class="date">${ad.formattedCreatedDate}</span></div>
-						<h3><a href="${viewAdUrl}">${ad.title}</a></h3>
-						<div class="meta"><span class="author">Upplagd av ${ad.unit.name}</span></div>
-						<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
-					</div>
+					<a class="ad-link" href="${viewAdUrl}">
+						<div class="image">
+							<img class="thumbnail" src="${imageUrl}" alt="">
+						</div>
+						<div class="content">
+							<div class="meta"><span class="date">${ad.formattedCreatedDate}</span></div>
+							<h3>${ad.title}</h3>
+							<div class="meta"><span class="author">Upplagd av <strong>${ad.unit.name}</strong></span></div>
+							<c:if test="${not empty ad.area}"><div class="meta"><span class="">Geografiskt område <strong>${ad.area.name}</strong></span></div></c:if>
+							<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
+						</div>
+					</a>
 				</li>
 			</c:forEach>
 		</ul>

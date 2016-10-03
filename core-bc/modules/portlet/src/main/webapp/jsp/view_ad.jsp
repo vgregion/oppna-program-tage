@@ -45,7 +45,7 @@
 				</portlet:actionURL>
 				<a href="${changeAdUrl}" class="btn btn-primary">Redigera</a>
 			</c:if>
-			<a href="<portlet:renderURL/>" class="btn btn-default">Tillbaka till startsidan</a>
+			<a href="${backUrl}" class="btn btn-default">Tillbaka</a>
 		</aui:button-row>
 
 		<h1>${advertisement.title}</h1>

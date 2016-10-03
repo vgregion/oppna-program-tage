@@ -66,8 +66,7 @@
       </preference>
       <preference>
         <name>pocURIBase</name>
-        <value>/group/vgregion/pub-tage?p_p_id=Retursidan_WAR_tageportlet</value>
-        <!--<value>/wps/myportal/int?uri=gbglnk:intranat.tage</value>-->
+        <value>/group/tage/start/-/t/</value>
       </preference>
       <preference>
         <name>rulesUrl</name>
