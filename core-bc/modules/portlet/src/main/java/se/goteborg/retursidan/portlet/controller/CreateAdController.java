@@ -9,6 +9,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import se.goteborg.retursidan.model.entity.Advertisement;
@@ -48,16 +49,38 @@ public class CreateAdController extends BaseController {
 	}
 		
 	@RenderMapping(params="page=createAdConfirm")
-	public String render(Model model) {		
+	public String render(@RequestParam(value = "copyAdvertisementId", required = false) Integer copyAdvertisementId,
+						 Model model) {
+		model.addAttribute("copyAdvertisementId", copyAdvertisementId);
 		return "create_ad_confirm";
 	}
 
 	
 	@RenderMapping(params="page=createAd")
-	public String createAd(PortletRequest request, Model model) {
+	public String createAd(PortletRequest request,
+						   @RequestParam(value = "copyAdvertisementId", required = false) Integer copyAdvertisementId,
+						   Model model) {
 		// work-around for Spring form bug/misbehavior, errors are not persisted in model 
 		Advertisement advertisement;
-		if(model.containsAttribute("advertisement")) {
+
+		if (copyAdvertisementId != null) {
+			// We want to base our new ad on this ad.
+			Advertisement baseAd = modelService.getAdvertisement(copyAdvertisementId);
+
+			advertisement = new Advertisement();
+			advertisement.setArea(baseAd.getArea());
+			advertisement.setCategory(baseAd.getCategory());
+			if (baseAd.getCategory() != null) {
+				advertisement.setTopCategory(baseAd.getCategory().getParent());
+			}
+			advertisement.setDescription(baseAd.getDescription());
+			advertisement.setPickupAddress(baseAd.getPickupAddress());
+			advertisement.setTitle(baseAd.getTitle());
+			advertisement.setUnit(baseAd.getUnit());
+			advertisement.setPickupConditions(baseAd.getPickupConditions());
+
+			model.asMap().put("advertisement", advertisement);
+		} else if(model.containsAttribute("advertisement")) {
 			advertisement = (Advertisement)model.asMap().get("advertisement");
 		} else {
 			advertisement = new Advertisement();
@@ -80,22 +103,42 @@ public class CreateAdController extends BaseController {
 		String userId = getUserId(request);
 
 		try {
-			LdapUser ldapUser = userDirectoryService.getLdapUserByUid(userId);
 
-			String displayname = ldapUser.getAttributeValue("displayname");
-			String mail = ldapUser.getAttributeValue("mail");
+			// Try to fill in user information, as much as possible.
 
 			if (advertisement.getContact() == null) {
 				advertisement.setContact(new Person());
 			}
 
-			if (advertisement.getContact().getName() == null) {
-				advertisement.getContact().setName(displayname);
+			Person person = modelService.getPerson(userId);
+
+			if (person != null) {
+				advertisement.getContact().setPhone(person.getPhone());
 			}
 
-			if (advertisement.getContact().getEmail() == null) {
-				advertisement.getContact().setEmail(mail);
+			LdapUser ldapUser = userDirectoryService.getLdapUserByUid(userId);
+
+			if (ldapUser != null) {
+				String displayname = ldapUser.getAttributeValue("displayname");
+				String mail = ldapUser.getAttributeValue("mail");
+
+				if (advertisement.getContact().getName() == null) {
+					advertisement.getContact().setName(displayname);
+				}
+
+				if (advertisement.getContact().getEmail() == null) {
+					advertisement.getContact().setEmail(mail);
+				}
+			} else if (person != null) {
+				if (advertisement.getContact().getName() == null) {
+					advertisement.getContact().setName(person.getName());
+				}
+
+				if (advertisement.getContact().getEmail() == null) {
+					advertisement.getContact().setEmail(person.getEmail());
+				}
 			}
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}

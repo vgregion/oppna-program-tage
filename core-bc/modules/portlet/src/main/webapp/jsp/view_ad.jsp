@@ -45,6 +45,13 @@
 				</portlet:actionURL>
 				<a href="${changeAdUrl}" class="btn btn-primary">Redigera</a>
 			</c:if>
+
+			<portlet:renderURL var="copyAd">
+				<portlet:param name="page" value="createAdConfirm"/>
+				<portlet:param name="copyAdvertisementId" value="${advertisement.id}"/>
+			</portlet:renderURL>
+			<a class="btn btn-primary" href="${copyAd}">Kopiera till ny annons</a>
+
 			<a href="${backUrl}" class="btn btn-default">Tillbaka</a>
 		</aui:button-row>
 
@@ -102,6 +109,13 @@
                     </portlet:actionURL>
                     <a href="${changeAdUrl}" class="btn btn-primary">Redigera</a>
                 </c:if>
+
+				<portlet:renderURL var="copyAd">
+					<portlet:param name="page" value="createAdConfirm"/>
+					<portlet:param name="copyAdvertisementId" value="${advertisement.id}"/>
+				</portlet:renderURL>
+				<a class="btn btn-primary" href="${copyAd}">Kopiera till ny annons</a>
+
                 <a href="<portlet:renderURL/>" class="btn btn-default">Tillbaka till startsidan</a>
             </aui:button-row>
 			<c:if test="${userId eq advertisement.creatorUid}">

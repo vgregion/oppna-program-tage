@@ -8,7 +8,11 @@
 <%
 %><portlet:defineObjects/><%
 %><portlet:renderURL var="cancelUrl"/><%
-%><portlet:renderURL var="createAdUrl"><portlet:param name="page" value="createAd"/></portlet:renderURL><%
+%>
+<portlet:renderURL var="createAdUrl">
+	<portlet:param name="page" value="createAd"/>
+	<portlet:param name="copyAdvertisementId" value="${copyAdvertisementId}"/>
+</portlet:renderURL><%
 %>
 
 <c:if test="${config.useInternalResources}">

@@ -53,8 +53,20 @@
 	</route>
 
 	<route>
+		<pattern>/createAdFromAdConfirm/{copyAdvertisementId}</pattern>
+		<implicit-parameter name="page">createAdConfirm</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+	</route>
+
+	<route>
 		<pattern>/createAdConfirm</pattern>
 		<implicit-parameter name="page">createAdConfirm</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/createAdFromAd/{copyAdvertisementId}</pattern>
+		<implicit-parameter name="page">createAd</implicit-parameter>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 	</route>
 

@@ -46,7 +46,7 @@ public class UserDirectoryService {
         env = new Hashtable();
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         env.put(Context.PROVIDER_URL, bindUrl);
-        env.put(Context.REFERRAL, "ignore");
+        env.put(Context.REFERRAL, "follow");
         env.put("com.sun.jndi.ldap.connect.pool", "true");
         if (bindDN != null) {
             env.put(Context.SECURITY_PRINCIPAL, bindDN);
@@ -55,7 +55,7 @@ public class UserDirectoryService {
     }
 
     public LdapUser getLdapUserByUid(String vgrId) {
-        LdapUser ldapUser = getLdapUser(ldapBase, "(&(objectClass=person)(cn=" + vgrId + "))");
+        LdapUser ldapUser = getLdapUser(ldapBase, "(&(objectCategory=Person)(sAMAccountName=" + vgrId + "))");
 
         return ldapUser;
     }
