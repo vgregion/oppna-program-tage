@@ -111,7 +111,7 @@
 		</div>
 		<div class="row cols-1 cf">
 			<div class="select large col col-1 mandatory">
-				<label for="3245987abaed8">Geografiskt område <em>(obligatoriskt)</em></label>
+				<label for="3245987abaed8">Geografiskt område <em>(obligatoriskt)</em> <i class="icon-info-sign area-info-icon"></i></label>
 				<form:select id="3245987abaed8" items="${areas}" itemValue="id" itemLabel="name" path="area.id"></form:select>
 			</div>
 		</div>
@@ -184,11 +184,11 @@
 		</div>
 	</form:form>
 </div>
-
+<%--
 <portlet:resourceURL id="testUrl" var="testUrl">
     <portlet:param name="asdf" value="asdf"/>
-</portlet:resourceURL>
-
+</portlet:resourceURL>--%>
+<jsp:include page="jspf/mapDialog.jsp"/>
 
 <script type="text/javascript">
     $(document).ready(initFileUploader("<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/img/loading.gif") %>"));

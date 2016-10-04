@@ -141,3 +141,37 @@ ul.inventory-listing h3, .inventory-info h3 {
 ul.slides li {
     margin-bottom: 10px;
 }
+
+.area-info-icon {
+    font-size: 1.3em;
+}
+
+#mapDialog {
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    opacity: .5;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+#mapDialogImageWrapper {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+#mapDialogImageWrapper img {
+    border: 8px solid #333;
+    border-radius: 5px;
+    max-height: 80vh;
+    max-width: 80vw;
+    left: 50%;
+    position: relative;
+    top: 50%;
+}

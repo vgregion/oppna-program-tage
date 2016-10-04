@@ -51,7 +51,7 @@
 				</form:select>
 			</div>
             <div class="select medium col col-4">
-				<label for="508e6b767bd2c">Geografiskt område</label>
+				<label for="435abeae3252b">Geografiskt område <i class="icon-info-sign area-info-icon"></i> </label>
 				<form:select id="435abeae3252b" path="area.id">
 					<option value="-1" selected="selected">Alla</option>
 					<form:options items="${areas}" itemLabel="name" itemValue="id"/>
@@ -134,6 +134,8 @@
 	</c:if>
 </div>
 
+<jsp:include page="jspf/mapDialog.jsp"/>
+
 <script type="text/javascript">
 	// construct the header based on filter selections
 	$(document).ready(function() {
@@ -163,4 +165,23 @@
 			}
 		});
 	});
+
+	/*$(".area-info-icon").click(function (e) {
+		e.preventDefault();
+
+		var mapDialog = $("#mapDialog");
+		var mapDialogImageWrapper = $("#mapDialogImageWrapper");
+		mapDialog.show();
+		mapDialogImageWrapper.show();
+		var mapDialogImage = $("#mapDialogImageWrapper img");
+		mapDialogImage.css('margin-top', -mapDialogImage.height() / 2);
+		mapDialogImage.css('margin-left', -mapDialogImage.width() / 2);
+	});
+
+	$('body').bind('click', function(e){
+		if($('#mapDialog').css('display') === 'block' && !jQuery(e.target).is('.area-info-icon')) {
+			$('#mapDialog').hide();
+			$('#mapDialogImageWrapper').hide();
+		}
+	});*/
 </script>
