@@ -40,7 +40,7 @@ public class AdminUnitsController extends BaseController {
 	
 	@InitBinder("newUnit")  
 	protected void initBinder(WebDataBinder binder) {  
-		binder.setValidator(unitValidator);  
+		binder.setValidator(unitValidator);
 	}
 
 	@RenderMapping(params="page=adminUnits")

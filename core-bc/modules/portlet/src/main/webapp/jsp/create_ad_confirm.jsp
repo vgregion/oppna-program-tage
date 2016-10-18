@@ -11,7 +11,6 @@
 %>
 <portlet:renderURL var="createAdUrl">
 	<portlet:param name="page" value="createAd"/>
-	<portlet:param name="copyAdvertisementId" value="${copyAdvertisementId}"/>
 </portlet:renderURL><%
 %>
 

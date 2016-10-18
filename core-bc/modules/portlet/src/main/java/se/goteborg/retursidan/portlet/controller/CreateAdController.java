@@ -69,21 +69,19 @@ public class CreateAdController extends BaseController {
 
 			advertisement = new Advertisement();
 			advertisement.setArea(baseAd.getArea());
-			advertisement.setCategory(baseAd.getCategory());
-			if (baseAd.getCategory() != null) {
-				advertisement.setTopCategory(baseAd.getCategory().getParent());
-			}
-			advertisement.setDescription(baseAd.getDescription());
 			advertisement.setPickupAddress(baseAd.getPickupAddress());
-			advertisement.setTitle(baseAd.getTitle());
 			advertisement.setUnit(baseAd.getUnit());
 			advertisement.setPickupConditions(baseAd.getPickupConditions());
+
+			advertisement.setContact(baseAd.getContact());
 
 			model.asMap().put("advertisement", advertisement);
 		} else if(model.containsAttribute("advertisement")) {
 			advertisement = (Advertisement)model.asMap().get("advertisement");
 		} else {
 			advertisement = new Advertisement();
+
+			populateContactInfoFromLdap(request, advertisement);
 		}
 		
 		List<Unit> units = modelService.getUnits();
@@ -100,50 +98,52 @@ public class CreateAdController extends BaseController {
 			model.addAttribute("subCategories", subCategories);		
 		}
 
-		String userId = getUserId(request);
+		return "create_ad";
+	}
 
+	private void populateContactInfoFromLdap(PortletRequest request, Advertisement advertisement) {
 		try {
 
-			// Try to fill in user information, as much as possible.
+            String userId = getUserId(request);
 
-			if (advertisement.getContact() == null) {
-				advertisement.setContact(new Person());
-			}
+            // Try to fill in user information, as much as possible.
 
-			Person person = modelService.getPerson(userId);
+            if (advertisement.getContact() == null) {
+                advertisement.setContact(new Person());
+            }
 
-			if (person != null) {
-				advertisement.getContact().setPhone(person.getPhone());
-			}
+            Person person = modelService.getPerson(userId);
 
-			LdapUser ldapUser = userDirectoryService.getLdapUserByUid(userId);
+            if (person != null) {
+                advertisement.getContact().setPhone(person.getPhone());
+            }
 
-			if (ldapUser != null) {
-				String displayname = ldapUser.getAttributeValue("displayname");
-				String mail = ldapUser.getAttributeValue("mail");
+            LdapUser ldapUser = userDirectoryService.getLdapUserByUid(userId);
 
-				if (advertisement.getContact().getName() == null) {
-					advertisement.getContact().setName(displayname);
-				}
+            if (ldapUser != null) {
+                String displayname = ldapUser.getAttributeValue("displayname");
+                String mail = ldapUser.getAttributeValue("mail");
 
-				if (advertisement.getContact().getEmail() == null) {
-					advertisement.getContact().setEmail(mail);
-				}
-			} else if (person != null) {
-				if (advertisement.getContact().getName() == null) {
-					advertisement.getContact().setName(person.getName());
-				}
+                if (advertisement.getContact().getName() == null) {
+                    advertisement.getContact().setName(displayname);
+                }
 
-				if (advertisement.getContact().getEmail() == null) {
-					advertisement.getContact().setEmail(person.getEmail());
-				}
-			}
+                if (advertisement.getContact().getEmail() == null) {
+                    advertisement.getContact().setEmail(mail);
+                }
+            } else if (person != null) {
+                if (advertisement.getContact().getName() == null) {
+                    advertisement.getContact().setName(person.getName());
+                }
 
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
+                if (advertisement.getContact().getEmail() == null) {
+                    advertisement.getContact().setEmail(person.getEmail());
+                }
+            }
 
-		return "create_ad";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
 	}
 
 	@ActionMapping("saveAd")

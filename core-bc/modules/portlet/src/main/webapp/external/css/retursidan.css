@@ -41,6 +41,10 @@ div.cols-3 select, div.cols-4 select {
     width: 95%;
 }
 
+div.col-1 .portlet-msg-error {
+    display: inline-block;
+}
+
 .content-header {
     margin-bottom: 20px;
 }

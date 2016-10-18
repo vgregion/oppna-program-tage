@@ -31,6 +31,14 @@ public class AdValidator implements Validator {
 			errors.rejectValue("category", "category.missing");
 		}
 
+		if(ad.getUnit() == null || ad.getUnit().getId() == -1) {
+			errors.rejectValue("unit", "unit.missing");
+		}
+
+		if(ad.getArea() == null || ad.getArea().getId() == -1) {
+			errors.rejectValue("area", "area.missing");
+		}
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "title.missing");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "description.missing");
 		

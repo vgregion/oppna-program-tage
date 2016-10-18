@@ -69,14 +69,14 @@
 	<form:form id="new-ad-form" cssClass="form-general" modelAttribute="advertisement" action="${saveAdUrl}" >
 		<div class="row cols-2 cf clearfix">
 			<div class="select medium col col-1 mandatory <%= bindingResult.hasFieldErrors("topCategory") ? "error" : "" %>">
-				<label for="5086c4a3b2949">Kategori <em>(obligatoriskt)</em> <strong><form:errors path="topCategory"/></strong></label>
+				<label for="5086c4a3b2949">Kategori <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="topCategory"/></div></label>
 				<form:select id="5086c4a3b2949" path="topCategory.id">
 					<form:option value="-1">Välj kategori...</form:option>
 					<form:options items="${topCategories}" itemLabel="title" itemValue="id"/>
 				</form:select>
 			</div>
 			<div id="subCategories" class="select medium col col-2 mandatory <%= bindingResult.hasFieldErrors("category") ? "error" : "" %>">
-				<label for="5086c4a3b2aae">Underkategori <em>(obligatoriskt)</em> <strong><form:errors path="category"/></strong></label>
+				<label for="5086c4a3b2aae">Underkategori <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="category"/></div></label>
 				<form:select id="5086c4a3b2aae" path="category.id">
 					<option value="-1" selected="selected">Välj underkategori...</option>
 					<c:if test="${!empty subCategories}">
@@ -86,15 +86,15 @@
 			</div>
 		</div>
 		<div class="row cols-1 cf">
-		<c:set var="err"><form:errors path="title"/></c:set> 
+		<c:set var="err"><form:errors path="title"/></c:set>
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("title") ? "error" : "" %>">
-				<label for="5086c4a3b2bb2">Rubrik <em>(obligatoriskt)</em> <strong><form:errors path="title"/></strong></label>
+				<label for="5086c4a3b2bb2">Rubrik <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="title"/></div></label>
 				<form:input path="title" id="5086c4a3b2bb2"/>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
-			<div class="text col full col-1 mandatory <%= bindingResult.hasFieldErrors("title") ? "error" : "" %>">
-				<label for="5086c4a3b2c09">Beskrivning <em>(obligatoriskt)</em> <strong><form:errors path="description"/></strong></label>
+			<div class="text col full col-1 mandatory <%= bindingResult.hasFieldErrors("description") ? "error" : "" %>">
+				<label for="5086c4a3b2c09">Beskrivning <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="description"/></div></label>
 				<form:textarea path="description" cols="30" rows="10" id="5086c4a3b2c09"/>
 			</div>
 		</div>
@@ -104,32 +104,38 @@
 			</div>
 		</div>
 		<div class="row cols-1 cf">
-			<div class="select large col col-1 mandatory">
-				<label for="5086c4a3b2c60">Förvaltning som skänker bort <em>(obligatoriskt)</em></label>
-				<form:select id="5086c4a3b2c60" items="${units}" itemValue="id" itemLabel="name" path="unit.id"></form:select>
+			<div class="select large col col-1 mandatory ">
+				<label for="5086c4a3b2c60">Förvaltning som skänker bort <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="unit"/></div></label>
+				<form:select id="5086c4a3b2c60" path="unit.id">
+					<form:option value="-1" label="Välj förvaltning..." />
+					<form:options items="${units}" itemValue="id" itemLabel="name"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
-			<div class="select large col col-1 mandatory">
-				<label for="3245987abaed8">Geografiskt område <em>(obligatoriskt)</em> <i class="icon-info-sign area-info-icon"></i></label>
-				<form:select id="3245987abaed8" items="${areas}" itemValue="id" itemLabel="name" path="area.id"></form:select>
+			<div class="select large col col-1 mandatory <%= bindingResult.hasFieldErrors("area") ? "error" : "" %>">
+				<label for="3245987abaed8">Geografiskt område <em>(obligatoriskt)</em> <i class="icon-info-sign area-info-icon"></i> <div><form:errors cssClass="portlet-msg-error" path="area"/></div></label>
+				<form:select id="3245987abaed8" path="area.id">
+					<form:option value="-1" label="Välj geografiskt område..." />
+					<form:options items="${areas}" itemValue="id" itemLabel="name"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.name") ? "error" : "" %>">
-				<label for="5086c4a3b306c">Kontaktperson <em>(obligatoriskt)</em> <strong><form:errors path="contact.name"/></strong></label>
+				<label for="5086c4a3b306c">Kontaktperson <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="contact.name"/></div></label>
 				<form:input path="contact.name" id="5086c4a3b306c"/>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.phone") ? "error" : "" %>">
-				<label for="5086c4a3b30c2">Telefonnummer <em>(obligatoriskt)</em> <strong><form:errors path="contact.phone"/></strong></label>
+				<label for="5086c4a3b30c2">Telefonnummer <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="contact.phone"/></div></label>
 				<form:input path="contact.phone" id="5086c4a3b30c2"/>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.email") ? "error" : "" %>">
-				<label for="5086c4a3b3119">E-mail <em>(obligatoriskt)</em> <strong><form:errors path="contact.email"/></strong></label>
+				<label for="5086c4a3b3119">E-mail <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="contact.email"/></div></label>
 				<form:input path="contact.email" id="5086c4a3b3119"/>
 			</div>
 		</div>
@@ -140,7 +146,7 @@
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col full short col-1 mandatory <%= bindingResult.hasFieldErrors("pickupAddress") ? "error" : "" %>">
-				<label for="5086c4a3b3170">Hämtningsadress <em>(obligatoriskt)</em> <strong><form:errors path="pickupAddress"/></strong></label>
+				<label for="5086c4a3b3170">Hämtningsadress <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="pickupAddress"/></div></label>
 				<form:textarea path="pickupAddress" id="5086c4a3b3170" cols="30" rows="5"/>
 			</div>
 		</div>
@@ -173,21 +179,14 @@
 		</div>
 		<p><span class="author">Annonsen skapad av ${userId}.</span></p>
 		<div class="row cols-1 cf">
-			<%--<div class="col medium col-1 submit-area">--%>
             <aui:button-row>
 				<aui:button type="submit" id="addAdSubmit" cssClass="btn btn-primary" value="Lägg upp annons" name="submit-5086c4a3b380d"/>
 				<a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
-                <%--<aui:button type="submit" href="#" id="submit-5097936784ac4" cssClass="rp-button button" value="Fortsätt"/>--%>
-                <%--<a class="rp-link-button" href="${cancelUrl}">Avbryt</a>--%>
             </aui:button-row>
-			<%--</div>--%>
 		</div>
 	</form:form>
 </div>
-<%--
-<portlet:resourceURL id="testUrl" var="testUrl">
-    <portlet:param name="asdf" value="asdf"/>
-</portlet:resourceURL>--%>
+
 <jsp:include page="jspf/mapDialog.jsp"/>
 
 <script type="text/javascript">
