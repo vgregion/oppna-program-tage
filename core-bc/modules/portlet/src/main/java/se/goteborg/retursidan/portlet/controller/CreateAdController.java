@@ -60,7 +60,6 @@ public class CreateAdController extends BaseController {
 	public String createAd(PortletRequest request,
 						   @RequestParam(value = "copyAdvertisementId", required = false) Integer copyAdvertisementId,
 						   Model model) {
-		// work-around for Spring form bug/misbehavior, errors are not persisted in model 
 		Advertisement advertisement;
 
 		if (copyAdvertisementId != null) {
@@ -78,12 +77,16 @@ public class CreateAdController extends BaseController {
 			model.asMap().put("advertisement", advertisement);
 		} else if(model.containsAttribute("advertisement")) {
 			advertisement = (Advertisement)model.asMap().get("advertisement");
+
+			if (advertisement.getContact() == null) {
+				populateContactInfoFromLdap(request, advertisement);
+			}
 		} else {
 			advertisement = new Advertisement();
 
 			populateContactInfoFromLdap(request, advertisement);
 		}
-		
+
 		List<Unit> units = modelService.getUnits();
 		model.addAttribute("units", units);
 	
