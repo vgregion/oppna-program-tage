@@ -31,6 +31,14 @@ public class RequestValidator implements Validator {
 			errors.rejectValue("category", "category.missing");
 		}
 
+		if(request.getUnit() == null || request.getUnit().getId() == -1) {
+			errors.rejectValue("unit", "unit.missing");
+		}
+
+		if(request.getArea() == null || request.getArea().getId() == -1) {
+			errors.rejectValue("area", "area.missing");
+		}
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "title.missing");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "description.missing");
 		

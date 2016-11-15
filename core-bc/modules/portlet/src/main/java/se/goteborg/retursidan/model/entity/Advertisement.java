@@ -27,7 +27,7 @@ import se.goteborg.retursidan.util.StringFormatter;
  */
 @Entity
 @Table(name="vgr_tage_advertisement")
-public class Advertisement extends GeneralEntityBean implements Serializable {
+public class Advertisement extends GeneralEntityBean implements Serializable, ContactInterface {
 	private static final long serialVersionUID = 2549203246057963368L;
 
 	/**

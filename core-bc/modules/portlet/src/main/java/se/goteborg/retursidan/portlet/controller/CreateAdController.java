@@ -15,11 +15,9 @@ import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import se.goteborg.retursidan.model.entity.Advertisement;
 import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Category;
-import se.goteborg.retursidan.model.entity.Person;
 import se.goteborg.retursidan.model.entity.Unit;
 import se.goteborg.retursidan.portlet.binding.PhotoListPropertyEditor;
 import se.goteborg.retursidan.portlet.validation.AdValidator;
-import se.vgregion.ldapservice.LdapUser;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -33,7 +31,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("VIEW")
-public class CreateAdController extends BaseController {
+public class CreateAdController extends CreateController {
     Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 
@@ -102,51 +100,6 @@ public class CreateAdController extends BaseController {
 		}
 
 		return "create_ad";
-	}
-
-	private void populateContactInfoFromLdap(PortletRequest request, Advertisement advertisement) {
-		try {
-
-            String userId = getUserId(request);
-
-            // Try to fill in user information, as much as possible.
-
-            if (advertisement.getContact() == null) {
-                advertisement.setContact(new Person());
-            }
-
-            Person person = modelService.getPerson(userId);
-
-            if (person != null) {
-                advertisement.getContact().setPhone(person.getPhone());
-            }
-
-            LdapUser ldapUser = userDirectoryService.getLdapUserByUid(userId);
-
-            if (ldapUser != null) {
-                String displayname = ldapUser.getAttributeValue("displayname");
-                String mail = ldapUser.getAttributeValue("mail");
-
-                if (advertisement.getContact().getName() == null) {
-                    advertisement.getContact().setName(displayname);
-                }
-
-                if (advertisement.getContact().getEmail() == null) {
-                    advertisement.getContact().setEmail(mail);
-                }
-            } else if (person != null) {
-                if (advertisement.getContact().getName() == null) {
-                    advertisement.getContact().setName(person.getName());
-                }
-
-                if (advertisement.getContact().getEmail() == null) {
-                    advertisement.getContact().setEmail(person.getEmail());
-                }
-            }
-
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
 	}
 
 	@ActionMapping("saveAd")

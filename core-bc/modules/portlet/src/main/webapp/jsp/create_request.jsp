@@ -52,14 +52,14 @@
 	<form:form id="new-want-ad-form" cssClass="form-general" modelAttribute="request" action="${saveRequestUrl}" >
 		<div class="row cols-2 cf">
 			<div class="select medium col col-1 mandatory <%= bindingResult.hasFieldErrors("topCategory") ? "error" : "" %>">
-				<label for="5086c4a3b2949">Kategori <em>(obligatoriskt)</em> <strong><form:errors path="topCategory"/></strong></label>
+				<label for="5086c4a3b2949">Kategori <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="topCategory"/></div></label>
 				<form:select id="5086c4a3b2949" path="topCategory.id">
 					<form:option value="-1">Välj kategori...</form:option>
 					<form:options items="${topCategories}" itemLabel="title" itemValue="id"/>
 				</form:select>
 			</div>
 			<div id="subCategories" class="select medium col col-2 mandatory <%= bindingResult.hasFieldErrors("category") ? "error" : "" %>">
-				<label for="5086c4a3b2aae">Underkategori <em>(obligatoriskt)</em> <strong><form:errors path="category"/></strong></label>
+				<label for="5086c4a3b2aae">Underkategori <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="category"/></div></label>
 				<form:select id="5086c4a3b2aae" path="category.id">
 					<option value="-1" selected="selected">Välj underkategori...</option>
 					<c:if test="${!empty subCategories}">
@@ -71,13 +71,13 @@
 		<div class="row cols-1 cf">
 			<c:set var="err"><form:errors path="title"/></c:set> 
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("title") ? "error" : "" %>">
-				<label for="5086c4a3b2bb2">Rubrik <em>(obligatoriskt)</em> <strong><form:errors path="title"/></strong></label>
+				<label for="5086c4a3b2bb2">Rubrik <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="title"/></div></label>
 				<form:input path="title" id="5086c4a3b2bb2"/>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col full col-1 mandatory <%= bindingResult.hasFieldErrors("title") ? "error" : "" %>">
-				<label for="5086c4a3b2c09">Beskrivning <em>(obligatoriskt)</em> <strong><form:errors path="description"/></strong></label>
+				<label for="5086c4a3b2c09">Beskrivning <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="description"/></div></label>
 				<form:textarea path="description" cols="30" rows="10" id="5086c4a3b2c09"/>
 			</div>
 		</div>
@@ -87,32 +87,38 @@
 			</div>
 		</div>
 		<div class="row cols-1 cf">
-			<div class="select large col col-1 mandatory">
-				<label for="5086c4a3b2c60">Förvaltning som efterlyser <em>(obligatoriskt)</em></label>
-				<form:select id="5086c4a3b2c60" items="${units}" itemValue="id" itemLabel="name" path="unit.id"></form:select>
+			<div class="select large col col-1 mandatory <%= bindingResult.hasFieldErrors("unit") ? "error" : "" %>"">
+				<label for="5086c4a3b2c60">Förvaltning som efterlyser <em>(obligatoriskt)</em><div><form:errors cssClass="portlet-msg-error" path="unit"/></div></label>
+				<form:select id="5086c4a3b2c60" path="unit.id">
+					<form:option value="-1" label="Välj förvaltning..." />
+					<form:options items="${units}" itemValue="id" itemLabel="name"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
-			<div class="select large col col-1 mandatory">
-				<label for="5086c4a3b2c60">Geografiskt område <em>(obligatoriskt)</em></label>
-				<form:select id="7546c4a3b2c78" items="${areas}" itemValue="id" itemLabel="name" path="area.id"></form:select>
+			<div class="select large col col-1 mandatory <%= bindingResult.hasFieldErrors("area") ? "error" : "" %>"">
+				<label for="5086c4a3b2c60">Geografiskt område <em>(obligatoriskt)</em><div><form:errors cssClass="portlet-msg-error" path="area"/></div></label>
+				<form:select id="5086c4a3b2c60" path="area.id">
+					<form:option value="-1" label="Välj geografiskt område..." />
+					<form:options items="${areas}" itemValue="id" itemLabel="name"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.name") ? "error" : "" %>">
-				<label for="5086c4a3b306c">Kontaktperson <em>(obligatoriskt)</em> <strong><form:errors path="contact.name"/></strong></label>
+				<label for="5086c4a3b306c">Kontaktperson <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="contact.name"/></div></label>
 				<form:input path="contact.name" id="5086c4a3b306c"/>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.phone") ? "error" : "" %>">
-				<label for="5086c4a3b30c2">Telefonnummer <em>(obligatoriskt)</em> <strong><form:errors path="contact.phone"/></strong></label>
+				<label for="5086c4a3b30c2">Telefonnummer <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="contact.phone"/></div></label>
 				<form:input path="contact.phone" id="5086c4a3b30c2"/>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.email") ? "error" : "" %>">
-				<label for="5086c4a3b3119">E-mail <em>(obligatoriskt)</em> <strong><form:errors path="contact.email"/></strong></label>
+				<label for="5086c4a3b3119">E-mail <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="contact.email"/></div></label>
 				<form:input path="contact.email" id="5086c4a3b3119"/>
 			</div>
 		</div>

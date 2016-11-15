@@ -19,6 +19,7 @@ import se.goteborg.retursidan.portlet.validation.RequestValidator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("VIEW")
-public class CreateRequestController extends BaseController {
+public class CreateRequestController extends CreateController {
     Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	@InitBinder("request")
@@ -37,8 +38,10 @@ public class CreateRequestController extends BaseController {
 	}
 	
 	@RenderMapping(params="externalPage=createRequest")
-	public String createAdExternal(Model model) {
+	public String createAdExternal(PortletRequest portletRequest, Model model) {
 		Request request = new Request();
+		populateContactInfoFromLdap(portletRequest, request);
+
 		model.addAttribute("request", request);
 		
 		List<Unit> units = modelService.getUnits();
@@ -54,13 +57,18 @@ public class CreateRequestController extends BaseController {
 	}
 
 	@RenderMapping(params="page=createRequest")
-	public String createAd(Model model) {
+	public String createAd(PortletRequest portletRequest, Model model) {
 		// work-around for Spring form bug/misbehavior, errors are not persisted in model 
 		Request request;
 		if(model.containsAttribute("request")) {
 			request = (Request)model.asMap().get("request");
+
+			if (request.getContact() == null) {
+				populateContactInfoFromLdap(portletRequest, request);
+			}
 		} else {
 			request = new Request();
+			populateContactInfoFromLdap(portletRequest, request);
 			model.addAttribute("request", request);
 		}
 		

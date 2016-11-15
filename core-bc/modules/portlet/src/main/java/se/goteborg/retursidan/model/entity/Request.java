@@ -18,7 +18,7 @@ import se.goteborg.retursidan.util.StringFormatter;
  */
 @Entity
 @Table(name="vgr_tage_request")
-public class Request extends GeneralEntityBean implements Serializable {
+public class Request extends GeneralEntityBean implements Serializable, ContactInterface {
 	private static final long serialVersionUID = 5734565963237558347L;
 
 	public enum Status {
@@ -63,9 +63,11 @@ public class Request extends GeneralEntityBean implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	@Override
 	public Person getContact() {
 		return contact;
 	}
+	@Override
 	public void setContact(Person contact) {
 		this.contact = contact;
 	}
