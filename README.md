@@ -21,3 +21,5 @@ After cloning the git repository, execute:
 	mvn package
 
 And copy the tage-portlet.war file to the Liferay deploy directory.
+
+Tage is part of the Region of Västra Götaland's commitment to open source within the scope of [Öppna program](http://vastra-gotalandsregionen.github.io/oppna-program/).
