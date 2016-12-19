@@ -1,7 +1,13 @@
 # Tage
-This application is used to donate and request furnitures and equipment for reuse within the Region of Västra Götaland in Sweden.
+This application is used to donate and request furnitures and equipment for reuse within the Region of Västra Götaland in Sweden. In that way the organisation and its divisions may contribute to more effective use of resources and improved sustainability.
+
+The employees are allowed to create *advertisements* where they offer pieces of furniture for others to take over. It is also possible to create *requests* where they outline something they wish for.
+
+Before Tage was first used many employees reacted to the amount of furniture which was thrown away while moving or rebuilding departments. The departments usually don't have own places to store furniture and missing access to centrally located storage.
 
 The source code is originally donated from Göteborg Stad.
+
+Follow this [link](http://www.vgregion.se/sv/Vastra-Gotalandsregionen/startsida/Miljo/Prioriterade-miljoomraden/Hallbara-produkter-och-tjanster/Tage---intern-bytessajt-for-mobler/) for more information, in Swedish.
 
 ## Development
 ### Prerequisites
