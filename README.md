@@ -1,5 +1,5 @@
 # Tage
-This application is used to donate and request furnitures and equipment for reuse within the Region of Västra Götaland in Sweden. In that way the organisation and its divisions may contribute to more effective use of resources and improved sustainability.
+This application is used to donate and request furniture and equipment for reuse within the Region of Västra Götaland in Sweden. In that way the organisation and its divisions may contribute to more effective use of resources and improved sustainability.
 
 The employees are allowed to create *advertisements* where they offer pieces of furniture for others to take over. It is also possible to create *requests* where they outline something they wish for.
 
