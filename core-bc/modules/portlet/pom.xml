@@ -122,6 +122,11 @@ Generation time : 2014-01-21 08:45:01 CET
     </dependency>
   </dependencies>
 
+  <scm>
+    <developerConnection>scm:git:git@git.vgregion.se:portal-teamet/tage.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
   <profiles>
     <profile>
       <id>prod</id>
@@ -137,6 +142,54 @@ Generation time : 2014-01-21 08:45:01 CET
                   <targetPath>WEB-INF</targetPath>
                 </resource>
               </webResources>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>buildnumber</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>buildnumber-maven-plugin</artifactId>
+            <version>1.4</version>
+            <executions>
+              <execution>
+                <phase>validate</phase>
+                <goals>
+                  <goal>create</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <buildNumberPropertyName>build.number</buildNumberPropertyName>
+              <timestampFormat>{0, time, yyyy-MM-dd HH:mm:ss z}</timestampFormat>
+              <timestampPropertyName>build.time</timestampPropertyName>
+              <doCheck>true</doCheck>
+              <doUpdate>false</doUpdate>
+              <shortRevisionLength>7</shortRevisionLength>
+              <scmBranchPropertyName>build.branch</scmBranchPropertyName>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.0.0</version>
+            <configuration>
+              <archive>
+                <manifest>
+                  <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                  <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                </manifest>
+                <manifestEntries>
+                  <Build-Number>${build.number}</Build-Number>
+                  <Build-Time>${build.time}</Build-Time>
+                  <Branch>${build.branch}</Branch>
+                </manifestEntries>
+              </archive>
             </configuration>
           </plugin>
         </plugins>
