@@ -30,6 +30,7 @@
 		<pattern>/ad/{advertisementId}</pattern>
 		<implicit-parameter name="page">viewAd</implicit-parameter>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="externalPage">none</implicit-parameter>
 	</route>
 
 	<route>
@@ -240,6 +241,12 @@
 		<pattern>/admin</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/listAds</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="externalPage">none</implicit-parameter>
 	</route>
 
 	<route>

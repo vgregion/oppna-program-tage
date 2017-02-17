@@ -73,6 +73,7 @@
 				<portlet:renderURL var="viewAdUrl">
 					<portlet:param name="page" value="viewAd"/>
 					<portlet:param name="advertisementId" value="${ad.id}"/>
+					<portlet:param name="externalPage" value="none"/>
 				</portlet:renderURL>
 				
 				<c:if test="${fn:length(ad.photos) gt 0}">
