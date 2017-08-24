@@ -47,7 +47,7 @@
 			</c:if>
 
 			<c:if test="${userId eq advertisement.creatorUid}">
-				<portlet:renderURL var="copyAd">
+				<portlet:renderURL var="copyAd" portletMode="view">
 					<portlet:param name="page" value="createAd"/>
 					<portlet:param name="copyAdvertisementId" value="${advertisement.id}"/>
 				</portlet:renderURL>

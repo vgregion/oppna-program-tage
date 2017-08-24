@@ -21,6 +21,7 @@
 					<portlet:param name="page" value="viewAd"/>
 					<portlet:param name="advertisementId" value="${ad.id}"/>
 					<portlet:param name="previousPage" value="adminAds"/>
+					<portlet:param name="externalPage" value="none"/>
 				</portlet:renderURL>
 				<portlet:actionURL var="removeAdUrl" name="removeAd">
 					<portlet:param name="advertisementId" value="${ad.id}"/>

@@ -16,6 +16,7 @@
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 		<implicit-parameter name="p_p_mode">edit</implicit-parameter>
 		<implicit-parameter name="previousPage">adminAds</implicit-parameter>
+		<implicit-parameter name="externalPage">none</implicit-parameter>
 	</route>
 
 	<route>
@@ -85,6 +86,7 @@
 		<pattern>/createAdFromAd/{copyAdvertisementId}</pattern>
 		<implicit-parameter name="page">createAd</implicit-parameter>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">view</implicit-parameter>
 	</route>
 
 	<route>
