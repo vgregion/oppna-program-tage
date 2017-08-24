@@ -90,6 +90,16 @@
 				<div class="email"><a href="mailto:${advertisement.contact.email}">${advertisement.contact.email}</a></div>
 			</div>
 			<p><span class="author">Annonsen skapad av ${advertisement.creatorUid}.</span></p>
+
+			<c:if test="${not empty booker}">
+				<h2>Bokad av</h2>
+				<div class="contact-person">
+					<span>${booker.userId}</span>
+					<span>${booker.phone}</span>
+					<div class="email"><a href="mailto:${booker.email}">${booker.email}</a></div>
+				</div>
+			</c:if>
+
             <aui:button-row>
                 <c:if test="${!advertisement.booked}">
                     <portlet:renderURL var="bookUrl">

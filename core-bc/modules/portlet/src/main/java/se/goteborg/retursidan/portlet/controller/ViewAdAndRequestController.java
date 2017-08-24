@@ -11,6 +11,7 @@ import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import se.goteborg.retursidan.model.entity.Advertisement;
 import se.goteborg.retursidan.model.entity.Request;
 
+import javax.portlet.PortletMode;
 import javax.portlet.RenderRequest;
 
 /**
@@ -32,9 +33,16 @@ public class ViewAdAndRequestController extends BaseController {
 		}
 		return null;
 	}
-	
-	@RenderMapping(params={"page=viewAd", "externalPage=none"})
-	public String viewAd(@RequestParam(value="previousPage", required=false) String previousPage, Model model) {
+
+	@RenderMapping(params = {"page=viewAd", "externalPage=none"})
+	public String viewAd(@RequestParam(value = "previousPage", required = false) String previousPage, RenderRequest request, Model model) {
+		if (request.getPortletMode().equals(PortletMode.EDIT)) {
+			Advertisement advertisement = (Advertisement) model.asMap().get("advertisement");
+
+			if (advertisement != null && advertisement.getBooker() != null) {
+				model.addAttribute("booker", advertisement.getBooker());
+			}
+		}
 		if (previousPage != null) {
 			model.addAttribute("previousPage", previousPage);
 		}
