@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -15,14 +15,14 @@
 		    <h1>Statistik</h1>
 	    </div>
     </div>
-    <div style="font-size: 12pt;">Antal unika besökare på funktionen: <strong>${uniqueVisitors}</strong></div>
+    <div style="font-size: 12pt;">Antal unika besÃ¶kare pÃ¥ funktionen: <strong>${uniqueVisitors}</strong></div>
     <h2>Upplagda annonser</h2>
 
 	<div class="cols-2 clearfix">
 		<div class="col-table col col-1">
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
-					<th>Förvaltning</th>
+					<th>FÃ¶rvaltning</th>
 					<th>Antal</th>
 				</tr>
 				<c:forEach items="${units}" var="unit" varStatus="status">
@@ -41,7 +41,7 @@
 		<div class="col-table col col-2">
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
-					<th>Geografiskt område</th>
+					<th>Geografiskt omrÃ¥de</th>
 					<th>Antal</th>
 				</tr>
 				<c:forEach items="${areas}" var="area" varStatus="status">
@@ -63,7 +63,7 @@
 		<div class="col-table col col-1">
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
-					<th>Förvaltning</th>
+					<th>FÃ¶rvaltning</th>
 					<th>Antal</th>
 				</tr>
 				<c:forEach items="${units}" var="unit" varStatus="status">
@@ -82,7 +82,7 @@
 		<div class="col-table col col-2">
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
-					<th>Geografiskt område</th>
+					<th>Geografiskt omrÃ¥de</th>
 					<th>Antal</th>
 				</tr>
 				<c:forEach items="${areas}" var="area" varStatus="status">
@@ -106,7 +106,7 @@
 
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
-					<th>Förvaltning</th>
+					<th>FÃ¶rvaltning</th>
 					<th>Antal</th>
 				</tr>
 				<c:forEach items="${units}" var="unit" varStatus="status">
@@ -125,7 +125,7 @@
 		<div class="col-table col col-2">
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
-					<th>Geografiskt område</th>
+					<th>Geografiskt omrÃ¥de</th>
 					<th>Antal</th>
 				</tr>
 				<c:forEach items="${areas}" var="area" varStatus="status">
@@ -143,6 +143,6 @@
 
 	</div>
 
-	<h2>Övrigt</h2>
-	Antal icke bokade men utgångna annonser: <strong>${totalNumberOfExpiredAds}</strong>
+	<h2>Ã–vrigt</h2>
+	Antal icke bokade men utgÃ¥ngna annonser: <strong>${totalNumberOfExpiredAds}</strong>
 </div>

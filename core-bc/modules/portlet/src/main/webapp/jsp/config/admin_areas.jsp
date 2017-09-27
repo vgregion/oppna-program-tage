@@ -1,5 +1,5 @@
 <%@page import="org.springframework.validation.ObjectError"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -14,25 +14,25 @@
 
 <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 
-<% 
-	org.springframework.validation.BindingResult bindingResult = 
-		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.config"); 
+<%
+	org.springframework.validation.BindingResult bindingResult =
+		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.config");
 %>
 
 <div id="content-primary" class="article cf" role="main">
 	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL/>">Tillbaka</a></p>
-	<h1>Administration - administrera geografiska områden</h1>
-	
+	<h1>Administration - administrera geografiska omrÃ¥den</h1>
+
 <%
 	if (bindingResult.hasErrors()) {
 %>
 	<div class="system-info portlet-msg-error">
 		<h2>Felaktigt inmatade texter</h2>
-		<p>Följande fel upptäcktes i texterna, rätta felen och försök igen.</p>
+		<p>FÃ¶ljande fel upptÃ¤cktes i texterna, rÃ¤tta felen och fÃ¶rsÃ¶k igen.</p>
 		<ul>
 <%
 		for(ObjectError error: bindingResult.getAllErrors()) {
-%>			
+%>
 			<li><spring:message code="<%= error.getCode() %>"/></li>
 <%
 		}
@@ -41,34 +41,34 @@
 	</div>
 <%
 	}
-%>	
-	
+%>
+
 	<form:form id="change-area-form" cssClass="form-general" modelAttribute="newArea" action="${saveAreaUrl}" >
 		<div class="row cols-1 cf">
-			<c:set var="err"><form:errors path="name"/></c:set> 
+			<c:set var="err"><form:errors path="name"/></c:set>
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("name") ? "error" : "" %>">
-				<label for="nameInput">Geografiskt område <strong><form:errors path="name"/></strong></label>
+				<label for="nameInput">Geografiskt omrÃ¥de <strong><form:errors path="name"/></strong></label>
 				<form:input path="name" id="nameInput"/>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
             <aui:button-row>
-                <aui:button cssClass="btn btn-primary" type="submit" value="Lägg till nytt geografiskt område"/>
+                <aui:button cssClass="btn btn-primary" type="submit" value="LÃ¤gg till nytt geografiskt omrÃ¥de"/>
             </aui:button-row>
-		</div>	
+		</div>
 	</form:form>
 	<form:form id="change-area-form" cssClass="form-general" modelAttribute="removeArea" action="${removeAreaUrl}" >
 		<div class="row cols-1 cf">
 			<div class="col full col-1">
 				<fieldset>
-					<legend class="wrap"><span>Välj geografiskt område att ta bort</span></legend>
+					<legend class="wrap"><span>VÃ¤lj geografiskt omrÃ¥de att ta bort</span></legend>
 					<div class="fieldset-content">
 						<c:forEach items="${areas}" var="area">
 							<div class="radio">
 								<form:radiobutton path="id" title="${area.name}" value="${area.id}" id="area${area.id}"/>
 								<label for="area${area.id}">${area.name}</label>
 							</div>
-						</c:forEach>	
+						</c:forEach>
 					</div>
 				</fieldset>
 			</div>
@@ -80,8 +80,8 @@
 			</div>
 --%>
             <aui:button-row>
-                <aui:button cssClass="btn btn-danger" type="submit" value="Ta bort valt geografiskt område"/>
+                <aui:button cssClass="btn btn-danger" type="submit" value="Ta bort valt geografiskt omrÃ¥de"/>
             </aui:button-row>
-		</div>		
+		</div>
 	</form:form>
 </div>

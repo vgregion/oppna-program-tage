@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -40,7 +40,7 @@
 			<p class="meta"><span class="date">${request.formattedCreatedDate}</span> | <span class="category">${request.category.parent.title} <span class="sep">&gt;</span> ${request.category.title}</span></p>
 			<p class="meta">Efterlyses av <strong>${request.unit.name}</strong></p>
 			<c:if test="${not empty request.area.name}">
-				<p class="meta">Geografiskt område <strong>${request.area.name}</strong></p>
+				<p class="meta">Geografiskt omrÃ¥de <strong>${request.area.name}</strong></p>
 			</c:if>
 			<p>${request.description}</p>
 			<h2>Kontaktperson</h2>
@@ -72,7 +72,7 @@
 		<p class="back-link"><a href="<portlet:renderURL/>">Tillbaka</a></p>
 		<h1>Efterlysningen kunde inte hittas</h1>
 		<div class="inventory-info">
-			Den begärda efterlysningen kunde inte hittas i systemet. Detta innebär förmodligen att den har tagits bort, eller att länken du klickat på är felaktig.
+			Den begÃ¤rda efterlysningen kunde inte hittas i systemet. Detta innebÃ¤r fÃ¶rmodligen att den har tagits bort, eller att lÃ¤nken du klickat pÃ¥ Ã¤r felaktig.
 		</div>
 		<a href="${cancelUrl}" class="button">Tillbaka till startsidan</a>
 	</div>

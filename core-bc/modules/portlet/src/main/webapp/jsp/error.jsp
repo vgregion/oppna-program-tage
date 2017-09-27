@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -15,8 +15,8 @@
 	<div class="content-header cf">
 		<h1>Ett fel uppstod!</h1>
 	</div>
-	<p>Systemet kunde inte slutföra dig begäran då ett fel uppstod. Kontakta support om felet kvarstår!</p>
-	<p>Klicka <a href="${cancelUrl}">här</a> för att börja om.
+	<p>Systemet kunde inte slutfÃ¶ra dig begÃ¤ran dÃ¥ ett fel uppstod. Kontakta support om felet kvarstÃ¥r!</p>
+	<p>Klicka <a href="${cancelUrl}">hÃ¤r</a> fÃ¶r att bÃ¶rja om.
 	<p>
 		<strong>${error}</strong>
 		<div style="border:1px #BBB solid; padding: 5px; width:600px">
@@ -32,7 +32,7 @@
 	$("#showHide").click(function() {
 		if ($("#stack").css("display") == "none") {
 			$("#stack").css("display", "");
-			$("#showHide").text("Dölj detaljer");
+			$("#showHide").text("DÃ¶lj detaljer");
 		} else {
 			$("#stack").css("display", "none");
 			$("#showHide").text("Visa detaljer");

@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -20,11 +20,11 @@
 <div id="content-primary" class="cf" role="main">
 	<div class="content-header cf clearfix">
 		<h1>Tage</h1>
-        <a href="${createAdUrl}" class="btn btn-primary">Lägg in annons</a>
+        <a href="${createAdUrl}" class="btn btn-primary">LÃ¤gg in annons</a>
         <a href="${listMyAdsUrl}" class="btn btn-primary">Mina annonser</a>
 	</div>
-	<p>Här kan du annonsera ut överblivna möbler och utrustning som du vill skänka för återanvändning till andra verksamheter inom VGR. Du kan även efterlysa möbler och utrustning din verksamhet har behov av. Det kostar inget att annonsera på Tage.</p>
-	<p>Vi gör det här för att öka återvändningen och minska resursförbrukningen.</p>
+	<p>HÃ¤r kan du annonsera ut Ã¶verblivna mÃ¶bler och utrustning som du vill skÃ¤nka fÃ¶r Ã¥teranvÃ¤ndning till andra verksamheter inom VGR. Du kan Ã¤ven efterlysa mÃ¶bler och utrustning din verksamhet har behov av. Det kostar inget att annonsera pÃ¥ Tage.</p>
+	<p>Vi gÃ¶r det hÃ¤r fÃ¶r att Ã¶ka Ã¥tervÃ¤ndningen och minska resursfÃ¶rbrukningen.</p>
 	<form:form id="search-inventory-form" cssClass="form-general" modelAttribute="searchFilter" action="${filterUrl}" >
 		<div class="row cols-4 cf clearfix">
 			<div class="select medium col col-1">
@@ -44,14 +44,14 @@
 				</form:select>
 			</div>
 			<div class="select medium col col-3">
-				<label for="508e6b767bd2c">Förvaltning</label>
+				<label for="508e6b767bd2c">FÃ¶rvaltning</label>
 				<form:select id="508e6b767bd2c" path="unit.id">
 					<option value="-1" selected="selected">Alla</option>
 					<form:options items="${units}" itemLabel="name" itemValue="id"/>
 				</form:select>
 			</div>
             <div class="select medium col col-4">
-				<label for="435abeae3252b">Geografiskt område <i class="icon-info-sign area-info-icon"></i> </label>
+				<label for="435abeae3252b">Geografiskt omrÃ¥de <i class="icon-info-sign area-info-icon"></i> </label>
 				<form:select id="435abeae3252b" path="area.id">
 					<option value="-1" selected="selected">Alla</option>
 					<form:options items="${areas}" itemLabel="name" itemValue="id"/>
@@ -75,7 +75,7 @@
 					<portlet:param name="advertisementId" value="${ad.id}"/>
 					<portlet:param name="externalPage" value="none"/>
 				</portlet:renderURL>
-				
+
 				<c:if test="${fn:length(ad.photos) gt 0}">
 					<c:forEach var="photo" items="${ad.photos}" end="0">
 		     			<c:set var="imageUrl" value="${thumbnailUrl}&id=${photo.id}"/>
@@ -84,7 +84,7 @@
 				<c:if test="${fn:length(ad.photos) eq 0}">
 	     			<c:set var="imageUrl" value="${thumbnailUrl}&id="/>
 				</c:if>
-	
+
 				<li class="cf clearfix">
 					<a class="ad-link" href="${viewAdUrl}">
 						<div class="image">
@@ -94,7 +94,7 @@
 							<div class="meta"><span class="date">${ad.formattedCreatedDate}</span></div>
 							<h3>${ad.title}</h3>
 							<div class="meta"><span class="author">Upplagd av <strong>${ad.unit.name}</strong></span></div>
-							<c:if test="${not empty ad.area}"><div class="meta"><span class="">Geografiskt område <strong>${ad.area.name}</strong></span></div></c:if>
+							<c:if test="${not empty ad.area}"><div class="meta"><span class="">Geografiskt omrÃ¥de <strong>${ad.area.name}</strong></span></div></c:if>
                             <div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
 						</div>
 					</a>
@@ -103,13 +103,13 @@
 		</ul>
 		<c:if test="${ads.numberOfPages > 1}">
 			<div class="paging cf clearfix">
-				<strong>Gå till sida:</strong>
+				<strong>GÃ¥ till sida:</strong>
 				<ul>
 					<c:if test="${ads.hasPrevious}">
 						<portlet:actionURL name="filterAds" var="prevUrl"><portlet:param name="pageIdx" value="${ads.page-1}"/></portlet:actionURL>
 						<portlet:actionURL name="filterAds" var="firstUrl"><portlet:param name="pageIdx" value="1"/></portlet:actionURL>
-						<li><a href="${firstUrl}" title="Länk till första sidan">&lt;&lt;</a></li>
-						<li><a href="${prevUrl}" title="Länk till föregående sida">&lt;</a></li>					
+						<li><a href="${firstUrl}" title="LÃ¤nk till fÃ¶rsta sidan">&lt;&lt;</a></li>
+						<li><a href="${prevUrl}" title="LÃ¤nk till fÃ¶regÃ¥ende sida">&lt;</a></li>
 					</c:if>
 					<c:forEach var="pageIdx" begin="1" end="${ads.numberOfPages}">
 						<c:if test="${pageIdx eq ads.page}">
@@ -123,19 +123,19 @@
 					<c:if test="${ads.hasNext}">
 						<portlet:actionURL name="filterAds" var="nextUrl"><portlet:param name="pageIdx" value="${ads.page+1}"/></portlet:actionURL>
 						<portlet:actionURL name="filterAds" var="lastUrl"><portlet:param name="pageIdx" value="${ads.numberOfPages}"/></portlet:actionURL>
-						<li><a href="${nextUrl}" title="Länk till nästa sida">&gt;</a></li>
-						<li><a href="${lastUrl}" title="Länk till sista sidan">&gt;&gt;</a></li>
+						<li><a href="${nextUrl}" title="LÃ¤nk till nÃ¤sta sida">&gt;</a></li>
+						<li><a href="${lastUrl}" title="LÃ¤nk till sista sidan">&gt;&gt;</a></li>
 					</c:if>
 				</ul>
 			</div>
-		</c:if>	
+		</c:if>
 	</c:if>
 	<c:if test="${fn:length(ads.list) eq 0}">
 		<div>Inga annonser hittades.</div>
 	</c:if>
 </div>
 
-<jsp:include page="jspf/mapDialog.jsp"/>
+<jsp:include page="/jsp/jspf/mapDialog.jsp" flush="true" />
 
 <script type="text/javascript">
 	// construct the header based on filter selections
@@ -147,14 +147,14 @@
 			$("#headerTitle").append(" > " + $("#508e6b767bc24 option:selected").text());
 		}
 		if ($("#508e6b767bd2c").val() != -1) {
-			$("#headerTitle").append(" från förvaltning " + $("#508e6b767bd2c option:selected").text());
+			$("#headerTitle").append(" frÃ¥n fÃ¶rvaltning " + $("#508e6b767bd2c option:selected").text());
 		}
 	});
 
 	$("#508e6b767babe").change(function() {
 		$.ajax({
 			type: "POST",
-			url: "${subCatUrl}", 
+			url: "${subCatUrl}",
 			dataType: "html",
 			data: { parent: $(this).find(":selected").val() },
 			success: function(result) {
@@ -162,7 +162,7 @@
 				$("#508e6b767bc24").trigger("change");
 			},
 			error: function(result) {
-				alert("Ett fel uppstod på servern när underkategorier hämtades: " + result.responseText);
+				alert("Ett fel uppstod pÃ¥ servern nÃ¤r underkategorier hÃ¤mtades: " + result.responseText);
 			}
 		});
 	});

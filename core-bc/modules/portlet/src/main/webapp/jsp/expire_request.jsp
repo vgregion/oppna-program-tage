@@ -1,5 +1,5 @@
 <%@page import="org.springframework.validation.ObjectError"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -28,7 +28,7 @@
 		</div>
 		<div class="row cols-1 cf">
 			<div class="col medium col-1 submit-area">
-				<a href="#" id="submit-5097936784ac4" class="btn btn-danger">Fortsätt</a>
+				<a href="#" id="submit-5097936784ac4" class="btn btn-danger">FortsÃ¤tt</a>
 				<a href="${cancelUrl}" class="btn btn-default">Avbryt</a>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 		if ($("#checkbox1-5097936784a63").is(":checked")) {
 			window.location.href="${expireUrl}";
 		} else {
-			alert("Du måste klicka i rutan som bekräftar att du vill sätta efterlysningen som utgången för att kunna gå vidare.")
+			alert("Du mÃ¥ste klicka i rutan som bekrÃ¤ftar att du vill sÃ¤tta efterlysningen som utgÃ¥ngen fÃ¶r att kunna gÃ¥ vidare.")
 		}
 	});
 </script>

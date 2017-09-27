@@ -1,5 +1,5 @@
 <%@page import="org.springframework.validation.ObjectError"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -14,9 +14,9 @@
 <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 <script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
 
-<% 
-	org.springframework.validation.BindingResult bindingResult = 
-		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.booking"); 
+<%
+	org.springframework.validation.BindingResult bindingResult =
+		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.booking");
 %>
 
 <div id="content-primary" class="article cf" role="main">
@@ -27,11 +27,11 @@
 %>
 	<div class="system-info portlet-msg-error">
 		<h2>Felaktigt inmatade bokningsuppgifter</h2>
-		<p>Följande fel upptäcktes i bokningen, rätta felen och försök igen.</p>
+		<p>FÃ¶ljande fel upptÃ¤cktes i bokningen, rÃ¤tta felen och fÃ¶rsÃ¶k igen.</p>
 		<ul>
 <%
 		for(ObjectError error: bindingResult.getAllErrors()) {
-%>			
+%>
 			<li><spring:message code="<%= error.getCode() %>"/></li>
 <%
 		}
@@ -40,8 +40,8 @@
 	</div>
 <%
 	}
-%>	
-	
+%>
+
 	<form:form id="book-inventory-form" cssClass="form-general" modelAttribute="booking" action="${bookAdUrl}" >
 		<form:hidden path="advertisementId"/>
 		<form:hidden path="advertisementTitle"/>
@@ -50,7 +50,7 @@
 			<div class="col col-1">
 				<div class="checkbox alt">
 					<form:checkbox path="transportationConfirmed" id="checkbox1-50911f89bfed7"/>
-					<label for="checkbox1-50911f89bfed7">Jag förstår att transport måste ordnas</label>
+					<label for="checkbox1-50911f89bfed7">Jag fÃ¶rstÃ¥r att transport mÃ¥ste ordnas</label>
 				</div>
 			</div>
 		</div>
@@ -81,7 +81,7 @@
 		<div class="row cols-1 cf">
 			<%--<div class="col medium col-1 submit-area">--%>
             <aui:button-row>
-				<aui:button cssClass="btn btn-primary" type="submit" value="Bekräfta bokningen" name="submit-50911f89c035a" onClick="this.disabled=true; this.form.submit()"/>
+				<aui:button cssClass="btn btn-primary" type="submit" value="BekrÃ¤fta bokningen" name="submit-50911f89c035a" onClick="this.disabled=true; this.form.submit()"/>
 				<a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 			<%--</div>--%>

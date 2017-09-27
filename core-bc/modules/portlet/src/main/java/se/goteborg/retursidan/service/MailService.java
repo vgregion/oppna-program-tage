@@ -1,6 +1,6 @@
 package se.goteborg.retursidan.service;
 
-import com.liferay.mail.service.MailServiceUtil;
+import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

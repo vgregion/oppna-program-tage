@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -38,7 +38,7 @@
 						<portlet:param name="page" value="republishAd"/>
 						<portlet:param name="advertisementId" value="${advertisement.id}"/>
 					</portlet:renderURL>
-					<a href="${republishAdUrl}" class="btn btn-primary">Återpublicera</a>
+					<a href="${republishAdUrl}" class="btn btn-primary">Ã…terpublicera</a>
 				</c:if>
 				<portlet:actionURL name="loadAd" var="changeAdUrl">
 					<portlet:param name="advertisementId" value="${advertisement.id}"/>
@@ -67,20 +67,20 @@
 							<li data-thumb="${thumbnailUrl}&id=${photo.id}">
 								<img class="thumbnail" src="${photoUrl}&id=${photo.id}" alt="" />
 							</li>
-						</c:forEach>				
+						</c:forEach>
 					</ul>
 				</div>
-			</c:if>			
+			</c:if>
 			<p class="meta"><span class="date">${advertisement.formattedCreatedDate}</span> | <span class="category">${advertisement.category.parent.title} <span class="sep">&gt;</span> ${advertisement.category.title}</span></p>
-			<p class="meta">Bortskänkes av <strong>${advertisement.unit.name}</strong></p>
+			<p class="meta">BortskÃ¤nkes av <strong>${advertisement.unit.name}</strong></p>
 			<c:if test="${not empty advertisement.area.name}">
-				<p class="meta">Geografiskt område <strong>${advertisement.area.name}</strong></p>
+				<p class="meta">Geografiskt omrÃ¥de <strong>${advertisement.area.name}</strong></p>
 			</c:if>
 			<p>${advertisement.description}</p>
 			<div class="info-box">
-				<h3>Hämtningsadress</h3>
+				<h3>HÃ¤mtningsadress</h3>
 				<p>${advertisement.pickupAddress}</p>
-				<h3>Hämtningsvillkor</h3>
+				<h3>HÃ¤mtningsvillkor</h3>
 				<p>${advertisement.pickupConditions}</p>
 			</div>
 			<h2>Kontaktperson</h2>
@@ -114,7 +114,7 @@
                             <portlet:param name="page" value="republishAd"/>
                             <portlet:param name="advertisementId" value="${advertisement.id}"/>
                         </portlet:renderURL>
-                        <a href="${republishAdUrl}" class="btn btn-primary">Återpublicera</a>
+                        <a href="${republishAdUrl}" class="btn btn-primary">Ã…terpublicera</a>
                     </c:if>
                     <portlet:actionURL name="loadAd" var="changeAdUrl">
                         <portlet:param name="advertisementId" value="${advertisement.id}"/>
@@ -133,7 +133,7 @@
                 <a href="<portlet:renderURL/>" class="btn btn-default">Tillbaka</a>
             </aui:button-row>
 			<c:if test="${userId eq advertisement.creatorUid}">
-				Behöver du ta bort annonsen, maila funktionsbrevlåda: <a href="mailto:tage@vgregion.se">tage@vgregion.se</a>
+				BehÃ¶ver du ta bort annonsen, maila funktionsbrevlÃ¥da: <a href="mailto:tage@vgregion.se">tage@vgregion.se</a>
 			</c:if>
 	</div>
 	</div>
@@ -143,7 +143,7 @@
 		<p class="back-link"><a href="<portlet:renderURL/>">Tillbaka</a></p>
 		<h1>Annonsen kunde inte hittas</h1>
 		<div class="inventory-info">
-			Den begärda annonsen kunde inte hittas i systemet. Detta innebär förmodligen att den har tagits bort, eller att länken du klickat på är felaktig.
+			Den begÃ¤rda annonsen kunde inte hittas i systemet. Detta innebÃ¤r fÃ¶rmodligen att den har tagits bort, eller att lÃ¤nken du klickat pÃ¥ Ã¤r felaktig.
 		</div>
 		<a href="<portlet:renderURL/>" class="button">Tillbaka till startsidan</a>
 	</div>

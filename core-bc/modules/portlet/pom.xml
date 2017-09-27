@@ -51,15 +51,28 @@ Generation time : 2014-01-21 08:45:01 CET
       <groupId>javax.portlet</groupId>
       <artifactId>portlet-api</artifactId>
     </dependency>
+
     <dependency>
-      <groupId>com.liferay.portal</groupId>
-      <artifactId>portal-service</artifactId>
+        <groupId>com.liferay.portal</groupId>
+        <artifactId>com.liferay.portal.kernel</artifactId>
+        <scope>provided</scope>
+        <version>2.46.0</version>
     </dependency>
+
     <!-- To get tag assistance in your IDE -->
+    <!--
     <dependency>
       <groupId>com.liferay.portal</groupId>
       <artifactId>util-taglib</artifactId>
     </dependency>
+    -->
+    <dependency>
+      <groupId>com.liferay.portal</groupId>
+      <artifactId>com.liferay.util.taglib</artifactId>
+      <scope>provided</scope>
+      <version>2.8.0</version>
+    </dependency>
+
     <dependency>
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
@@ -96,7 +109,13 @@ Generation time : 2014-01-21 08:45:01 CET
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>
     </dependency>
-    
+
+    <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>9.4.1212.jre7</version>
+    </dependency>
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>

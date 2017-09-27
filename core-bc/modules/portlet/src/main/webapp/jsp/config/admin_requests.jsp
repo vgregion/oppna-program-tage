@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -33,11 +33,11 @@
 				</portlet:actionURL>
 				<c:if test="${request.status eq 'PUBLISHED'}">
 					<c:set var="statusTitle" value="PUBLICERAD" />
-				</c:if>				
+				</c:if>
 				<c:if test="${request.status eq 'EXPIRED'}">
-					<c:set var="statusTitle" value="UTGÅNGEN" />
-				</c:if>					
-				
+					<c:set var="statusTitle" value="UTGÃ…NGEN" />
+				</c:if>
+
 				<li class="cf clearfix">
 					<div class="content">
 						<div class="meta"><span class="date">${request.formattedCreatedDate}</span></div>
@@ -47,10 +47,10 @@
 						<div class="meta">
 							<a href="${removeRequestUrl}" class="btn btn-danger">Ta bort</a>
 							<c:if test="${request.published}">
-								<a href="${expireRequestUrl}" class="btn btn-primary">Sätt som utgången</a>
-							</c:if>				
+								<a href="${expireRequestUrl}" class="btn btn-primary">SÃ¤tt som utgÃ¥ngen</a>
+							</c:if>
 							<c:if test="${!request.published}">
-								<a href="${republishRequestUrl}" class="btn btn-primary">Återpublicera</a>
+								<a href="${republishRequestUrl}" class="btn btn-primary">Ã…terpublicera</a>
 							</c:if>
 						</div>
 					</div>
@@ -59,13 +59,13 @@
 		</ul>
 		<c:if test="${requests.numberOfPages > 1}">
 			<div class="paging cf clearfix">
-				<strong>Gå till sida:</strong>
+				<strong>GÃ¥ till sida:</strong>
 				<ul>
 					<c:if test="${requests.hasPrevious}">
 						<portlet:actionURL name="selectRequestsPage" var="prevUrl"><portlet:param name="page" value="adminRequests"/><portlet:param name="pageIdx" value="${requests.page-1}"/></portlet:actionURL>
 						<portlet:actionURL name="selectRequestsPage" var="firstUrl"><portlet:param name="page" value="adminRequests"/><portlet:param name="pageIdx" value="1"/></portlet:actionURL>
-						<li><a href="${firstUrl}" title="Länk till första sidan">&lt;&lt;</a></li>
-						<li><a href="${prevUrl}" title="Länk till föregående sida">&lt;</a></li>					
+						<li><a href="${firstUrl}" title="LÃ¤nk till fÃ¶rsta sidan">&lt;&lt;</a></li>
+						<li><a href="${prevUrl}" title="LÃ¤nk till fÃ¶regÃ¥ende sida">&lt;</a></li>
 					</c:if>
 					<c:forEach var="pageIdx" begin="1" end="${requests.numberOfPages}">
 						<c:if test="${pageIdx eq requests.page}">
@@ -79,12 +79,12 @@
 					<c:if test="${requests.hasNext}">
 						<portlet:actionURL name="selectRequestsPage" var="nextUrl"><portlet:param name="page" value="adminRequests"/><portlet:param name="pageIdx" value="${requests.page+1}"/></portlet:actionURL>
 						<portlet:actionURL name="selectRequestsPage" var="lastUrl"><portlet:param name="page" value="adminRequests"/><portlet:param name="pageIdx" value="${requests.numberOfPages}"/></portlet:actionURL>
-						<li><a href="${nextUrl}" title="Länk till nästa sida">&gt;</a></li>
-						<li><a href="${lastUrl}" title="Länk till sista sidan">&gt;&gt;</a></li>
+						<li><a href="${nextUrl}" title="LÃ¤nk till nÃ¤sta sida">&gt;</a></li>
+						<li><a href="${lastUrl}" title="LÃ¤nk till sista sidan">&gt;&gt;</a></li>
 					</c:if>
 				</ul>
 			</div>
-		</c:if>	
+		</c:if>
 	</c:if>
 	<c:if test="${fn:length(requests.list) eq 0}">
 		<div>Inga efterlysningar hittades.</div>

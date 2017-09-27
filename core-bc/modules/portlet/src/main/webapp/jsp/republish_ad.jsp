@@ -1,5 +1,5 @@
 <%@page import="org.springframework.validation.ObjectError"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -14,7 +14,7 @@
 </c:if>
 
 <div id="content-primary" class="article cf" role="main">
-	<h1>Återpublicera ${advertisement.title}</h1>
+	<h1>Ã…terpublicera ${advertisement.title}</h1>
 
 	<form id="republish-ad-start-form" class="form-general" method="get" action="#">
 		<p>${texts.confirmRepublishText}</p>
@@ -22,13 +22,13 @@
 			<div class="col col-1">
 				<div class="checkbox alt">
 					<input type="checkbox" value="ett" name="checkboxgroup1" id="checkbox1-5097936784a63">
-					<label for="checkbox1-5097936784a63">Jag vill återpublicera min annons</label>
+					<label for="checkbox1-5097936784a63">Jag vill Ã¥terpublicera min annons</label>
 				</div>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="col medium col-1 submit-area">
-				<input class="btn btn-primary" type="button" value="Fortsätt" name="submit-5097936784ac4" id="submit-5097936784ac4">
+				<input class="btn btn-primary" type="button" value="FortsÃ¤tt" name="submit-5097936784ac4" id="submit-5097936784ac4">
 				<a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 		if ($("#checkbox1-5097936784a63").is(":checked")) {
 			window.location.href="${republishAdUrl}";
 		} else {
-			alert("Du måste klicka i rutan som bekräftar att du vill återpublicera annonsen för att kunna gå vidare.")
+			alert("Du mÃ¥ste klicka i rutan som bekrÃ¤ftar att du vill Ã¥terpublicera annonsen fÃ¶r att kunna gÃ¥ vidare.")
 		}
 	});
 </script>

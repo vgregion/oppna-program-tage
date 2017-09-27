@@ -1,6 +1,6 @@
 <%@page import="se.goteborg.retursidan.model.entity.Advertisement"%>
 <%@page import="org.springframework.validation.ObjectError"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -22,9 +22,9 @@
 
 <script type="text/javascript">
 	window.urlConfig = {
-		uploadUrl: "${uploadUrl}", 
-		removeUrl: "${removeUrl}", 
-		thumbnailUrl: "${thumbnailUrl}", 
+		uploadUrl: "${uploadUrl}",
+		removeUrl: "${removeUrl}",
+		thumbnailUrl: "${thumbnailUrl}",
 		photoUrl: "${photoUrl}"
 	};
 </script>
@@ -36,14 +36,14 @@
 	<link rel="stylesheet" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/fileuploader.css") %>" type="text/css" />
 </c:if>
 
-<% 
-	org.springframework.validation.BindingResult bindingResult = 
-		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.advertisement"); 
+<%
+	org.springframework.validation.BindingResult bindingResult =
+		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.advertisement");
 %>
 
 <div id="content-primary" class="article cf" role="main">
 	<h1>Skapa ny annons</h1>
-	<p>Välj en tydlig beskrivande rubrik och en bra beskrivning. Ta gärna flera bilder så föremålet syns tydligt. Behövs särskilda transportsätt? Hur är skicket? Finns det alternativa kontaktpersoner? Gör det enkelt för den som läser annonsen att bedöma om de ska ha den.</p>
+	<p>VÃ¤lj en tydlig beskrivande rubrik och en bra beskrivning. Ta gÃ¤rna flera bilder sÃ¥ fÃ¶remÃ¥let syns tydligt. BehÃ¶vs sÃ¤rskilda transportsÃ¤tt? Hur Ã¤r skicket? Finns det alternativa kontaktpersoner? GÃ¶r det enkelt fÃ¶r den som lÃ¤ser annonsen att bedÃ¶ma om de ska ha den.</p>
 
 
 <%
@@ -51,11 +51,11 @@
 %>
 	<div class="system-info portlet-msg-error">
 		<h2>Felaktigt inmatade annonsuppgifter</h2>
-		<p>Följande fel upptäcktes i annonsen, rätta felen och försök igen.</p>
+		<p>FÃ¶ljande fel upptÃ¤cktes i annonsen, rÃ¤tta felen och fÃ¶rsÃ¶k igen.</p>
 		<ul>
 <%
 		for(ObjectError error: bindingResult.getAllErrors()) {
-%>			
+%>
 			<li><spring:message code="<%= error.getCode() %>"/></li>
 <%
 		}
@@ -71,14 +71,14 @@
 			<div class="select medium col col-1 mandatory <%= bindingResult.hasFieldErrors("topCategory") ? "error" : "" %>">
 				<label for="5086c4a3b2949">Kategori <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="topCategory"/></div></label>
 				<form:select id="5086c4a3b2949" path="topCategory.id">
-					<form:option value="-1">Välj kategori...</form:option>
+					<form:option value="-1">VÃ¤lj kategori...</form:option>
 					<form:options items="${topCategories}" itemLabel="title" itemValue="id"/>
 				</form:select>
 			</div>
 			<div id="subCategories" class="select medium col col-2 mandatory <%= bindingResult.hasFieldErrors("category") ? "error" : "" %>">
 				<label for="5086c4a3b2aae">Underkategori <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="category"/></div></label>
 				<form:select id="5086c4a3b2aae" path="category.id">
-					<option value="-1" selected="selected">Välj underkategori...</option>
+					<option value="-1" selected="selected">VÃ¤lj underkategori...</option>
 					<c:if test="${!empty subCategories}">
 						<form:options items="${subCategories}" itemLabel="title" itemValue="id"/>
 					</c:if>
@@ -105,18 +105,18 @@
 		</div>
 		<div class="row cols-1 cf">
 			<div class="select large col col-1 mandatory ">
-				<label for="5086c4a3b2c60">Förvaltning som skänker bort <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="unit"/></div></label>
+				<label for="5086c4a3b2c60">FÃ¶rvaltning som skÃ¤nker bort <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="unit"/></div></label>
 				<form:select id="5086c4a3b2c60" path="unit.id">
-					<form:option value="-1" label="Välj förvaltning..." />
+					<form:option value="-1" label="VÃ¤lj fÃ¶rvaltning..." />
 					<form:options items="${units}" itemValue="id" itemLabel="name"/>
 				</form:select>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="select large col col-1 mandatory <%= bindingResult.hasFieldErrors("area") ? "error" : "" %>">
-				<label for="3245987abaed8">Geografiskt område <em>(obligatoriskt)</em> <i class="icon-info-sign area-info-icon"></i> <div><form:errors cssClass="portlet-msg-error" path="area"/></div></label>
+				<label for="3245987abaed8">Geografiskt omrÃ¥de <em>(obligatoriskt)</em> <i class="icon-info-sign area-info-icon"></i> <div><form:errors cssClass="portlet-msg-error" path="area"/></div></label>
 				<form:select id="3245987abaed8" path="area.id">
-					<form:option value="-1" label="Välj geografiskt område..." />
+					<form:option value="-1" label="VÃ¤lj geografiskt omrÃ¥de..." />
 					<form:options items="${areas}" itemValue="id" itemLabel="name"/>
 				</form:select>
 			</div>
@@ -146,13 +146,13 @@
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col full short col-1 mandatory <%= bindingResult.hasFieldErrors("pickupAddress") ? "error" : "" %>">
-				<label for="5086c4a3b3170">Hämtningsadress <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="pickupAddress"/></div></label>
+				<label for="5086c4a3b3170">HÃ¤mtningsadress <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="pickupAddress"/></div></label>
 				<form:textarea path="pickupAddress" id="5086c4a3b3170" cols="30" rows="5"/>
 			</div>
 		</div>
 		<div class="row cols-1 cf">
 			<div class="text col full short col-1">
-				<label for="5086c4a3b31c6">Speciella hämtningsvillkor</label>
+				<label for="5086c4a3b31c6">Speciella hÃ¤mtningsvillkor</label>
 				<form:textarea path="pickupConditions" id="5086c4a3b31c6" cols="30" rows="5"/>
 			</div>
 		</div>
@@ -166,7 +166,7 @@
 				<label for="5086c4a3b3355">Ladda upp bild</label>
 				<!-- upload -->
 				<div style="display:table;" id="thumbnails"></div>
-				<div style="width:140px; float:left" id="upload-area"><noscript>JavaScript måste vara påslaget för att kunna ladda upp foton!</noscript></div>
+				<div style="width:140px; float:left" id="upload-area"><noscript>JavaScript mÃ¥ste vara pÃ¥slaget fÃ¶r att kunna ladda upp foton!</noscript></div>
 				<div style="height:30px; display:table-cell; vertical-align:middle;" id="upload-info"></div>
 				<form:hidden id="photos" path="photos"/>
 
@@ -180,30 +180,30 @@
 		<p><span class="author">Annonsen skapad av ${userId}.</span></p>
 		<div class="row cols-1 cf">
             <aui:button-row>
-				<aui:button type="submit" id="addAdSubmit" cssClass="btn btn-primary" value="Lägg upp annons" name="submit-5086c4a3b380d"/>
+				<aui:button type="submit" id="addAdSubmit" cssClass="btn btn-primary" value="LÃ¤gg upp annons" name="submit-5086c4a3b380d"/>
 				<a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 		</div>
 	</form:form>
 </div>
 
-<jsp:include page="jspf/mapDialog.jsp"/>
+<jsp:include page="/jsp/jspf/mapDialog.jsp" flush="true" />
 
 <script type="text/javascript">
     $(document).ready(initFileUploader("<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/img/loading.gif") %>"));
-        
+
 	$("#5086c4a3b2949").change(function() {
 		$.ajax({
 			type: "POST",
-			url: "${subCatUrl}", 
+			url: "${subCatUrl}",
 			dataType: "html",
 			data: { parent: $(this).find(":selected").val() },
 			success: function(result) {
-				$("#5086c4a3b2aae").html("<option value=\"-1\" selected=\"selected\">Välj underkategori...</option>" + result);
+				$("#5086c4a3b2aae").html("<option value=\"-1\" selected=\"selected\">VÃ¤lj underkategori...</option>" + result);
 				$("#5086c4a3b2aae").trigger("change");
 			},
 			error: function(result) {
-				alert("Ett fel uppstod på servern underkategorier hämtades: " + result.responseText);
+				alert("Ett fel uppstod pÃ¥ servern underkategorier hÃ¤mtades: " + result.responseText);
 			}
 		});
 	});

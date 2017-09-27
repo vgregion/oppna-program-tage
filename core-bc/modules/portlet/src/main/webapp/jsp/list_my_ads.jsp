@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -22,7 +22,7 @@
 		<h1>Mina annonser</h1>
 		<a href="${cancelUrl}" class="btn btn-default">Tillbaka</a>
 	</div>
-	<p>H‰r visas de annonser som du har lagt upp i Tage, bÂde annonser som ‰r publicerade och annonser som ‰r bokade.</p>
+	<p>H√§r visas de annonser som du har lagt upp i Tage, b√•de annonser som √§r publicerade och annonser som √§r bokade.</p>
 	<form:form id="search-inventory-form" cssClass="form-general" modelAttribute="searchFilter" action="${filterUrl}" >
 		<div class="row cols-3 cf clearfix">
 			<div class="select medium col col-1">
@@ -60,7 +60,7 @@
 					<portlet:param name="previousPage" value="listMyAds" />
 					<portlet:param name="externalPage" value="none" />
 				</portlet:renderURL>
-				
+
 				<c:if test="${fn:length(ad.photos) gt 0}">
 					<c:forEach var="photo" items="${ad.photos}" end="0">
 		     			<c:set var="imageUrl" value="${thumbnailUrl}&id=${photo.id}"/>
@@ -69,7 +69,7 @@
 				<c:if test="${fn:length(ad.photos) eq 0}">
 	     			<c:set var="imageUrl" value="${thumbnailUrl}&id="/>
 				</c:if>
-	
+
 				<li class="cf clearfix">
 					<a class="ad-link" href="${viewAdUrl}">
 						<div class="image">
@@ -79,7 +79,7 @@
 							<div class="meta"><span class="date">${ad.formattedCreatedDate}</span></div>
 							<h3>${ad.title}</h3>
 							<div class="meta"><span class="author">Upplagd av <strong>${ad.unit.name}</strong></span></div>
-							<c:if test="${not empty ad.area}"><div class="meta"><span class="">Geografiskt omrÂde <strong>${ad.area.name}</strong></span></div></c:if>
+							<c:if test="${not empty ad.area}"><div class="meta"><span class="">Geografiskt omr√•de <strong>${ad.area.name}</strong></span></div></c:if>
 							<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
 						</div>
 					</a>
@@ -88,13 +88,13 @@
 		</ul>
 		<c:if test="${ads.numberOfPages > 1}">
 			<div class="paging cf clearfix">
-				<strong>GÂ till sida:</strong>
+				<strong>G√• till sida:</strong>
 				<ul>
 					<c:if test="${ads.hasPrevious}">
 						<portlet:actionURL name="filterMyAds" var="prevUrl"><portlet:param name="pageIdx" value="${ads.page-1}"/></portlet:actionURL>
 						<portlet:actionURL name="filterMyAds" var="firstUrl"><portlet:param name="pageIdx" value="1"/></portlet:actionURL>
-						<li><a href="${firstUrl}" title="L‰nk till fˆrsta sidan">&lt;&lt;</a></li>
-						<li><a href="${prevUrl}" title="L‰nk till fˆregÂende sida">&lt;</a></li>					
+						<li><a href="${firstUrl}" title="L√§nk till f√∂rsta sidan">&lt;&lt;</a></li>
+						<li><a href="${prevUrl}" title="L√§nk till f√∂reg√•ende sida">&lt;</a></li>
 					</c:if>
 					<c:forEach var="pageIdx" begin="1" end="${ads.numberOfPages}">
 						<c:if test="${pageIdx eq ads.page}">
@@ -108,16 +108,16 @@
 					<c:if test="${ads.hasNext}">
 						<portlet:actionURL name="filterMyAds" var="nextUrl"><portlet:param name="pageIdx" value="${ads.page+1}"/></portlet:actionURL>
 						<portlet:actionURL name="filterMyAds" var="lastUrl"><portlet:param name="pageIdx" value="${ads.numberOfPages}"/></portlet:actionURL>
-						<li><a href="${nextUrl}" title="L‰nk till n‰sta sida">&gt;</a></li>
-						<li><a href="${lastUrl}" title="L‰nk till sista sidan">&gt;&gt;</a></li>
+						<li><a href="${nextUrl}" title="L√§nk till n√§sta sida">&gt;</a></li>
+						<li><a href="${lastUrl}" title="L√§nk till sista sidan">&gt;&gt;</a></li>
 					</c:if>
 				</ul>
 			</div>
-		</c:if>		
+		</c:if>
 	</c:if>
 	<c:if test="${fn:length(ads.list) eq 0}">
 		<div>Inga annonser hittades.</div>
-	</c:if>		
+	</c:if>
 </div>
 
 <script type="text/javascript">
@@ -130,11 +130,11 @@
 			$("#headerTitle").append(" > " + $("#508e6b767bc24 option:selected").text());
 		}
 	});
-	
+
 	$("#508e6b767babe").change(function() {
 		$.ajax({
 			type: "POST",
-			url: "${subCatUrl}", 
+			url: "${subCatUrl}",
 			dataType: "html",
 			data: { parent: $(this).find(":selected").val() },
 			success: function(result) {
@@ -142,7 +142,7 @@
 				$("#508e6b767bc24").trigger("change");
 			},
 			error: function(result) {
-				alert("Ett fel uppstod pÂ servern n‰r underkategorier h‰mtades: " + result.responseText);
+				alert("Ett fel uppstod p√• servern n√§r underkategorier h√§mtades: " + result.responseText);
 			}
 		});
 	});

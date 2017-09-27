@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -27,14 +27,14 @@
 		<div class="col col-1">
 			<div class="checkbox alt">
 				<input type="checkbox" value="ett" name="checkboxgroup1" id="checkbox1-5097936784a63">
-				<label for="checkbox1-5097936784a63">Jag förstår hur bortskänkning och bokning fungerar</label>
+				<label for="checkbox1-5097936784a63">Jag fÃ¶rstÃ¥r hur bortskÃ¤nkning och bokning fungerar</label>
 			</div>
 		</div>
 	</div>
 	<div class="row cols-1 cf">
 		<%--<div class="col medium col-1 submit-area">--%>
             <aui:button-row>
-                <aui:button type="submit" href="#" id="submit-5097936784ac4" cssClass="btn btn-primary" value="Fortsätt"/>
+                <aui:button type="submit" href="#" id="submit-5097936784ac4" cssClass="btn btn-primary" value="FortsÃ¤tt" useNamespace="false" />
                 <a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 		<%--</div>--%>
@@ -48,7 +48,7 @@
 		if ($("#checkbox1-5097936784a63").is(":checked")) {
 			window.location.href="${createAdUrl}";
 		} else {
-			alert("Du måste klicka i rutan som bekräftar att du förstått reglerna för bortskänkning för att kunna gå vidare.")
+			alert("Du mÃ¥ste klicka i rutan som bekrÃ¤ftar att du fÃ¶rstÃ¥tt reglerna fÃ¶r bortskÃ¤nkning fÃ¶r att kunna gÃ¥ vidare.")
 		}
 	});
 </script>

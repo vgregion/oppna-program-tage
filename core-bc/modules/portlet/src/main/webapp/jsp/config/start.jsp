@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -20,19 +20,19 @@
 	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL portletMode="VIEW"/>">Avsluta administrationen</a></p>
 	<h1>Administration</h1>
 	<p>
-		Välj en administrationsåtgärd nedan:
+		VÃ¤lj en administrationsÃ¥tgÃ¤rd nedan:
 		<ul>
 			<li><a href="${adminUnitsUrl}">Administrera enheter</a></li>
-			<li><a href="${adminAreasUrl}">Administrera geografiska områden</a></li>
+			<li><a href="${adminAreasUrl}">Administrera geografiska omrÃ¥den</a></li>
 			<li><a href="${adminCategoriesUrl}">Administrera kategorier</a></li>
 			<li><a href="${adminAdsUrl}">Administrera annonser</a></li>
 			<li><a href="${adminRequestsUrl}">Administrera efterlysningar</a></li>
 		</ul>
 	</p>
 	<p>
-		Övrigt:
+		Ã–vrigt:
 		<ul>
 			<li><a href="${statisticsUrl}">Visa statistik</a></li>
 		</ul>
-	</p>	
+	</p>
 </div>

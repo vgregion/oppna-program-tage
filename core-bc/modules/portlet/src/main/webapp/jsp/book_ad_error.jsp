@@ -1,5 +1,5 @@
 <%@page import="org.springframework.validation.ObjectError"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="false"%><%
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%><%
 %><%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%><%
 %><%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%><%
 %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><%
@@ -13,9 +13,9 @@
 
 <div id="content-primary" class="article cf" role="main">
 	<p class="back-link"><a class="btn btn-default" href="${backUrl}">Tillbaka</a></p>
-	<h1>Ett fel uppstod när ${advertisement.title} skulle bokas</h1>
+	<h1>Ett fel uppstod nÃ¤r ${advertisement.title} skulle bokas</h1>
 	<div class="system-info confirmation-message">
 		<h2>${errorMessage}</h2>
-		<p>Din bokning har inte genomförts, klicka på tillbaka-länken ovan för att börja om och söka efter en annan annons.</p>
-	</div>	
+		<p>Din bokning har inte genomfÃ¶rts, klicka pÃ¥ tillbaka-lÃ¤nken ovan fÃ¶r att bÃ¶rja om och sÃ¶ka efter en annan annons.</p>
+	</div>
 </div>
