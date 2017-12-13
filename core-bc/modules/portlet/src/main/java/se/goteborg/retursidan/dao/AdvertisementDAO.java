@@ -187,15 +187,33 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	 * @param days The maximum number of days 
 	 * @return the number of ads removed
 	 */
-	public int expireOldAds(int days) {
+	public List<Advertisement> expireOldAds(int days) {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_YEAR, -days);
 		Date maxDate = cal.getTime();
-		Query query = getSessionFactory().getCurrentSession().createQuery("UPDATE Advertisement SET status=:status WHERE created <= :maxDate AND status=:publishStatus");
-		query.setParameter("status", Status.EXPIRED);
+
+		List<Advertisement> list = queryTheSameAsGetsUpdated(maxDate);
+
+		Query updateQuery = getSessionFactory().getCurrentSession().createQuery("UPDATE Advertisement SET status=:status WHERE created <= :maxDate AND status=:publishStatus");
+		updateQuery.setParameter("status", Status.EXPIRED);
+		updateQuery.setParameter("publishStatus", Status.PUBLISHED);
+		updateQuery.setDate("maxDate", maxDate);
+
+		int count = updateQuery.executeUpdate();
+
+		if (list.size() != count) {
+			throw new RuntimeException("Unexpected count. Query and update did not give the same number.");
+		}
+
+		return list;
+	}
+
+	private List<Advertisement> queryTheSameAsGetsUpdated(Date maxDate) {
+		Query query = getSessionFactory().getCurrentSession().createQuery("SELECT a FROM Advertisement a WHERE a.created <= :maxDate AND a.status=:publishStatus");
 		query.setParameter("publishStatus", Status.PUBLISHED);
 		query.setDate("maxDate", maxDate);
-		return query.executeUpdate();
+
+		return (List<Advertisement>) query.list();
 	}
 
 	public Integer countNonNullArea(Status status) {

@@ -13,6 +13,7 @@ import se.goteborg.retursidan.model.entity.Advertisement;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
+import java.util.Date;
 import java.util.logging.Level;
 
 /**
@@ -38,6 +39,7 @@ public class RepublishAdController extends BaseController {
 	public void performRepublishing(@ModelAttribute("advertisement") Advertisement advertisement, ActionRequest request, ActionResponse response) {
 		logger.trace("Republishing ad with id=" + advertisement.getId());
 		advertisement.setStatus(Advertisement.Status.PUBLISHED);
+		advertisement.setCreated(new Date());
 		modelService.updateAd(advertisement);
 	}
 }
