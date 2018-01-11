@@ -7,7 +7,7 @@ import se.goteborg.retursidan.model.PhotoHolder;
 
 import javax.portlet.PortletContext;
 import javax.portlet.ResourceResponse;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
@@ -49,7 +49,8 @@ public abstract class PhotoBaseController extends BaseController implements Port
         // photo could not be found; serve up a default photo
         logger.trace("Requested " + (thumbnail ? "thumbnail" : "photo") + " could not be retrieved, so a default photo will be served up instead.");
         try {
-            FileInputStream is = new FileInputStream(getPortletContext().getRealPath("/img/pic_missing" + ((thumbnail) ? "_thumb" : "") + ".png"));
+            String path = "/img/pic_missing" + ((thumbnail) ? "_thumb" : "") + ".png";
+            InputStream is = getPortletContext().getResource(path).openStream();
             response.setContentType("image/png");
             OutputStream os = response.getPortletOutputStream();
             byte[] buf = new byte[1024];
