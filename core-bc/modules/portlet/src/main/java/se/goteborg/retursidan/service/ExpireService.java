@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import se.goteborg.retursidan.dao.AdvertisementDAO;
 import se.goteborg.retursidan.dao.RequestDAO;
+import se.goteborg.retursidan.model.entity.Advertisement;
+
+import java.util.List;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -20,10 +23,11 @@ public class ExpireService {
 	@Autowired
 	RequestDAO requestDAO;
 	
-	public void expireAds(int days) {
+	public List<Advertisement> expireAds(int days) {
 		logger.debug("Expiring ads older than " + days + " days.");
-		int count = advertisementDAO.expireOldAds(days);
-		logger.debug(count + " ads were expired.");
+		List<Advertisement> advertisements = advertisementDAO.expireOldAds(days);
+		logger.debug(advertisements.size() + " ads were expired.");
+		return advertisements;
 	}
 
 	public void expireRequests(int days) {

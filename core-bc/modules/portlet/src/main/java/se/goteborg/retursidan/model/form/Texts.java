@@ -20,6 +20,7 @@ public class Texts extends GeneralModelBean {
 	private String mailSenderAddress;
 	private String mailSubject;
 	private String mailBody;
+	private String expireMailBody;
 
 	public Texts() {
 	}
@@ -33,6 +34,7 @@ public class Texts extends GeneralModelBean {
 		this.mailSenderAddress = prefs.getValue("mailSenderAddress", "tage@vgregion.se");
 		this.mailSubject = prefs.getValue("mailSubject", "Annons bokad!");
 		this.mailBody = prefs.getValue("mailBody", "");
+		this.expireMailBody = prefs.getValue("expireMailBody", "");
 	}
 
 	public String getConfirmCreateAdText() {
@@ -97,5 +99,13 @@ public class Texts extends GeneralModelBean {
 
 	public void setMailBody(String mailBody) {
 		this.mailBody = mailBody;
+	}
+
+	public String getExpireMailBody() {
+		return expireMailBody;
+	}
+
+	public void setExpireMailBody(String expireMailBody) {
+		this.expireMailBody = expireMailBody;
 	}
 }

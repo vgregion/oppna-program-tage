@@ -122,6 +122,11 @@ Klicka på länken för att gå till annonsen:{NEWLINE}
 Med vänliga hälsningar Tage
 				]]></value>
       </preference>
+      <preference>
+        <!-- Use {NEWLINE} since there is problem to make Liferay save the preference with new lines.-->
+        <name>expireMailBody</name>
+        <value><![CDATA[Hej,{NEWLINE}{NEWLINE}Följande annonser har överskridit tidsgränsen och utgått:{NEWLINE}{NEWLINE}{advertisements}{NEWLINE}{NEWLINE}För att återpublicera annonsen, gå in på mina annonser, välj aktuell annons och klicka på återpublicera. Då ligger annonsen ute i ytterligare 30 dagar.{NEWLINE}{NEWLINE}Med vänliga hälsningar Tage]]></value>
+      </preference>
     </portlet-preferences>
     <supported-public-render-parameter>externalPage</supported-public-render-parameter>
     <supported-public-render-parameter>externalRequestId</supported-public-render-parameter>
