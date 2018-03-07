@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import se.goteborg.retursidan.dao.VisitDAO;
 import se.goteborg.retursidan.model.entity.Visit;
 
+import java.util.List;
+
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class VisitorLoggingService {
@@ -16,6 +18,9 @@ public class VisitorLoggingService {
 
 	@Autowired
 	private VisitDAO visitDAO;
+
+	@Autowired
+	private MailService mailService;
 	
 	public void logVisit(String uid) {
 		logger.debug("Logging visit for user " + uid);
@@ -30,6 +35,12 @@ public class VisitorLoggingService {
 		}
 		visit.setUserId(uid);
 		visitDAO.saveOrUpdate(visit);
+
+		List<Visit> allByUid = visitDAO.findAllByUid(uid);
+		if (allByUid != null && allByUid.size() > 1) {
+			mailService.sendMail(new String[]{"patrik.bjork@vgregion.se"}, "tage@vgregion.se", "Varning - Dubbelt i " +
+					"besöksloggen i Tage", uid);
+		}
 	}
 	
 	public int getUniqueVisitors() {
