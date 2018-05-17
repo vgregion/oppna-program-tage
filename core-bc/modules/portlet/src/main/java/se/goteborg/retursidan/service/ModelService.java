@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -33,25 +34,25 @@ import se.goteborg.retursidan.model.entity.Unit;
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class ModelService {
 	@Autowired
-	private AdvertisementDAO advertisementDAO;		
+	private AdvertisementDAO advertisementDAO;
 	
 	@Autowired
-	private RequestDAO requestDAO;	
+	private RequestDAO requestDAO;
 	
 	@Autowired
 	private CategoryDAO categoryDAO;
 
 	@Autowired
-	private UnitDAO unitDAO;	
+	private UnitDAO unitDAO;
 
 	@Autowired
 	private AreaDAO areaDAO;
 
 	@Autowired
-	private PersonDAO personDAO;		
+	private PersonDAO personDAO;
 
 	@Autowired
-	private PhotoDAO photoDAO;		
+	private PhotoDAO photoDAO;
 
 	
 	public void addCategory(Category category) {
@@ -146,17 +147,17 @@ public class ModelService {
 	public Advertisement getAdvertisement(int id) {
 		return advertisementDAO.findById(id);
 	}
-	public PagedList<Advertisement> getAllFilteredAdvertisements(Advertisement.Status status, Category topCategory, Category category, Unit unit, Area area, int page, int pageSize) {
-		return advertisementDAO.find(null, status, topCategory, category, unit, area, false, page, pageSize);
+	public PagedList<Advertisement> getAllFilteredAdvertisements(Advertisement.Status status, Category topCategory, Category category, Unit unit, Area area, Boolean hidden, int page, int pageSize) {
+		return advertisementDAO.find(null, status, topCategory, category, unit, area, hidden, false, page, pageSize);
 	}
-	public PagedList<Advertisement> getAllAdvertisements(Advertisement.Status status, int page, int pageSize) {
-		return advertisementDAO.find(null, status, null, null, null, null, false, page, pageSize);
+	public PagedList<Advertisement> getAllAdvertisements(Advertisement.Status status, Boolean hidden, int page, int pageSize) {
+		return advertisementDAO.find(null, status, null, null, null, null, hidden, false, page, pageSize);
 	}
-	public PagedList<Advertisement> getAllAdvertisementsForUid(String uid, int page, int pageSize) {
-		return advertisementDAO.find(uid, null, null, null, null, null, false, page, pageSize);
+	public PagedList<Advertisement> getAllAdvertisementsForUid(String uid, Boolean hidden, int page, int pageSize) {
+		return advertisementDAO.find(uid, null, null, null, null, null, hidden, false, page, pageSize);
 	}
-	public PagedList<Advertisement> getAllFilteredAdvertisementsForUid(String uid, Category topCategory, Category category, Unit unit, Area area, int page, int pageSize) {
-		return advertisementDAO.find(uid, null, topCategory, category, unit, area, false, page, pageSize);
+	public PagedList<Advertisement> getAllFilteredAdvertisementsForUid(String uid, Category topCategory, Category category, Unit unit, Area area, Boolean hidden, int page, int pageSize) {
+		return advertisementDAO.find(uid, null, topCategory, category, unit, area, hidden, false, page, pageSize);
 	}
 	
 	public void removeAdvertisement(Advertisement advertisement) {
@@ -208,5 +209,16 @@ public class ModelService {
 	}
 	public void removeCategory(Category category) {
 		categoryDAO.delete(category);
+	}
+
+	public void hideAdvertisement(Integer advertisementId, Boolean markAsBooked) {
+		Advertisement ad = advertisementDAO.findById(advertisementId);
+		ad.setHidden(true);
+
+		if (BooleanUtils.isTrue(markAsBooked)) {
+			ad.setStatus(Advertisement.Status.BOOKED);
+		}
+
+		advertisementDAO.update(ad);
 	}
 }

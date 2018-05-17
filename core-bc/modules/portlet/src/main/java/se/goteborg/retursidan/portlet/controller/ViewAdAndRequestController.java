@@ -7,12 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import se.goteborg.retursidan.model.entity.Advertisement;
 import se.goteborg.retursidan.model.entity.Request;
 
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.RenderRequest;
+import java.io.IOException;
 
 /**
  * Controller handling viewing of ads
@@ -71,5 +74,20 @@ public class ViewAdAndRequestController extends BaseController {
 			model.addAttribute("previousPage", previousPage);
 		}
 		return "view_request";
+	}
+
+	@ActionMapping(params="hideAdvertisementId")
+	public void hideAd(@RequestParam(value = "hideAdvertisementId") Integer advertisementId,
+					   @RequestParam(value="previousPage", required = false) String previousPage,
+					   @RequestParam(value="markAsBooked", required = false) Boolean markAsBooked,
+					   ActionResponse response) throws IOException {
+
+		modelService.hideAdvertisement(advertisementId, markAsBooked);
+
+		if (previousPage != null) {
+			response.setRenderParameter("page", previousPage);
+		} else {
+			response.setRenderParameter("page", "listMyAds");
+		}
 	}
 }

@@ -58,20 +58,20 @@ div.col-1 .portlet-msg-error {
     float: right;
 }
 
-.content-header a.btn {
+.content-header .btn {
     float: right;
 }
 
-html.aui a.btn {
+html.aui .btn {
     margin: 0 10px 0 5px;
     text-decoration: none;
 }
 
-html.aui a.btn-primary, html.aui a.btn-danger {
+html.aui .btn-primary, html.aui .btn-danger {
     color: #ffffff;
 }
 
-html.aui a.btn-default {
+html.aui .btn-default {
     color: #333333;
 }
 
@@ -178,4 +178,40 @@ ul.slides li {
     left: 50%;
     position: relative;
     top: 50%;
+}
+
+#justConfirmDialog {
+    position: fixed;
+    top: calc(50% - 74px);
+    left: calc(50% - 200px);
+    background: rgb(255, 255, 255);
+    padding: 24px;
+    border-radius: 4px;
+    z-index: 100;
+    width: 400px;
+    display: none
+}
+
+#decideWhetherBooked {
+    position: fixed;
+    top: calc(50% - 74px);
+    left: calc(50% - 262px);
+    background: rgb(255, 255, 255);
+    padding: 24px;
+    border-radius: 4px;
+    z-index: 100;
+    width: 524px;
+    display: none
+}
+
+#maskElement {
+    background-color: rgb(0, 0, 0);
+    height: 100%;
+    opacity: 0.7;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    left: 0;
+    display: none;
 }

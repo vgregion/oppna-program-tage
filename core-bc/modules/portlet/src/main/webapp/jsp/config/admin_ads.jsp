@@ -58,8 +58,13 @@
 					<div class="content">
 						<div class="meta"><span class="date">${ad.formattedCreatedDate}</span></div>
 						<h3><a href="${viewAdUrl}">${ad.title}</a></h3>
-						<div class="meta"><span class="author">Upplagd av ${ad.unit.name}</span>. Status: <strong>${statusTitle}</strong></div>
-						<div class="meta"><span class="author">Geografiskt område <strong>${ad.area.name}</strong></span>.</div>
+						<div class="meta">
+							<span class="author">Upplagd av ${ad.unit.name}</span>. Status: <strong>${statusTitle}</strong>
+							<c:if test="${ad.hidden}">
+								<strong class="">, GÖMD</strong>
+							</c:if>
+						</div>
+						<div class="meta"><span class="">Geografiskt område <strong>${ad.area.name}</strong></span>.</div>
 						<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
 						<div class="meta">
 							<a href="${removeAdUrl}" class="btn btn-danger">Ta bort</a>

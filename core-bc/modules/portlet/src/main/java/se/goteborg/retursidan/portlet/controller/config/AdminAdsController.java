@@ -25,7 +25,7 @@ public class AdminAdsController extends PhotoBaseController {
 
     @RenderMapping(params="page=adminAds")
 	public String adminAds( @RequestParam(value="pageIdx", required=false) Integer pageIdx, RenderRequest request, RenderResponse response, Model model) {
-		PagedList<Advertisement> pagedList = modelService.getAllAdvertisements(null, (pageIdx != null) ? pageIdx : 1, getConfig(request).getPageSizeInt());
+		PagedList<Advertisement> pagedList = modelService.getAllAdvertisements(null, null, (pageIdx != null) ? pageIdx : 1, getConfig(request).getPageSizeInt());
 		model.addAttribute("ads", pagedList);
 		return "config/admin_ads";
 	}
