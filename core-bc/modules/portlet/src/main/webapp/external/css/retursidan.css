@@ -180,6 +180,10 @@ ul.slides li {
     top: 50%;
 }
 
+.dialog p {
+    font-size: 14px;
+}
+
 #justConfirmDialog {
     position: fixed;
     top: calc(50% - 74px);

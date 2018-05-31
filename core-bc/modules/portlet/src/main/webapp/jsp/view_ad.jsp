@@ -175,7 +175,7 @@
 	</div>
 </c:if>
 
-<div id="justConfirmDialog">
+<div class="dialog" id="justConfirmDialog">
 	<p>Ta bort bokad annons från mina annonser. Klicka på &#8221;Bekräfta ta bort&#8221;.</p>
 
     <div>
@@ -184,7 +184,7 @@
     </div>
 </div>
 
-<div id="decideWhetherBooked">
+<div class="dialog" id="decideWhetherBooked">
 	<p>Om möbeln har hämtats för fortsatt användning, klicka på &#8221;Bekräfta ta bort och markera som bokad&#8221;. Om möbeln däremot har kasserats klicka på &#8221;Bekräfta ta bort&#8221;.</p>
 
     <div>
