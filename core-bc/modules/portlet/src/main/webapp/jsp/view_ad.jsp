@@ -161,10 +161,7 @@
 
 				<a href="<portlet:renderURL/>" class="btn btn-default">Tillbaka</a>
             </aui:button-row>
-			<c:if test="${userId eq advertisement.creatorUid}">
-				Behöver du ta bort annonsen, maila funktionsbrevlåda: <a href="mailto:tage@vgregion.se">tage@vgregion.se</a>
-			</c:if>
-	</div>
+		</div>
 	</div>
 </c:if>
 <c:if test="${empty advertisement}">
@@ -179,7 +176,7 @@
 </c:if>
 
 <div id="justConfirmDialog">
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut magna ante, dignissim non purus non, accumsan aliquet diam. Vivamus id neque sit amet quam varius pellentesque..</p>
+	<p>Ta bort bokad annons från mina annonser. Klicka på &#8221;Bekräfta ta bort&#8221;.</p>
 
     <div>
         <button class="btn btn-default" onclick="javascript: $('#justConfirmDialog').hide(); $('#maskElement').hide();">Avbryt</button>
@@ -188,7 +185,7 @@
 </div>
 
 <div id="decideWhetherBooked">
-	<p>Vill du markera som bokad? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut magna ante, dignissim non purus non, accumsan aliquet diam. Vivamus id neque sit amet quam varius pellentesque..</p>
+	<p>Om möbeln har hämtats för fortsatt användning, klicka på &#8221;Bekräfta ta bort och markera som bokad&#8221;. Om möbeln däremot har kasserats klicka på &#8221;Bekräfta ta bort&#8221;.</p>
 
     <div>
         <button class="btn btn-default" onclick="javascript: $('#decideWhetherBooked').hide(); $('#maskElement').hide();">Avbryt</button>
