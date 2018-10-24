@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import se.goteborg.retursidan.dao.VisitDAO;
@@ -12,7 +13,7 @@ import se.goteborg.retursidan.model.entity.Visit;
 import java.util.List;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
 public class VisitorLoggingService {
     Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
@@ -45,5 +46,9 @@ public class VisitorLoggingService {
 	
 	public int getUniqueVisitors() {
 		return visitDAO.getUniqueVisitorCount();
+	}
+
+	public List<Visit> findAllByUid(String uid) {
+		return visitDAO.findAllByUid(uid);
 	}
 }
