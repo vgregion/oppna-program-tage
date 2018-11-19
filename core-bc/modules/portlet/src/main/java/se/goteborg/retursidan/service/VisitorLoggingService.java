@@ -4,18 +4,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import se.goteborg.retursidan.dao.VisitDAO;
 import se.goteborg.retursidan.model.entity.Visit;
 
+import java.util.List;
+
 @Service
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
 public class VisitorLoggingService {
     Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	@Autowired
 	private VisitDAO visitDAO;
+
+	@Autowired
+	private MailService mailService;
 	
 	public void logVisit(String uid) {
 		logger.debug("Logging visit for user " + uid);
@@ -30,9 +36,19 @@ public class VisitorLoggingService {
 		}
 		visit.setUserId(uid);
 		visitDAO.saveOrUpdate(visit);
+
+		List<Visit> allByUid = visitDAO.findAllByUid(uid);
+		if (allByUid != null && allByUid.size() > 1) {
+			mailService.sendMail(new String[]{"patrik.bjork@vgregion.se"}, "tage@vgregion.se", "Varning - Dubbelt i " +
+					"besöksloggen i Tage", uid);
+		}
 	}
 	
 	public int getUniqueVisitors() {
 		return visitDAO.getUniqueVisitorCount();
+	}
+
+	public List<Visit> findAllByUid(String uid) {
+		return visitDAO.findAllByUid(uid);
 	}
 }

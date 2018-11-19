@@ -47,6 +47,12 @@ public class VisitDAO extends BaseDAO<Visit> {
 			.add(Restrictions.eq("userId", uid)).uniqueResult();
 	}
 	
+	public List<Visit> findAllByUid(String uid) {
+		return (List<Visit>)getSessionFactory().getCurrentSession()
+			.createCriteria(Visit.class)
+			.add(Restrictions.eq("userId", uid)).list();
+	}
+
 	/**
 	 * Return the number of unique visits to the application
 	 * @return the unique count

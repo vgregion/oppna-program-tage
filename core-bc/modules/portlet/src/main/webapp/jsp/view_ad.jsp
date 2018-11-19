@@ -12,6 +12,7 @@
 
 <c:if test="${config.useInternalResources}">
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
+	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/js/tage.js") %>" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 </c:if>
 
@@ -52,6 +53,20 @@
 					<portlet:param name="copyAdvertisementId" value="${advertisement.id}"/>
 				</portlet:renderURL>
 				<a class="btn btn-primary" href="${copyAd}">Kopiera till ny annons</a>
+			</c:if>
+
+			<c:if test="${userId eq advertisement.creatorUid}">
+                <portlet:actionURL var="hideAd" portletMode="view">
+                    <portlet:param name="previousPage" value="${previousPage}"/>
+                    <portlet:param name="hideAdvertisementId" value="${advertisement.id}"/>
+                </portlet:actionURL>
+                <portlet:actionURL var="hideAdAndMarkAsBooked" portletMode="view">
+                    <portlet:param name="previousPage" value="${previousPage}"/>
+                    <portlet:param name="hideAdvertisementId" value="${advertisement.id}"/>
+                    <portlet:param name="markAsBooked" value="true"/>
+                </portlet:actionURL>
+                <a class="hide-ad-link btn btn-danger ${not (advertisement.status eq 'BOOKED') ? 'hide' : ''}" data-href="${hideAd}">Ta bort</a>
+                <a class="hide-ad-link-with-decision btn btn-danger ${advertisement.status eq 'BOOKED' ? 'hide' : ''}" data-href="${hideAd}" data-href-booked="${hideAdAndMarkAsBooked}">Ta bort</a>
 			</c:if>
 
 			<a href="${backUrl}" class="btn btn-default">Tillbaka</a>
@@ -130,12 +145,23 @@
 					<a class="btn btn-primary" href="${copyAd}">Kopiera till ny annons</a>
 				</c:if>
 
-                <a href="<portlet:renderURL/>" class="btn btn-default">Tillbaka</a>
+				<c:if test="${userId eq advertisement.creatorUid}">
+					<portlet:actionURL var="hideAd" portletMode="view">
+						<portlet:param name="previousPage" value="${previousPage}"/>
+						<portlet:param name="hideAdvertisementId" value="${advertisement.id}"/>
+					</portlet:actionURL>
+					<portlet:actionURL var="hideAdAndMarkAsBooked" portletMode="view">
+						<portlet:param name="previousPage" value="${previousPage}"/>
+						<portlet:param name="hideAdvertisementId" value="${advertisement.id}"/>
+						<portlet:param name="markAsBooked" value="true"/>
+					</portlet:actionURL>
+					<a class="hide-ad-link btn btn-danger ${not (advertisement.status eq 'BOOKED') ? 'hide' : ''}" data-href="${hideAd}">Ta bort</a>
+					<a class="hide-ad-link-with-decision btn btn-danger ${advertisement.status eq 'BOOKED' ? 'hide' : ''}" data-href="${hideAd}" data-href-booked="${hideAdAndMarkAsBooked}">Ta bort</a>
+				</c:if>
+
+				<a href="<portlet:renderURL/>" class="btn btn-default">Tillbaka</a>
             </aui:button-row>
-			<c:if test="${userId eq advertisement.creatorUid}">
-				Behöver du ta bort annonsen, maila funktionsbrevlåda: <a href="mailto:tage@vgregion.se">tage@vgregion.se</a>
-			</c:if>
-	</div>
+		</div>
 	</div>
 </c:if>
 <c:if test="${empty advertisement}">
@@ -148,3 +174,24 @@
 		<a href="<portlet:renderURL/>" class="button">Tillbaka till startsidan</a>
 	</div>
 </c:if>
+
+<div class="dialog" id="justConfirmDialog">
+	<p>Ta bort bokad annons fr�n mina annonser. Klicka p� &#8221;Bekr�fta ta bort&#8221;.</p>
+
+    <div>
+        <button class="btn btn-default" onclick="javascript: $('#justConfirmDialog').hide(); $('#maskElement').hide();">Avbryt</button>
+        <button id="justConfirmButton" class="btn btn-primary">Bekr�fta ta bort</button>
+    </div>
+</div>
+
+<div class="dialog" id="decideWhetherBooked">
+	<p>Om m�beln har h�mtats f�r fortsatt anv�ndning, klicka p� &#8221;Bekr�fta ta bort och markera som bokad&#8221;. Om m�beln d�remot har kasserats klicka p� &#8221;Bekr�fta ta bort&#8221;.</p>
+
+    <div>
+        <button class="btn btn-default" onclick="javascript: $('#decideWhetherBooked').hide(); $('#maskElement').hide();">Avbryt</button>
+        <button id="decideWhetherBookedButtonNotBooked" class="btn btn-primary">Bekr�fta ta bort</button>
+        <button id="decideWhetherBookedButtonBooked" class="btn btn-primary">Bekr�fta ta bort och markera som bokad</button>
+    </div>
+</div>
+
+<div id="maskElement"></div>

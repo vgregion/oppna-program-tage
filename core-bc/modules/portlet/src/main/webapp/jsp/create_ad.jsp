@@ -95,6 +95,7 @@
 		<div class="row cols-1 cf">
 			<div class="text col full col-1 mandatory <%= bindingResult.hasFieldErrors("description") ? "error" : "" %>">
 				<label for="5086c4a3b2c09">Beskrivning <em>(obligatoriskt)</em> <div><form:errors cssClass="portlet-msg-error" path="description"/></div></label>
+				<div>Beskriv produktens mått och skick, med mera.</div>
 				<form:textarea path="description" cols="30" rows="10" id="5086c4a3b2c09"/>
 			</div>
 		</div>

@@ -87,7 +87,10 @@ public class Advertisement extends GeneralEntityBean implements Serializable, Co
 	
 	@Column(nullable=false)
 	private DisplayOption displayOption = DisplayOption.ENTIRE_CITY;
-	
+
+	@Column
+	private Boolean hidden;
+
 	/**
 	 * Fetch the photos lazy, we do not want to load the actual image data for each photo
 	 */
@@ -226,4 +229,13 @@ public class Advertisement extends GeneralEntityBean implements Serializable, Co
 	public boolean isExpired() {
 		return Status.EXPIRED.equals(status);
 	}
+
+	public void setHidden(Boolean hidden) {
+		this.hidden = hidden;
+	}
+
+	public Boolean getHidden() {
+		return hidden;
+	}
+
 }

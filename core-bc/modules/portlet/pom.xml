@@ -118,9 +118,14 @@ Generation time : 2014-01-21 08:45:01 CET
     </dependency>
 
     <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>9.4.1212.jre7</version>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.4.1212.jre7</version>
     </dependency>
 
     <dependency>

@@ -45,10 +45,7 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Advertisement> findAll() {
-		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		criteria.addOrder(Order.desc("created"));
-		return replaceProxiedPhotos(criteria.list());
+		throw new UnsupportedOperationException("Not used");
 	}
 	
 	/**
@@ -64,7 +61,16 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	 * @return a PagedList containing the results
 	 */
 	@SuppressWarnings("unchecked")
-	public PagedList<Advertisement> find(String creatorUid, Status status, Category topCategory, Category category, Unit unit, Area area, boolean usingDisplayOption, int page, int pageSize) {
+	public PagedList<Advertisement> find(String creatorUid,
+										 Status status,
+										 Category topCategory,
+										 Category category,
+										 Unit unit,
+										 Area area,
+										 Boolean hidden,
+										 boolean usingDisplayOption,
+										 int page,
+										 int pageSize) {
 		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
 		if (creatorUid != null) {
 			criteria.add(Restrictions.eq("creatorUid", creatorUid));
@@ -86,6 +92,14 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 		
 		if (area  != null && area.getId() != -1) {
 			criteria.add(Restrictions.eq("area", area));
+		}
+
+		if (hidden != null) {
+			if (hidden) {
+				criteria.add(Restrictions.eq("hidden", true));
+			} else {
+				criteria.add(Restrictions.or(Restrictions.isNull("hidden"), Restrictions.eq("hidden", false)));
+			}
 		}
 
 		// get the row count for this query
