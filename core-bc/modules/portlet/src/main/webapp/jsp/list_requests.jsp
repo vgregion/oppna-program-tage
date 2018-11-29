@@ -25,7 +25,7 @@
 						<portlet:param name="externalPage" value="viewRequest"/>
 						<portlet:param name="externalRequestId" value="${request.id}"/>
 					</portlet:renderURL>
-					<li class="cf">
+					<li class="cf clearfix">
 						<a href="${viewRequestUrl}">${request.title}</a>
 					</li>
 				</c:forEach>

@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 </c:if>
 
-<div id="content-primary" class="article cf" role="main">
+<div id="content-primary" class="article cf clearfix" role="main">
 	<p class="back-link"><a class="btn btn-default" href="${backUrl}">Tillbaka</a></p>
 	<h1>Boka ${advertisement.title}</h1>
 	<div class="system-info confirmation-message">

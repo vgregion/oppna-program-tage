@@ -19,7 +19,7 @@
 		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.config");
 %>
 
-<div id="content-primary" class="article cf" role="main">
+<div id="content-primary" class="article cf clearfix" role="main">
 	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL/>">Tillbaka</a></p>
 	<h1>Administration - administrera enheter</h1>
 
@@ -44,24 +44,24 @@
 %>
 
 	<form:form id="change-unit-form" cssClass="form-general" modelAttribute="newUnit" action="${saveUnitUrl}" >
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<c:set var="err"><form:errors path="name"/></c:set>
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("name") ? "error" : "" %>">
 				<label for="nameInput">Enhetsnamn <strong><form:errors path="name"/></strong></label>
 				<form:input path="name" id="nameInput"/>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<%--<div class="col medium col-1 submit-area">
 				<input type="submit" value="Lägg till ny enhet">
 			</div>--%>
             <aui:button-row>
-                <aui:button cssClass="btn btn-primary" type="submit" value="Lägg till ny enhet"/>
+                <button class="btn btn-primary" type="submit">Lägg till ny enhet</button>
             </aui:button-row>
 		</div>
 	</form:form>
 	<form:form id="change-unit-form" cssClass="form-general" modelAttribute="removeUnit" action="${removeUnitUrl}" >
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="col full col-1">
 				<fieldset>
 					<legend class="wrap"><span>Välj enhet att ta bort</span></legend>
@@ -76,14 +76,14 @@
 				</fieldset>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 <%--
 			<div class="col medium col-1 submit-area">
 				<input type="submit" value="Ta bort vald enhet">
 			</div>
 --%>
             <aui:button-row>
-                <aui:button cssClass="btn btn-danger" type="submit" value="Ta bort vald enhet"/>
+                <button cssClass="btn btn-danger" type="submit">Ta bort vald enhet</button>
             </aui:button-row>
 		</div>
 	</form:form>

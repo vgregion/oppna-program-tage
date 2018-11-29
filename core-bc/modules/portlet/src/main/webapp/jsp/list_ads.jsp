@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css?a=b")%>"/>
 </c:if>
 
-<div id="content-primary" class="cf" role="main">
+<div id="content-primary" class="cf clearfix" role="main">
 	<div class="content-header cf clearfix">
 		<h1>Tage</h1>
         <a href="${createAdUrl}" class="btn btn-primary">Lägg in annons</a>
@@ -57,10 +57,10 @@
 					<form:options items="${areas}" itemLabel="name" itemValue="id"/>
 				</form:select>
 			</div>
-            <div class="row cols-1 cf">
+            <div class="row cols-1 cf clearfix">
                 <%--<div class="col small col-1">--%>
                 <aui:button-row>
-                    <aui:button cssClass="btn btn-primary" type="submit" value="Visa" name="submit-508e6b767c18f"/>
+					<button class="btn btn-primary" type="submit" name="submit-508e6b767c18f">Visa</button>
                 </aui:button-row>
                 <%--</div>--%>
             </div>

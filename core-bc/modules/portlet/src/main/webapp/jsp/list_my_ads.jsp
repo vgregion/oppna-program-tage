@@ -44,7 +44,7 @@
             <div class="row cols-1 cf clearfix">
                 <%--<div class="col small col-1 submit-area">--%>
                 <aui:button-row>
-                    <aui:button cssClass="btn btn-primary" type="submit" value="Visa" name="submit-508e6b767c18f"/>
+                    <button class="btn btn-primary" type="submit" name="submit-508e6b767c18f">Visa</button>
                 </aui:button-row>
                 <%--</div>--%>
             </div>

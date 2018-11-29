@@ -13,12 +13,12 @@
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
 </c:if>
 
-<div id="content-primary" class="article cf" role="main">
+<div id="content-primary" class="article cf clearfix" role="main">
 	<h1>Ta bort ${request.title}</h1>
 
 	<form id="republish-ad-start-form" class="form-general" method="get" action="#">
 		<p>${texts.confirmRemoveRequestText}</p>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="col col-1">
 				<div class="checkbox alt">
 					<input type="checkbox" value="ett" name="checkboxgroup1" id="checkbox1-5097936784a63">
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="col medium col-1 submit-area">
 				<a href="#" id="submit-5097936784ac4" class="btn btn-danger">Fortsätt</a>
 				<a href="${cancelUrl}" class="btn btn-default">Avbryt</a>

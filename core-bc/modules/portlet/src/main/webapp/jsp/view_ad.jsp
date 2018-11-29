@@ -24,7 +24,7 @@
 
 
 <c:if test="${not empty advertisement}">
-	<div id="content-primary" class="article cf" role="main">
+	<div id="content-primary" class="article cf clearfix" role="main">
 		<aui:button-row>
 			<c:if test="${!advertisement.booked}">
 				<portlet:renderURL var="bookUrl">
@@ -65,8 +65,8 @@
                     <portlet:param name="hideAdvertisementId" value="${advertisement.id}"/>
                     <portlet:param name="markAsBooked" value="true"/>
                 </portlet:actionURL>
-                <a class="hide-ad-link btn btn-danger ${not (advertisement.status eq 'BOOKED') ? 'hide' : ''}" data-href="${hideAd}">Ta bort</a>
-                <a class="hide-ad-link-with-decision btn btn-danger ${advertisement.status eq 'BOOKED' ? 'hide' : ''}" data-href="${hideAd}" data-href-booked="${hideAdAndMarkAsBooked}">Ta bort</a>
+                <a class="hide-ad-link btn btn-danger ${not (advertisement.status eq 'BOOKED') ? 'hide' : ''}" href="" data-href="${hideAd}">Ta bort</a>
+                <a class="hide-ad-link-with-decision btn btn-danger ${advertisement.status eq 'BOOKED' ? 'hide' : ''}" href="" data-href="${hideAd}" data-href-booked="${hideAdAndMarkAsBooked}">Ta bort</a>
 			</c:if>
 
 			<a href="${backUrl}" class="btn btn-default">Tillbaka</a>
@@ -77,7 +77,7 @@
 		<div class="inventory-info">
 			<c:if test="${fn:length(advertisement.photos) ne 0}">
 				<div class="flexslider">
-					<ul class="slides cf" style="list-style: none">
+					<ul class="slides cf clearfix" style="list-style: none">
 						<c:forEach items="${advertisement.photos}" var="photo">
 							<li data-thumb="${thumbnailUrl}&id=${photo.id}">
 								<img class="thumbnail" src="${photoUrl}&id=${photo.id}" alt="" />
@@ -155,8 +155,8 @@
 						<portlet:param name="hideAdvertisementId" value="${advertisement.id}"/>
 						<portlet:param name="markAsBooked" value="true"/>
 					</portlet:actionURL>
-					<a class="hide-ad-link btn btn-danger ${not (advertisement.status eq 'BOOKED') ? 'hide' : ''}" data-href="${hideAd}">Ta bort</a>
-					<a class="hide-ad-link-with-decision btn btn-danger ${advertisement.status eq 'BOOKED' ? 'hide' : ''}" data-href="${hideAd}" data-href-booked="${hideAdAndMarkAsBooked}">Ta bort</a>
+					<a class="hide-ad-link btn btn-danger ${not (advertisement.status eq 'BOOKED') ? 'hide' : ''}" href="" data-href="${hideAd}">Ta bort</a>
+					<a class="hide-ad-link-with-decision btn btn-danger ${advertisement.status eq 'BOOKED' ? 'hide' : ''}" href="" data-href="${hideAd}" data-href-booked="${hideAdAndMarkAsBooked}">Ta bort</a>
 				</c:if>
 
 				<a href="<portlet:renderURL/>" class="btn btn-default">Tillbaka</a>
@@ -165,7 +165,7 @@
 	</div>
 </c:if>
 <c:if test="${empty advertisement}">
-	<div id="content-primary" class="article cf" role="main">
+	<div id="content-primary" class="article cf clearfix" role="main">
 		<p class="back-link"><a href="<portlet:renderURL/>">Tillbaka</a></p>
 		<h1>Annonsen kunde inte hittas</h1>
 		<div class="inventory-info">
@@ -176,21 +176,21 @@
 </c:if>
 
 <div class="dialog" id="justConfirmDialog">
-	<p>Ta bort bokad annons fr�n mina annonser. Klicka p� &#8221;Bekr�fta ta bort&#8221;.</p>
+	<p>Ta bort bokad annons från mina annonser. Klicka på &#8221;Bekräfta ta bort&#8221;.</p>
 
     <div>
         <button class="btn btn-default" onclick="javascript: $('#justConfirmDialog').hide(); $('#maskElement').hide();">Avbryt</button>
-        <button id="justConfirmButton" class="btn btn-primary">Bekr�fta ta bort</button>
+        <button id="justConfirmButton" class="btn btn-primary">Bekräfta ta bort</button>
     </div>
 </div>
 
 <div class="dialog" id="decideWhetherBooked">
-	<p>Om m�beln har h�mtats f�r fortsatt anv�ndning, klicka p� &#8221;Bekr�fta ta bort och markera som bokad&#8221;. Om m�beln d�remot har kasserats klicka p� &#8221;Bekr�fta ta bort&#8221;.</p>
+	<p>Om möbeln har hämtats för fortsatt användning, klicka på &#8221;Bekräfta ta bort och markera som bokad&#8221;. Om möbeln däremot har kasserats klicka på &#8221;Bekräfta ta bort&#8221;.</p>
 
     <div>
         <button class="btn btn-default" onclick="javascript: $('#decideWhetherBooked').hide(); $('#maskElement').hide();">Avbryt</button>
-        <button id="decideWhetherBookedButtonNotBooked" class="btn btn-primary">Bekr�fta ta bort</button>
-        <button id="decideWhetherBookedButtonBooked" class="btn btn-primary">Bekr�fta ta bort och markera som bokad</button>
+        <button id="decideWhetherBookedButtonNotBooked" class="btn btn-primary">Bekräfta ta bort</button>
+        <button id="decideWhetherBookedButtonBooked" class="btn btn-primary">Bekräfta ta bort och markera som bokad</button>
     </div>
 </div>
 

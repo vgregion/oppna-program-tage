@@ -19,7 +19,7 @@
 		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.booking");
 %>
 
-<div id="content-primary" class="article cf" role="main">
+<div id="content-primary" class="article cf clearfix" role="main">
 	<h1>Boka ${booking.advertisementTitle}</h1>
 
 <%
@@ -46,7 +46,7 @@
 		<form:hidden path="advertisementId"/>
 		<form:hidden path="advertisementTitle"/>
 		<p>${texts.confirmBookingText}</p>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="col col-1">
 				<div class="checkbox alt">
 					<form:checkbox path="transportationConfirmed" id="checkbox1-50911f89bfed7"/>
@@ -54,34 +54,34 @@
 				</div>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="col hr col-1">
 				<hr>
 			</div>
 		</div>
 		<h2>Kontaktuppgifter till mig</h2>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.name") ? "error" : "" %>">
 				<label for="50911f89c015f">Mitt namn <em>(obligatoriskt)</em> <strong><form:errors path="contact.name"/></strong></label>
 				<form:input path="contact.name" id="50911f89c015f"/>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.phone") ? "error" : "" %>">
 				<label for="50911f89c01d9">Telefonnummer <em>(obligatoriskt)</em> <strong><form:errors path="contact.phone"/></strong></label>
 				<form:input path="contact.phone" id="50911f89c01d9"/>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.email") ? "error" : "" %>">
 				<label for="50911f89c029f">E-mail <em>(obligatoriskt)</em> <strong><form:errors path="contact.email"/></strong></label>
 				<form:input path="contact.email" id="50911f89c029f"/>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<%--<div class="col medium col-1 submit-area">--%>
             <aui:button-row>
-				<aui:button cssClass="btn btn-primary" type="submit" value="Bekräfta bokningen" name="submit-50911f89c035a" onClick="this.disabled=true; this.form.submit()"/>
+				<button class="btn btn-primary" type="submit" name="submit-50911f89c035a" onClick="this.disabled=true; this.form.submit()">Bekräfta bokningen</button>
 				<a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 			<%--</div>--%>

@@ -8,10 +8,10 @@
 
 <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 
-<div id="content-primary" class="cf" role="main">
+<div id="content-primary" class="cf clearfix" role="main">
 	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL/>">Tillbaka</a></p>
 	<div class="clearfix">
-        <div class="content-header cf">
+        <div class="content-header cf clearfix">
 		    <h1>Statistik</h1>
 	    </div>
     </div>

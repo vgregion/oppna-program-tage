@@ -68,7 +68,7 @@
 	</div>
 </c:if>
 <c:if test="${empty request}">
-	<div id="content-primary" class="article cf" role="main">
+	<div id="content-primary" class="article cf clearfix" role="main">
 		<p class="back-link"><a href="<portlet:renderURL/>">Tillbaka</a></p>
 		<h1>Efterlysningen kunde inte hittas</h1>
 		<div class="inventory-info">

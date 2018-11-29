@@ -19,7 +19,7 @@
 		(org.springframework.validation.BindingResult)renderRequest.getAttribute("org.springframework.validation.BindingResult.config");
 %>
 
-<div id="content-primary" class="article cf" role="main">
+<div id="content-primary" class="article cf clearfix" role="main">
 	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL/>">Tillbaka</a></p>
 	<h1>Administration - administrera kategorier</h1>
 
@@ -44,7 +44,7 @@
 %>
 
 	<form:form id="change-category-form" cssClass="form-general" modelAttribute="newCategory" action="${saveCategoryUrl}" >
-		<div class="row cols-2 cf">
+		<div class="row cols-2 cf clearfix">
 			<c:set var="err"><form:errors path="title"/></c:set>
 			<div class="text col medium col-1 mandatory <%= bindingResult.hasFieldErrors("title") ? "error" : "" %>">
 				<label for="titleInput">Kategorititel <strong><form:errors path="title"/></strong></label>
@@ -58,20 +58,20 @@
 				</form:select>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 <%--
 			<div class="col medium col-1 submit-area">
 				<input type="submit" value="Lägg till ny kategori">
 			</div>
 --%>
             <aui:button-row>
-                <aui:button cssClass="btn btn-primary" type="submit" value="Lägg till ny kategori"/>
+                <button class="btn btn-primary" type="submit">Lägg till ny kategori</button>
             </aui:button-row>
 		</div>
 	</form:form>
 
 	<form:form id="change-category-form" cssClass="form-general" modelAttribute="removeCategory" action="${removeCategoryUrl}" >
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="col full col-1">
 				<fieldset>
 					<legend class="wrap"><span>Välj kategori att ta bort</span></legend>
@@ -94,14 +94,14 @@
 				</fieldset>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 <%--
 			<div class="col medium col-1 submit-area">
 				<input type="submit" value="Ta bort vald enhet">
 			</div>
 --%>
             <aui:button-row>
-                <aui:button cssClass="btn btn-primary" type="submit" value="Ta bort vald kategori" />
+                <button class="btn btn-primary" type="submit">Ta bort vald kategori</button>
             </aui:button-row>
 		</div>
 	</form:form>

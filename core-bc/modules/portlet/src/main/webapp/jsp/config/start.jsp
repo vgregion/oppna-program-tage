@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 
-<div id="content-primary" class="article cf" role="main">
+<div id="content-primary" class="article cf clearfix" role="main">
 	<p class="back-link"><a class="btn btn-default" href="<portlet:renderURL portletMode="VIEW"/>">Avsluta administrationen</a></p>
 	<h1>Administration</h1>
 	<p>

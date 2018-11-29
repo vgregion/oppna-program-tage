@@ -19,11 +19,11 @@
 	<link rel="stylesheet" type="text/css" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/retursidan.css")%>"/>
 </c:if>
 
-<div id="content-primary" class="article cf" role="main">
+<div id="content-primary" class="article cf clearfix" role="main">
 <h1>Skapa ny annons</h1>
 <form id="new-ad-start-form" class="form-general" method="get" action="#">
 	<p>${texts.confirmCreateAdText}</p>
-	<div class="row cols-1 cf">
+	<div class="row cols-1 cf clearfix">
 		<div class="col col-1">
 			<div class="checkbox alt">
 				<input type="checkbox" value="ett" name="checkboxgroup1" id="checkbox1-5097936784a63">
@@ -31,10 +31,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="row cols-1 cf">
+	<div class="row cols-1 cf clearfix">
 		<%--<div class="col medium col-1 submit-area">--%>
             <aui:button-row>
-                <aui:button type="submit" href="#" id="submit-5097936784ac4" cssClass="btn btn-primary" value="Fortsätt" useNamespace="false" />
+				<button type="submit" href="#" id="submit-5097936784ac4" class="btn btn-primary" useNamespace="false" >Fortsätt</button>
                 <a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 		<%--</div>--%>

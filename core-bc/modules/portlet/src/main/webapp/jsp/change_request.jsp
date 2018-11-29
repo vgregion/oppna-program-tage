@@ -51,8 +51,8 @@
 
 	<form:form id="new-want-ad-form" cssClass="form-general" modelAttribute="request" action="${updateRequestUrl}" >
 		<form:hidden path="id"/>
-		<div class="row cols-2 cf">
-			<div class="row cols-2 cf">
+		<div class="row cols-2 cf clearfix">
+			<div class="row cols-2 cf clearfix">
 				<div class="select medium col col-1 mandatory <%= bindingResult.hasFieldErrors("topCategory") ? "error" : "" %>">
 					<label for="5086c4a3b2949">Kategori <em>(obligatoriskt)</em> <strong><form:errors path="topCategory"/></strong></label>
 					<form:select id="5086c4a3b2949" path="topCategory.id">
@@ -71,50 +71,50 @@
 				</div>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<c:set var="err"><form:errors path="title"/></c:set>
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("title") ? "error" : "" %>">
 				<label for="5086c4a3b2bb2">Rubrik <em>(obligatoriskt)</em> <strong><form:errors path="title"/></strong></label>
 				<form:input path="title" id="5086c4a3b2bb2"/>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="text col full col-1 mandatory <%= bindingResult.hasFieldErrors("title") ? "error" : "" %>">
 				<label for="5086c4a3b2c09">Beskrivning <em>(obligatoriskt)</em> <strong><form:errors path="description"/></strong></label>
 				<form:textarea path="description" cols="30" rows="10" id="5086c4a3b2c09"/>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="col hr col-1">
 				<hr>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="select large col col-1 mandatory">
 				<label for="5086c4a3b2c60">Förvaltning som efterlyser <em>(obligatoriskt)</em></label>
 				<form:select id="5086c4a3b2c60" items="${units}" itemValue="id" itemLabel="name" path="unit.id"></form:select>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.name") ? "error" : "" %>">
 				<label for="5086c4a3b306c">Kontaktperson <em>(obligatoriskt)</em> <strong><form:errors path="contact.name"/></strong></label>
 				<form:input path="contact.name" id="5086c4a3b306c"/>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.phone") ? "error" : "" %>">
 				<label for="5086c4a3b30c2">Telefonnummer <em>(obligatoriskt)</em> <strong><form:errors path="contact.phone"/></strong></label>
 				<form:input path="contact.phone" id="5086c4a3b30c2"/>
 			</div>
 		</div>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 			<div class="text col large col-1 mandatory <%= bindingResult.hasFieldErrors("contact.email") ? "error" : "" %>">
 				<label for="5086c4a3b3119">E-mail <em>(obligatoriskt)</em> <strong><form:errors path="contact.email"/></strong></label>
 				<form:input path="contact.email" id="5086c4a3b3119"/>
 			</div>
 		</div>
 		<p><span class="author">Efterlysningen skapad av ${request.creatorUid}.</span></p>
-		<div class="row cols-1 cf">
+		<div class="row cols-1 cf clearfix">
 <%--
 			<div class="col medium col-1 submit-area">
 				<input type="submit" value="Uppdatera efterlysning" name="submit-509ae872593b6">
@@ -122,7 +122,7 @@
 			</div>
 --%>
             <aui:button-row>
-                <aui:button cssClass="btn btn-primary" type="submit" value="Uppdatera efterlysning" name="submit-509ae872593b6" />
+                <button class="btn btn-primary" type="submit" name="submit-509ae872593b6">Uppdatera efterlysning</button>
                 <a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 		</div>

@@ -11,8 +11,8 @@
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
 <%--</c:if>--%>
 
-<div id="content-primary" class="cf" role="main">
-	<div class="content-header cf">
+<div id="content-primary" class="cf clearfix" role="main">
+	<div class="content-header cf clearfix">
 		<h1>Ett fel uppstod!</h1>
 	</div>
 	<p>Systemet kunde inte slutföra dig begäran då ett fel uppstod. Kontakta support om felet kvarstår!</p>
