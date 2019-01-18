@@ -64,7 +64,7 @@
 								<strong class="">, GÖMD</strong>
 							</c:if>
 						</div>
-						<div class="meta"><span class="">Geografiskt omr�de <strong>${ad.area.name}</strong></span>.</div>
+						<div class="meta"><span class="">Geografiskt område <strong>${ad.area.name}</strong></span>.</div>
 						<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
 						<div class="meta">
 							<a href="${removeAdUrl}" class="btn btn-danger">Ta bort</a>
