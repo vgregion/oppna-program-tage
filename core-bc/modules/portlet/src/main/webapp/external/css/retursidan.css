@@ -235,7 +235,7 @@ ul.slides li {
 /* Override Liferay 7.1 */
 .col.col-1{
     flex: unset;
-    max-width: unset;
+    max-width: none;
     padding-left: 0;
     padding-right: 0;
 }
