@@ -1,9 +1,14 @@
 package se.goteborg.retursidan.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -157,7 +162,7 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	 * Retrieve the count of all advertisements in the database
 	 * @return the number of advertisements
 	 */
-	public Integer count() {
+	public Map<Integer, Integer> count() {
 		return count(null, (Unit) null);
 	}
 
@@ -166,7 +171,7 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	 * @param unit The unit to use as filter
 	 * @return the number of advertisements
 	 */
-	public Integer count(Unit unit) {
+	public Map<Integer, Integer> count(Unit unit) {
 		return count(null, unit);
 	}
 
@@ -175,7 +180,7 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	 * @param status The status to use as a filter
 	 * @return the number of advertisements
 	 */
-	public Integer count(Status status) {
+	public Map<Integer, Integer> count(Status status) {
 		return count(status, (Unit) null);
 	}
 
@@ -185,20 +190,53 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	 * @param unit The unit to filter with, or null for all units
 	 * @return the number of advertisements
 	 */
-	public Integer count(Status status, Unit unit) {
-		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
-		if (unit != null) {
-			criteria.add(Restrictions.eq("unit", unit));
+	public Map<Integer, Integer> count(Status status, Unit unit) {
+
+		Map<Integer, Integer> result = new LinkedHashMap<>();
+
+		List<Integer> lastYears = getLastYears();
+
+		for (Integer year : lastYears) {
+			Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
+			if (unit != null) {
+				criteria.add(Restrictions.eq("unit", unit));
+			}
+			if (status != null) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+
+			addDateRestriction(year, criteria);
+
+			int number = ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+
+			result.put(year, number);
 		}
-		if (status != null) {
-			criteria.add(Restrictions.eq("status", status));
-		}
-		return ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+
+		return result;
 	}
+
+	private List<Integer> getLastYears() {
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+		return Arrays.asList(currentYear - 4, currentYear - 3, currentYear - 2, currentYear - 1, currentYear);
+	}
+
+	private void addDateRestriction(Integer year, Criteria criteria) {
+		try {
+			String startOfYear = year + "-01-01";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			criteria.add(Restrictions.ge("created", sdf.parse(startOfYear)));
+			String startOfNextYear = (year + 1) + "-01-01";
+			criteria.add(Restrictions.lt("created", sdf.parse(startOfNextYear)));
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 
 	/**
 	 * Expire any ad that is older than the provided amount of days
-	 * @param days The maximum number of days 
+	 * @param days The maximum number of days
 	 * @return the number of ads removed
 	 */
 	public List<Advertisement> expireOldAds(int days) {
@@ -230,26 +268,53 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 		return (List<Advertisement>) query.list();
 	}
 
-	public Integer countNonNullArea(Status status) {
-		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
+	public Map<Integer, Integer> countNonNullArea(Status status) {
 
-		criteria.add(Restrictions.isNotNull("area"));
+		Map<Integer, Integer> result = new LinkedHashMap<>();
 
-		if (status != null) {
-			criteria.add(Restrictions.eq("status", status));
+		List<Integer> lastYears = getLastYears();
+
+		for (Integer year : lastYears) {
+			Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
+
+			criteria.add(Restrictions.isNotNull("area"));
+
+			if (status != null) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+
+			addDateRestriction(year, criteria);
+
+			int number = ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+
+			result.put(year, number);
 		}
 
-		return ((Number) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		return result;
 	}
 
-	public Integer count(Status status, Area area) {
-		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
-		if (area != null) {
-			criteria.add(Restrictions.eq("area", area));
+	public Map<Integer, Integer> count(Status status, Area area) {
+
+		Map<Integer, Integer> result = new LinkedHashMap<>();
+
+		List<Integer> lastYears = getLastYears();
+
+		for (Integer year : lastYears) {
+			Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
+			if (area != null) {
+				criteria.add(Restrictions.eq("area", area));
+			}
+			if (status != null) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+
+			addDateRestriction(year, criteria);
+
+			int number = ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+
+			result.put(year, number);
 		}
-		if (status != null) {
-			criteria.add(Restrictions.eq("status", status));
-		}
-		return ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+
+		return result;
 	}
 }

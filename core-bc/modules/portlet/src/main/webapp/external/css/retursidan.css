@@ -6,6 +6,7 @@ form.form-general div.row {
 
 div.cols-2 div.select, div.cols-2 div.col-table {
     float: left;
+    max-width: none;
     padding: 10px 0 10px 0;
     width: 50%;
 }
@@ -94,6 +95,10 @@ table.statistics th, table.statistics td {
     border: 1px solid #AAA;
     border-radius: 3px;
     padding: 3px;
+}
+
+table td strong {
+    font-weight: bold;
 }
 
 ul.inventory-listing {

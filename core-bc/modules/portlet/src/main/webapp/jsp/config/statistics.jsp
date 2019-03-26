@@ -23,17 +23,24 @@
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
 					<th>Förvaltning</th>
-					<th>Antal</th>
+					<c:forEach items="${unitRequestCount.get(0).keySet()}" var="year">
+						<th>${year}</th>
+					</c:forEach>
 				</tr>
 				<c:forEach items="${units}" var="unit" varStatus="status">
 					<tr>
 						<td>${unit.name}</td>
-						<td><strong>${unitAdCount[status.index]}</strong></td>
+						<c:forEach items="${unitAdCount[status.index].keySet()}" var="year">
+
+							<td>${unitAdCount[status.index][year]}</td>
+						</c:forEach>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td>TOTALT</td>
-					<td><strong>${totalNumberOfAds}</strong></td>
+					<td><strong>TOTALT</strong></td>
+					<c:forEach items="${totalNumberOfAds.keySet()}" var="year">
+						<td><strong>${totalNumberOfAds[year]}</strong></td>
+					</c:forEach>
 				</tr>
 			</table>
 		</div>
@@ -42,17 +49,24 @@
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
 					<th>Geografiskt område</th>
-					<th>Antal</th>
+					<c:forEach items="${unitRequestCount.get(0).keySet()}" var="year">
+						<th>${year}</th>
+					</c:forEach>
 				</tr>
 				<c:forEach items="${areas}" var="area" varStatus="status">
 					<tr>
 						<td>${area.name}</td>
-						<td><strong>${areaAdCount[status.index]}</strong></td>
+						<c:forEach items="${areaAdCount[status.index].keySet()}" var="year">
+
+							<td>${areaAdCount[status.index][year]}</td>
+						</c:forEach>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td>TOTALT</td>
-					<td><strong>${totalNumberOfAreaAds}</strong></td>
+					<td><strong>TOTALT</strong></td>
+                    <c:forEach items="${totalNumberOfAreaAds.keySet()}" var="year">
+					    <td><strong>${totalNumberOfAreaAds[year]}</strong></td>
+                    </c:forEach>
 				</tr>
 			</table>
 		</div>
@@ -64,17 +78,24 @@
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
 					<th>Förvaltning</th>
-					<th>Antal</th>
+                    <c:forEach items="${unitRequestCount.get(0).keySet()}" var="year">
+                        <th>${year}</th>
+                    </c:forEach>
 				</tr>
 				<c:forEach items="${units}" var="unit" varStatus="status">
 					<tr>
 						<td>${unit.name}</td>
-						<td><strong>${unitRequestCount[status.index]}</strong></td>
+                        <c:forEach items="${unitRequestCount[status.index].keySet()}" var="year">
+
+                            <td>${unitRequestCount[status.index][year]}</td>
+                        </c:forEach>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td>TOTALT</td>
-					<td><strong>${totalNumberOfRequests}</strong></td>
+					<td><strong>TOTALT</strong></td>
+                    <c:forEach items="${totalNumberOfAreaAds.keySet()}" var="year">
+					    <td><strong>${totalNumberOfAreaAds[year]}</strong></td>
+                    </c:forEach>
 				</tr>
 			</table>
 		</div>
@@ -83,17 +104,24 @@
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
 					<th>Geografiskt område</th>
-					<th>Antal</th>
+                    <c:forEach items="${unitRequestCount.get(0).keySet()}" var="year">
+                        <th>${year}</th>
+                    </c:forEach>
 				</tr>
 				<c:forEach items="${areas}" var="area" varStatus="status">
 					<tr>
 						<td>${area.name}</td>
-						<td><strong>${areaRequestCount[status.index]}</strong></td>
+                        <c:forEach items="${areaRequestCount[status.index].keySet()}" var="year">
+
+                            <td>${areaRequestCount[status.index][year]}</td>
+                        </c:forEach>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td>TOTALT</td>
-					<td><strong>${totalNumberOfAreaRequests}</strong></td>
+					<td><strong>TOTALT</strong></td>
+                    <c:forEach items="${totalNumberOfAreaRequests.keySet()}" var="year">
+					    <td><strong>${totalNumberOfAreaRequests[year]}</strong></td>
+                    </c:forEach>
 				</tr>
 			</table>
 		</div>
@@ -107,17 +135,24 @@
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
 					<th>Förvaltning</th>
-					<th>Antal</th>
+                    <c:forEach items="${unitRequestCount.get(0).keySet()}" var="year">
+                        <th>${year}</th>
+                    </c:forEach>
 				</tr>
 				<c:forEach items="${units}" var="unit" varStatus="status">
 					<tr>
 						<td>${unit.name}</td>
-						<td><strong>${unitBookedCount[status.index]}</strong></td>
+                        <c:forEach items="${unitBookedCount[status.index].keySet()}" var="year">
+
+                            <td>${unitBookedCount[status.index][year]}</td>
+                        </c:forEach>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td>TOTALT</td>
-					<td><strong>${totalNumberOfBookedAds}</strong></td>
+					<td><strong>TOTALT</strong></td>
+                    <c:forEach items="${totalNumberOfBookedAds.keySet()}" var="year">
+                        <td><strong>${totalNumberOfBookedAds[year]}</strong></td>
+                    </c:forEach>
 				</tr>
 			</table>
 		</div>
@@ -126,17 +161,24 @@
 			<table class="statistics" style="border: 1px solid #AAA">
 				<tr>
 					<th>Geografiskt område</th>
-					<th>Antal</th>
+                    <c:forEach items="${unitRequestCount.get(0).keySet()}" var="year">
+                        <th>${year}</th>
+                    </c:forEach>
 				</tr>
 				<c:forEach items="${areas}" var="area" varStatus="status">
 					<tr>
 						<td>${area.name}</td>
-						<td><strong>${areaBookedCount[status.index]}</strong></td>
+                        <c:forEach items="${areaBookedCount[status.index].keySet()}" var="year">
+
+                            <td>${areaBookedCount[status.index][year]}</td>
+                        </c:forEach>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td>TOTALT</td>
-					<td><strong>${totalNumberOfBookedAreaAds}</strong></td>
+					<td><strong>TOTALT</strong></td>
+                    <c:forEach items="${totalNumberOfBookedAreaAds.keySet()}" var="year">
+                        <td><strong>${totalNumberOfBookedAreaAds[year]}</strong></td>
+                    </c:forEach>
 				</tr>
 			</table>
 		</div>
@@ -144,5 +186,17 @@
 	</div>
 
 	<h2>Övrigt</h2>
-	Antal icke bokade men utgångna annonser: <strong>${totalNumberOfExpiredAds}</strong>
+	Antal icke bokade men utgångna annonser:
+    <table class="statistics" style="border: 1px solid #AAA">
+        <tr>
+            <c:forEach items="${unitRequestCount.get(0).keySet()}" var="year">
+                <th>${year}</th>
+            </c:forEach>
+        </tr>
+        <tr>
+            <c:forEach items="${totalNumberOfExpiredAds.keySet()}" var="year">
+                <td>${totalNumberOfExpiredAds[year]}</td>
+            </c:forEach>
+        </tr>
+    </table>
 </div>

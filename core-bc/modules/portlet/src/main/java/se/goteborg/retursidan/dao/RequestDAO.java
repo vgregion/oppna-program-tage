@@ -12,17 +12,23 @@ import se.goteborg.retursidan.model.entity.Request;
 import se.goteborg.retursidan.model.entity.Request.Status;
 import se.goteborg.retursidan.model.entity.Unit;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *  Data access object for the Request entity objects
- * 
+ *
  */
 @Repository
 public class RequestDAO extends BaseDAO<Request> {
-	
+
 	/**
 	 * @see BaseDAO#findById(int)
 	 */
@@ -62,10 +68,10 @@ public class RequestDAO extends BaseDAO<Request> {
 		criteria.setMaxResults(pageSize);
 		criteria.setFetchSize(pageSize);
 		criteria.setFirstResult((page - 1) * pageSize);
-		
+
 		return new PagedList<Request>(criteria.list(), page, pageSize, (int)totalCount);
 	}
-	
+
 
 	/**
 	 * Find all wanted request for the given status
@@ -81,12 +87,12 @@ public class RequestDAO extends BaseDAO<Request> {
 		criteria.addOrder(Order.desc("created"));
 		return criteria.list();
 	}
-	
+
 	/**
 	 * Retrieve the number of requests found in the database
 	 * @return the number of requests found
 	 */
-	public Integer count() {
+	public Map<Integer, Integer> count() {
 		return count((Unit) null);
 	}
 
@@ -95,17 +101,35 @@ public class RequestDAO extends BaseDAO<Request> {
 	 * @param unit the unit to search for, or null if all requests should be counted
 	 * @return the number of requests found
 	 */
-	public Integer count(Unit unit) {
-		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Request.class);
-		if (unit != null) {
-			criteria.add(Restrictions.eq("unit", unit));
+	public Map<Integer, Integer> count(Unit unit) {
+		Map<Integer, Integer> result = new LinkedHashMap<>();
+
+		List<Integer> lastYears = getLastYears();
+
+		for (Integer year : lastYears) {
+
+            Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Request.class);
+            if (unit != null) {
+                criteria.add(Restrictions.eq("unit", unit));
+            }
+
+			addDateRestriction(year, criteria);
+
+			int number = ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+
+            result.put(year, number);
 		}
-		return ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+
+        return result;
+	}
+
+	private List<Integer> getLastYears() {
+		return Arrays.asList(2015, 2016, 2017, 2018, 2019);
 	}
 
 	/**
 	 * Expire any request that is older than the provided amount of days
-	 * @param days The maximum number of days 
+	 * @param days The maximum number of days
 	 * @return the number of ads removed
 	 */
 	public int expireOldRequests(int days) {
@@ -119,20 +143,57 @@ public class RequestDAO extends BaseDAO<Request> {
 		return query.executeUpdate();
 	}
 
-	public Integer countNonNullArea() {
-		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Request.class);
+	public Map<Integer, Integer> countNonNullArea() {
+        Map<Integer, Integer> result = new LinkedHashMap<>();
 
-		criteria.add(Restrictions.isNotNull("area"));
+        List<Integer> lastYears = getLastYears();
 
-		return ((Number) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+        for (Integer year : lastYears) {
+            Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Request.class);
+
+            criteria.add(Restrictions.isNotNull("area"));
+
+			addDateRestriction(year, criteria);
+
+			int number = ((Number) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+
+            result.put(year, number);
+        }
+
+        return result;
 	}
 
-	public Integer count(Area area) {
-		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Request.class);
-		if (area != null) {
-			criteria.add(Restrictions.eq("area", area));
+	private void addDateRestriction(Integer year, Criteria criteria) {
+		try {
+			String startOfYear = year + "-01-01";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			criteria.add(Restrictions.ge("created", sdf.parse(startOfYear)));
+			String startOfNextYear = (year + 1) + "-01-01";
+			criteria.add(Restrictions.lt("created", sdf.parse(startOfNextYear)));
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
 		}
-		return ((Number)criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+	}
+
+	public Map<Integer, Integer> count(Area area) {
+        Map<Integer, Integer> result = new HashMap<>();
+
+        List<Integer> lastYears = getLastYears();
+
+        for (Integer year : lastYears) {
+            Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Request.class);
+            if (area != null) {
+                criteria.add(Restrictions.eq("area", area));
+            }
+
+			addDateRestriction(year, criteria);
+
+			int number = ((Number) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+
+            result.put(year, number);
+        }
+
+        return result;
 	}
 
 }

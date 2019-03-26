@@ -12,6 +12,8 @@ import se.goteborg.retursidan.model.entity.Advertisement.Status;
 import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Unit;
 
+import java.util.Map;
+
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class StatisticsService {
@@ -23,55 +25,55 @@ public class StatisticsService {
 	@Autowired
 	private RequestDAO requestDAO;
 
-	public Integer getTotalNumberOfAds() {
+	public Map<Integer, Integer> getTotalNumberOfAds() {
 		return advertisementDAO.count();
 	}
 
-	public Integer getTotalNumberOfRequests() {
+	public Map<Integer, Integer> getTotalNumberOfRequests() {
 		return requestDAO.count();
 	}
 
-	public Integer getTotalAdsForUnit(Unit unit) {
+	public Map<Integer, Integer> getTotalAdsForUnit(Unit unit) {
 		return advertisementDAO.count(unit);
 	}
 
-	public Integer getTotalRequestsForUnit(Unit unit) {
+	public Map<Integer, Integer> getTotalRequestsForUnit(Unit unit) {
 		return requestDAO.count(unit);
 	}
 
-	public Integer getTotalNumberOfBookedAds() {
+	public Map<Integer, Integer> getTotalNumberOfBookedAds() {
 		return advertisementDAO.count(Status.BOOKED);
 	}
 
-	public Integer getBookedAdsForUnit(Unit unit) {
+	public Map<Integer, Integer> getBookedAdsForUnit(Unit unit) {
 		return advertisementDAO.count(Status.BOOKED, unit);
 	}
 
-	public Integer getTotalNumberOfExpiredAds() {
+	public Map<Integer, Integer> getTotalNumberOfExpiredAds() {
 		return advertisementDAO.count(Status.EXPIRED);
 	}
 
-	public Integer getTotalNumberOfAdsWithArea() {
+	public Map<Integer, Integer> getTotalNumberOfAdsWithArea() {
 		return advertisementDAO.countNonNullArea(null);
 	}
 
-	public Integer getTotalNumberOfRequestsWithArea() {
+	public Map<Integer, Integer> getTotalNumberOfRequestsWithArea() {
 		return requestDAO.countNonNullArea();
 	}
 
-	public Integer getTotalAdsForArea(Area area) {
+	public Map<Integer, Integer> getTotalAdsForArea(Area area) {
 		return advertisementDAO.count(null, area);
 	}
 
-	public Integer getTotalRequestsForArea(Area area) {
+	public Map<Integer, Integer> getTotalRequestsForArea(Area area) {
 		return requestDAO.count(area);
 	}
 
-	public Integer getTotalNumberOfBookedAdsWithArea() {
+	public Map<Integer, Integer> getTotalNumberOfBookedAdsWithArea() {
 		return advertisementDAO.countNonNullArea(Status.BOOKED);
 	}
 
-	public Integer getBookedAdsForArea(Area area) {
+	public Map<Integer, Integer> getBookedAdsForArea(Area area) {
 		return advertisementDAO.count(Status.BOOKED, area);
 	}
 }
