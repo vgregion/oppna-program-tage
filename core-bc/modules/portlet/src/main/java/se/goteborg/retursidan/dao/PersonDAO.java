@@ -40,6 +40,14 @@ public class PersonDAO extends BaseDAO<Person> {
 		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Person.class);
 		criteria.add(Restrictions.eq("userId", uid));
 		criteria.addOrder(Order.desc("id"));
-		return (Person)criteria.uniqueResult();
+
+		List list = criteria.list();
+
+		if (list.size() == 0) {
+			return null;
+		} else {
+			// Due to a problem there may be more than one with the same userid so we just take first.
+			return (Person) list.get(0);
+		}
 	}
 }
