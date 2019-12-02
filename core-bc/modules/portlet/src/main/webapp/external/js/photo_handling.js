@@ -1,6 +1,31 @@
 /**
  * Handling of photo uploading
  */
+function rotatePhoto(id) {
+	$.ajax({
+		type: "POST",
+		url: window.urlConfig.rotateUrl,
+		dataType: "json",
+		data: { id: id },
+		success: function(result) {
+			if (typeof result.success != "undefined" && result.success) {
+				$("[id='uploadedphoto']").each(function(index) {
+					if ($(this).data("photoid") === id) {
+						$(this).context.firstChild.src += "&t=" + new Date().getTime();
+					}
+				});
+			} else {
+				alert(result.error);
+			}
+		},
+		error: function(result) {
+			alert("Ett fel uppstod på servern när fotot skulle tas bort: " + result.responseText);
+		}
+	});
+
+	return false; // Prevent default
+}
+
 function removePhoto(id) {
 	$.ajax({
 		type: "POST",
@@ -14,7 +39,7 @@ function removePhoto(id) {
 						$(this).remove();
 					}
 				});
-				// remove selected id from the id array, and set the content as value of the 'photos' input element 
+				// remove selected id from the id array, and set the content as value of the 'photos' input element
 				window.photoIds = jQuery.grep(window.photoIds, function (a) { return a != id; });
 				$("#photos").val(window.photoIds);
 			} else {
@@ -34,7 +59,7 @@ function initFileUploader(loadingImage) {
 		for (n in window.photoIds ) {
 			window.photoIds[n] = parseInt(window.photoIds[n]);
 			$("#thumbnails").append(
-				"<div data-photoid=\"" + window.photoIds[n] + "\" id=\"uploadedphoto\"><img class=\"thumbnail\" src=\"" + window.urlConfig.thumbnailUrl + "&id=" + window.photoIds[n] + "\"><br/><a class=\"btn btn-danger\" href=\"#\" onclick=\"removePhoto(" + window.photoIds[n] + ");\">Ta bort</a></div>"
+				"<div data-photoid=\"" + window.photoIds[n] + "\" id=\"uploadedphoto\"><img class=\"thumbnail\" src=\"" + window.urlConfig.thumbnailUrl + "&id=" + window.photoIds[n] + "\"><br/><br/><a class=\"btn btn-danger\" href=\"#\" onclick=\"removePhoto(" + window.photoIds[n] + ");\">Ta bort</a><a class=\"btn btn-default\" href=\"#\" onclick=\"return rotatePhoto(" + window.photoIds[n] + ");\">Rotera</a> </div>"
 			);
 		}
 	} else {
@@ -74,7 +99,7 @@ function initFileUploader(loadingImage) {
 				window.photoIds.push(result.id);
 				$("#photos").val(window.photoIds);
 				$("#thumbnails").append(
-					"<div data-photoid=\"" + result.id + "\" data-photowidth=\"" + result.width + "\" data-photoheight=\"" + result.height + "\" data-filename=\"" + fileName + "\" id=\"uploadedphoto\"><img class=\"thumbnail\" src=\"" + window.urlConfig.thumbnailUrl + "&id=" + result.id + "\"><br/><a class=\"btn btn-danger\" href=\"#\" onclick=\"removePhoto(" + result.id + ");\">Ta bort</a></div>"
+					"<div data-photoid=\"" + result.id + "\" data-photowidth=\"" + result.width + "\" data-photoheight=\"" + result.height + "\" data-filename=\"" + fileName + "\" id=\"uploadedphoto\"><img class=\"thumbnail\" src=\"" + window.urlConfig.thumbnailUrl + "&id=" + result.id + "\"><br/><br/><a class=\"btn btn-danger\" href=\"#\" onclick=\"removePhoto(" + result.id + ");\">Ta bort</a><a class=\"btn btn-default\" href=\"#\" onclick=\"return rotatePhoto(" + result.id + ");\">Rotera</a></div>"
 				);
 			}
 		},

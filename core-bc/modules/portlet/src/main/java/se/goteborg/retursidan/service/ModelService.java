@@ -1,13 +1,17 @@
 package se.goteborg.retursidan.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Function;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.BooleanUtils;
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -29,6 +33,9 @@ import se.goteborg.retursidan.model.entity.Person;
 import se.goteborg.retursidan.model.entity.Photo;
 import se.goteborg.retursidan.model.entity.Request;
 import se.goteborg.retursidan.model.entity.Unit;
+
+import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -221,4 +228,42 @@ public class ModelService {
 
 		advertisementDAO.update(ad);
 	}
+
+	public void rotatePhoto(Integer id, Function<BufferedImage, BufferedImage> postTransformFunction) {
+		Photo photo = getPhoto(id);
+		if (photo != null) {
+			BufferedImage image = null;
+			try {
+				image = ImageIO.read(photo.getImage().getBinaryStream());
+				BufferedImage thumbnail = ImageIO.read(photo.getThumbnail().getBinaryStream());
+				rotateImage(photo, image, thumbnail, postTransformFunction);
+			} catch (IOException | SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+
+	private void rotateImage(Photo photo, BufferedImage image, BufferedImage thumbnail, Function<BufferedImage,
+			BufferedImage> postTransformFunction) throws IOException, SQLException {
+
+		BufferedImage rotated = Scalr.rotate(image, Scalr.Rotation.CW_90);
+		BufferedImage rotatedThumbnail = Scalr.rotate(thumbnail, Scalr.Rotation.CW_90);
+
+		if (postTransformFunction != null) {
+			rotated = postTransformFunction.apply(rotated);
+		}
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(rotated, "png", baos);
+
+		photo.setImage(new SerialBlob(baos.toByteArray()));
+
+		baos = new ByteArrayOutputStream();
+		ImageIO.write(rotatedThumbnail, "png", baos);
+
+		photo.setThumbnail(new SerialBlob(baos.toByteArray()));
+
+		addPhoto(photo);
+	}
+
 }

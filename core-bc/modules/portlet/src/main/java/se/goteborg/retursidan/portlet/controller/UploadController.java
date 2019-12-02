@@ -58,7 +58,10 @@ public class UploadController extends BaseController {
 				
 				} else {
 			    	// scale image
-					img = Scalr.resize(img, Scalr.Method.BALANCED, Scalr.Mode.FIT_TO_WIDTH, getConfig(request).getImageWidthInt(), getConfig(request).getImageHeightInt());
+					img = Scalr.resize(img, Scalr.Method.BALANCED, Scalr.Mode.FIT_TO_WIDTH,
+							getConfig(request).getImageWidthInt(), getConfig(request).getImageHeightInt()
+					);
+
 					logger.debug("Photo scaled to " + img.getWidth() + "x" + img.getHeight());
 					
 					int id = storePhoto(img, getUserId(request), filename, getConfig(request));

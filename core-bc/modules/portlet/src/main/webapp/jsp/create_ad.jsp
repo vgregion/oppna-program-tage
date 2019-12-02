@@ -11,6 +11,7 @@
 %><portlet:defineObjects/><%
 %><portlet:resourceURL id="uploadPhoto" var="uploadUrl"/><%
 %><portlet:resourceURL id="removePhoto" var="removeUrl"/><%
+%><portlet:resourceURL id="rotatePhoto" var="rotateUrl"/><%
 %><portlet:resourceURL id="thumbnail" cacheability="cacheLevelFull" var="thumbnailUrl"/><%
 %><portlet:resourceURL id="photo" cacheability="cacheLevelFull" var="photoUrl"/><%
 %><portlet:resourceURL id="subCategories" cacheability="cacheLevelFull" var="subCatUrl"/><%
@@ -25,13 +26,14 @@
 		uploadUrl: "${uploadUrl}",
 		removeUrl: "${removeUrl}",
 		thumbnailUrl: "${thumbnailUrl}",
-		photoUrl: "${photoUrl}"
+		photoUrl: "${photoUrl}",
+		rotateUrl: "${rotateUrl}"
 	};
 </script>
 
 <c:if test="${config.useInternalResources}">
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/jquery/jquery-1.8.2.js") %>" type="text/javascript"></script>
-	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/js/photo_handling.js") %>" type="text/javascript"></script>
+	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/js/photo_handling.js?t=10") %>" type="text/javascript"></script>
 	<script src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/js/fileuploader.js") %>" type="text/javascript"></script>
 	<link rel="stylesheet" href="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/external/css/fileuploader.css") %>" type="text/css" />
 </c:if>
