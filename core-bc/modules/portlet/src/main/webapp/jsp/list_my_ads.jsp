@@ -10,6 +10,7 @@
 %><portlet:renderURL var="cancelUrl" /><%
 %><portlet:renderURL var="listMyAdsUrl"><portlet:param name="page" value="listMyAds"/></portlet:renderURL><%
 %><portlet:actionURL name="filterMyAds" var="filterUrl"/><%
+%><portlet:actionURL name="publishDrafts" var="publishDraftsUrl"/><%
 %><portlet:defineObjects/>
 
 <c:if test="${config.useInternalResources}">
@@ -18,6 +19,10 @@
 </c:if>
 
 <div id="content-primary" class="cf clearfix" role="main">
+	<c:if test="${not empty numberPublished}">
+		<p class="portlet-msg-success">Publicerade ${numberPublished} annonser.</p>
+	</c:if>
+
 	<div class="content-header cf clearfix">
 		<h1>Mina annonser</h1>
 		<a href="${cancelUrl}" class="btn btn-default">Tillbaka</a>
@@ -41,6 +46,16 @@
 					</c:if>
 				</form:select>
 			</div>
+            <div class="select medium col col-3">
+				<label for="508e6b767bc24">Status</label>
+				<form:select id="508e6b767bc24" path="status">
+					<form:option value="${null}" label="Alla"/>
+					<form:option value="PUBLISHED" label="Publicerad"/>
+					<form:option value="BOOKED" label="Bokad"/>
+					<form:option value="EXPIRED" label="Utgått"/>
+					<form:option value="DRAFT" label="Utkast"/>
+				</form:select>
+			</div>
             <div class="row cols-1 cf clearfix">
                 <%--<div class="col small col-1 submit-area">--%>
                 <aui:button-row>
@@ -50,7 +65,10 @@
             </div>
         </div>
 	</form:form>
-	<h2><span id="headerTitle">Mina annonser</span></h2>
+	<h2>
+		<span id="headerTitle">Mina annonser</span>
+		<form:form cssStyle="float: right" action="${publishDraftsUrl}"><button class="btn btn-primary" type="submit">Publicera alla utkast</button></form:form>
+	</h2>
 	<c:if test="${fn:length(ads.list) gt 0}">
 		<ul class="inventory-listing">
 			<c:forEach items="${ads.list}" var="ad">
@@ -80,7 +98,14 @@
 							<h3>${ad.title}</h3>
 							<div class="meta"><span class="author">Upplagd av <strong>${ad.unit.name}</strong></span></div>
 							<c:if test="${not empty ad.area}"><div class="meta"><span class="">Geografiskt område <strong>${ad.area.name}</strong></span></div></c:if>
-							<div class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></div>
+							<p class="meta"><span class="category">${ad.category.parent.title} <span class="sep">&gt;</span> ${ad.category.title}</span></p>
+							<p>
+								<c:if test="${ad.status eq 'PUBLISHED'}">Publicerad</c:if>
+								<c:if test="${ad.status eq 'BOOKED'}">Bokad</c:if>
+								<c:if test="${ad.status eq 'EXPIRED'}">Utgången</c:if>
+								<c:if test="${ad.status eq 'DRAFT'}">Utkast</c:if>
+							</p>
+
 						</div>
 					</a>
 				</li>

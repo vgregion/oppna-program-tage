@@ -39,7 +39,14 @@
 						<portlet:param name="page" value="republishAd"/>
 						<portlet:param name="advertisementId" value="${advertisement.id}"/>
 					</portlet:renderURL>
-					<a href="${republishAdUrl}" class="btn btn-primary">Återpublicera</a>
+					<a href="${republishAdUrl}" class="btn btn-primary">
+						<c:if test="${advertisement.status eq 'DRAFT'}">
+							Publicera utkast
+						</c:if>
+						<c:if test="${not (advertisement.status eq 'DRAFT')}">
+							Återpublicera
+						</c:if>
+					</a>
 				</c:if>
 				<portlet:actionURL name="loadAd" var="changeAdUrl">
 					<portlet:param name="advertisementId" value="${advertisement.id}"/>
@@ -129,7 +136,14 @@
                             <portlet:param name="page" value="republishAd"/>
                             <portlet:param name="advertisementId" value="${advertisement.id}"/>
                         </portlet:renderURL>
-                        <a href="${republishAdUrl}" class="btn btn-primary">Återpublicera</a>
+                        <a href="${republishAdUrl}" class="btn btn-primary">
+                            <c:if test="${advertisement.status eq 'DRAFT'}">
+                                Publicera utkast
+                            </c:if>
+                            <c:if test="${not (advertisement.status eq 'DRAFT')}">
+                                Återpublicera
+                            </c:if>
+                        </a>
                     </c:if>
                     <portlet:actionURL name="loadAd" var="changeAdUrl">
                         <portlet:param name="advertisementId" value="${advertisement.id}"/>

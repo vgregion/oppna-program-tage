@@ -34,7 +34,7 @@ public class Advertisement extends GeneralEntityBean implements Serializable, Co
 	 * Possible statuses of the advertisement 
 	 */
 	public enum Status {
-	    PUBLISHED, BOOKED, EXPIRED 
+	    PUBLISHED, BOOKED, EXPIRED, DRAFT
 	}
 	
 	/**

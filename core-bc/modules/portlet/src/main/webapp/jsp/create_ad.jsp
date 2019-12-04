@@ -184,6 +184,7 @@
 		<div class="row cols-1 cf clearfix">
             <aui:button-row>
 				<button type="submit" id="addAdSubmit" class="btn btn-primary" name="submit-5086c4a3b380d">Lägg upp annons</button>
+				<button type="submit" id="saveDraft" class="btn btn-default" name="saveDraft" value="saveDraft">Spara som utkast</button>
 				<a class="btn btn-default" href="${cancelUrl}">Avbryt</a>
             </aui:button-row>
 		</div>

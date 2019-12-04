@@ -154,17 +154,36 @@ public class ModelService {
 	public Advertisement getAdvertisement(int id) {
 		return advertisementDAO.findById(id);
 	}
-	public PagedList<Advertisement> getAllFilteredAdvertisements(Advertisement.Status status, Category topCategory, Category category, Unit unit, Area area, Boolean hidden, int page, int pageSize) {
+	public PagedList<Advertisement> getAllFilteredAdvertisements(Advertisement.Status status, Category topCategory,
+																 Category category, Unit unit, Area area,
+																 Boolean hidden, int page, int pageSize) {
 		return advertisementDAO.find(null, status, topCategory, category, unit, area, hidden, false, page, pageSize);
 	}
-	public PagedList<Advertisement> getAllAdvertisements(Advertisement.Status status, Boolean hidden, int page, int pageSize) {
+	public PagedList<Advertisement> getAllAdvertisements(Advertisement.Status status, Boolean hidden, int page,
+														 int pageSize) {
 		return advertisementDAO.find(null, status, null, null, null, null, hidden, false, page, pageSize);
 	}
-	public PagedList<Advertisement> getAllAdvertisementsForUid(String uid, Boolean hidden, int page, int pageSize) {
-		return advertisementDAO.find(uid, null, null, null, null, null, hidden, false, page, pageSize);
+	public PagedList<Advertisement> getAllAdvertisementsForUid(String uid, Advertisement.Status status, Boolean hidden,
+															   int page, int pageSize) {
+		return advertisementDAO.find(uid, status, null, null, null, null, hidden, false, page, pageSize);
 	}
-	public PagedList<Advertisement> getAllFilteredAdvertisementsForUid(String uid, Category topCategory, Category category, Unit unit, Area area, Boolean hidden, int page, int pageSize) {
-		return advertisementDAO.find(uid, null, topCategory, category, unit, area, hidden, false, page, pageSize);
+	public PagedList<Advertisement> getAllFilteredAdvertisementsForUid(String uid, Advertisement.Status status,
+																	   Category topCategory, Category category,
+																	   Unit unit, Area area, Boolean hidden,
+																	   int page, int pageSize) {
+		return advertisementDAO.find(uid, status, topCategory, category, unit, area, hidden, false, page, pageSize);
+	}
+
+	public long publishDraftsForUid(String uid) {
+		PagedList<Advertisement> usersDrafts = advertisementDAO.find(uid, Advertisement.Status.DRAFT, null, null, null,
+				null, null, false, 1, Integer.MAX_VALUE);
+
+		for (Advertisement advertisement : usersDrafts.getList()) {
+			advertisement.setStatus(Advertisement.Status.PUBLISHED);
+			advertisementDAO.merge(advertisement);
+		}
+
+		return usersDrafts.getTotalCount();
 	}
 	
 	public void removeAdvertisement(Advertisement advertisement) {

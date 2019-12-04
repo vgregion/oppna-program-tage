@@ -108,7 +108,13 @@ public class CreateAdController extends CreateController {
 		advertisement.setCreatorUid(getUserId(request));
 		if (!bindingResult.hasErrors()) {
 			logger.trace("Saving advertisement: " + advertisement);
-			advertisement.setStatus(Advertisement.Status.PUBLISHED);
+
+			if (request.getParameter("saveDraft") != null) {
+				advertisement.setStatus(Advertisement.Status.DRAFT);
+			} else {
+				advertisement.setStatus(Advertisement.Status.PUBLISHED);
+			}
+
 			int id = modelService.saveAd(advertisement);
 			logger.trace("Advertisement saved with id = " + id);
 			

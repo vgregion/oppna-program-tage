@@ -3,6 +3,7 @@ package se.goteborg.retursidan.model.form;
 import org.springframework.stereotype.Component;
 
 import se.goteborg.retursidan.model.GeneralModelBean;
+import se.goteborg.retursidan.model.entity.Advertisement;
 import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Category;
 import se.goteborg.retursidan.model.entity.Unit;
@@ -17,6 +18,7 @@ public class SearchFilter extends GeneralModelBean {
 	private Category subCategory;
 	private Unit unit;
 	private Area area;
+	private Advertisement.Status status;
 
 	public Category getTopCategory() {
 		return topCategory;
@@ -43,5 +45,13 @@ public class SearchFilter extends GeneralModelBean {
 
 	public void setArea(Area area) {
 		this.area = area;
+	}
+
+	public Advertisement.Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Advertisement.Status status) {
+		this.status = status;
 	}
 }

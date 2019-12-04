@@ -87,9 +87,16 @@ public class ListAdsController extends BaseController {
 		}
 
 		if (!model.containsAttribute("ads")) {
-			PagedList<Advertisement> pagedList = modelService.getAllAdvertisementsForUid(userId, false, (pageIdx != null) ? pageIdx : 1, getConfig(request).getPageSizeInt());
+			PagedList<Advertisement> pagedList = modelService.getAllFilteredAdvertisementsForUid(userId,
+					searchFilter.getStatus(), searchFilter.getTopCategory(), searchFilter.getSubCategory(),
+					searchFilter.getUnit(), searchFilter.getArea(), false, (pageIdx != null) ? pageIdx : 1,
+					getConfig(request).getPageSizeInt());
+
 			model.addAttribute("ads", pagedList);
 		}
+
+		model.addAttribute("showStatus", true);
+
 		return "list_my_ads";
 	}
 
@@ -102,8 +109,31 @@ public class ListAdsController extends BaseController {
 	}
 
 	@ActionMapping("filterMyAds")
-	public void filterMyAds(@ModelAttribute("userId") String userId, @ModelAttribute SearchFilter searchFilter, @RequestParam(value="pageIdx", required=false) Integer pageIdx, Model model, ActionRequest request, ActionResponse response) {
-		PagedList<Advertisement> pagedList = modelService.getAllFilteredAdvertisementsForUid(userId, searchFilter.getTopCategory(), searchFilter.getSubCategory(), searchFilter.getUnit(), searchFilter.getArea(), false, (pageIdx != null) ? pageIdx : 1, getConfig(request).getPageSizeInt());
+	public void filterMyAds(@ModelAttribute("userId") String userId, @ModelAttribute SearchFilter searchFilter,
+							@RequestParam(value="pageIdx", required=false) Integer pageIdx, Model model,
+							ActionRequest request, ActionResponse response) {
+		PagedList<Advertisement> pagedList = modelService.getAllFilteredAdvertisementsForUid(userId,
+				searchFilter.getStatus(), searchFilter.getTopCategory(), searchFilter.getSubCategory(),
+				searchFilter.getUnit(), searchFilter.getArea(), false, (pageIdx != null) ? pageIdx : 1,
+				getConfig(request).getPageSizeInt());
+
+		logger.trace("Ad list for uid=" + userId + " filtered using " + searchFilter + " for page " + pageIdx + ", returing " + ((pagedList.getList() != null) ? pagedList.getList().size() : "null") + " ads.");
+		model.addAttribute("ads", pagedList);
+		response.setRenderParameter("page", "listMyAds");
+	}
+
+	@ActionMapping("publishDrafts")
+	public void publishDrafts(@ModelAttribute("userId") String userId, @ModelAttribute SearchFilter searchFilter,
+							  @RequestParam(value="pageIdx", required=false) Integer pageIdx, Model model,
+							  ActionRequest request, ActionResponse response) {
+		long numberPublished = modelService.publishDraftsForUid(userId);
+		model.addAttribute("numberPublished", numberPublished);
+
+		PagedList<Advertisement> pagedList = modelService.getAllFilteredAdvertisementsForUid(userId,
+				searchFilter.getStatus(), searchFilter.getTopCategory(), searchFilter.getSubCategory(),
+				searchFilter.getUnit(), searchFilter.getArea(), false, (pageIdx != null) ? pageIdx : 1,
+				getConfig(request).getPageSizeInt());
+
 		logger.trace("Ad list for uid=" + userId + " filtered using " + searchFilter + " for page " + pageIdx + ", returing " + ((pagedList.getList() != null) ? pagedList.getList().size() : "null") + " ads.");
 		model.addAttribute("ads", pagedList);
 		response.setRenderParameter("page", "listMyAds");
