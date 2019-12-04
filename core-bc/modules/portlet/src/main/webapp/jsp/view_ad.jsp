@@ -35,18 +35,19 @@
 			</c:if>
 			<c:if test="${userId eq advertisement.creatorUid}">
 				<c:if test="${!advertisement.published}">
-					<portlet:renderURL var="republishAdUrl">
-						<portlet:param name="page" value="republishAd"/>
-						<portlet:param name="advertisementId" value="${advertisement.id}"/>
-					</portlet:renderURL>
-					<a href="${republishAdUrl}" class="btn btn-primary">
-						<c:if test="${advertisement.status eq 'DRAFT'}">
-							Publicera utkast
-						</c:if>
-						<c:if test="${not (advertisement.status eq 'DRAFT')}">
-							Återpublicera
-						</c:if>
-					</a>
+					<c:if test="${advertisement.status eq 'DRAFT'}">
+						<portlet:actionURL name="performRepublishing" var="publishDraftUrl">
+							<portlet:param name="advertisementId" value="${advertisement.id}"/>
+						</portlet:actionURL>
+						<a href="${publishDraftUrl}" class="btn btn-primary">Publicera utkast</a>
+					</c:if>
+					<c:if test="${not (advertisement.status eq 'DRAFT')}">
+						<portlet:renderURL var="republishAdUrl">
+							<portlet:param name="page" value="republishAd"/>
+							<portlet:param name="advertisementId" value="${advertisement.id}"/>
+						</portlet:renderURL>
+						<a href="${republishAdUrl}" class="btn btn-primary">Återpublicera</a>
+					</c:if>
 				</c:if>
 				<portlet:actionURL name="loadAd" var="changeAdUrl">
 					<portlet:param name="advertisementId" value="${advertisement.id}"/>
@@ -132,18 +133,19 @@
                 </c:if>
                 <c:if test="${userId eq advertisement.creatorUid}">
                     <c:if test="${!advertisement.published}">
-                        <portlet:renderURL var="republishAdUrl">
-                            <portlet:param name="page" value="republishAd"/>
-                            <portlet:param name="advertisementId" value="${advertisement.id}"/>
-                        </portlet:renderURL>
-                        <a href="${republishAdUrl}" class="btn btn-primary">
-                            <c:if test="${advertisement.status eq 'DRAFT'}">
-                                Publicera utkast
-                            </c:if>
-                            <c:if test="${not (advertisement.status eq 'DRAFT')}">
-                                Återpublicera
-                            </c:if>
-                        </a>
+						<c:if test="${advertisement.status eq 'DRAFT'}">
+							<portlet:actionURL name="performRepublishing" var="publishDraftUrl">
+								<portlet:param name="advertisementId" value="${advertisement.id}"/>
+							</portlet:actionURL>
+							<a href="${publishDraftUrl}" class="btn btn-primary">Publicera utkast</a>
+						</c:if>
+						<c:if test="${not (advertisement.status eq 'DRAFT')}">
+							<portlet:renderURL var="republishAdUrl">
+								<portlet:param name="page" value="republishAd"/>
+								<portlet:param name="advertisementId" value="${advertisement.id}"/>
+							</portlet:renderURL>
+							<a href="${republishAdUrl}" class="btn btn-primary">Återpublicera</a>
+						</c:if>
                     </c:if>
                     <portlet:actionURL name="loadAd" var="changeAdUrl">
                         <portlet:param name="advertisementId" value="${advertisement.id}"/>

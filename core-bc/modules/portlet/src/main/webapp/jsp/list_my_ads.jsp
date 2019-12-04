@@ -52,7 +52,7 @@
 					<form:option value="${null}" label="Alla"/>
 					<form:option value="PUBLISHED" label="Publicerad"/>
 					<form:option value="BOOKED" label="Bokad"/>
-					<form:option value="EXPIRED" label="Utgått"/>
+					<form:option value="EXPIRED" label="Utgången"/>
 					<form:option value="DRAFT" label="Utkast"/>
 				</form:select>
 			</div>

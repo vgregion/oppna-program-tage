@@ -67,6 +67,7 @@
 %>
 	<form:form id="new-ad-form" cssClass="form-general" modelAttribute="advertisement" action="${updateAdUrl}" >
 		<form:hidden path="id"/>
+		<form:hidden path="status"/>
 		<div class="row cols-2 cf clearfix">
 			<div class="select medium col col-1 mandatory <%= bindingResult.hasFieldErrors("topCategory") ? "error" : "" %>">
 				<label for="5086c4a3b2949">Kategori <em>(obligatoriskt)</em> <strong><form:errors path="topCategory"/></strong></label>

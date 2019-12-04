@@ -86,7 +86,7 @@ public class ChangeAdController extends BaseController {
 			model.addAttribute("advertisement", modelService.getAdvertisement(advertisement.getId()));
 			response.setRenderParameter("page", "viewAd");
 		} else {
-			response.setRenderParameter("page", "changeAd");			
+			response.setRenderParameter("page", "changeAd");
 		}
 	}		
 }
