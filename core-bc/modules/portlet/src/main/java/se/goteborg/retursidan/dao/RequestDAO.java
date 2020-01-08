@@ -124,7 +124,9 @@ public class RequestDAO extends BaseDAO<Request> {
 	}
 
 	private List<Integer> getLastYears() {
-		return Arrays.asList(2015, 2016, 2017, 2018, 2019);
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+		return Arrays.asList(currentYear - 4, currentYear - 3, currentYear - 2, currentYear - 1, currentYear);
 	}
 
 	/**
