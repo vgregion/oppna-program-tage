@@ -39,12 +39,20 @@
         <version>4.1.7.Final</version>
       </dependency>
 
+      <dependency>
+        <groupId>com.liferay.portal</groupId>
+        <artifactId>release.portal.bom</artifactId>
+        <version>${liferay.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
     </dependencies>
 
   </dependencyManagement>
   <properties>
     <spring.fw.version>3.2.12.RELEASE</spring.fw.version>
-    <liferay.version>7.0.0</liferay.version>
+    <liferay.version>7.2.1</liferay.version>
   </properties>
 
 </project>
