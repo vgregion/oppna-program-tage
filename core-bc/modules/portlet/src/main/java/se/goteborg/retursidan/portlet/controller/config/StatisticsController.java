@@ -66,7 +66,6 @@ public class StatisticsController extends BaseController {
 			Map<Integer, Integer> count = statisticsService.getTotalRequestsForUnit(unit);
 			unitRequestCount.add(count);
 		}
-		System.out.println(unitRequestCount);
 		model.addAttribute("unitRequestCount", unitRequestCount);
 
 		Map<Integer, Integer> totalNumberOfAreaRequests = statisticsService.getTotalNumberOfRequestsWithArea();

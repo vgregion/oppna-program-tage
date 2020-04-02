@@ -91,6 +91,11 @@ public class Advertisement extends GeneralEntityBean implements Serializable, Co
 	@Column
 	private Boolean hidden;
 
+	@Transient
+	private String department;
+	@Transient
+	private String division;
+
 	/**
 	 * Fetch the photos lazy, we do not want to load the actual image data for each photo
 	 */
@@ -238,4 +243,19 @@ public class Advertisement extends GeneralEntityBean implements Serializable, Co
 		return hidden;
 	}
 
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getDivision() {
+		return division;
+	}
+
+	public void setDivision(String division) {
+		this.division = division;
+	}
 }

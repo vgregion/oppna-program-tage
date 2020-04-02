@@ -1,5 +1,7 @@
 package se.goteborg.retursidan.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import se.vgregion.ldapservice.LdapUser;
@@ -8,6 +10,8 @@ import se.vgregion.ldapservice.SimpleLdapUser;
 import javax.annotation.PostConstruct;
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+import javax.naming.directory.Attribute;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchControls;
@@ -23,6 +27,8 @@ import static org.springframework.ldap.support.LdapUtils.closeContext;
  */
 @Service
 public class UserDirectoryService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDirectoryService.class);
 
     @Value("${BASE}")
     private String ldapBase;
@@ -55,6 +61,8 @@ public class UserDirectoryService {
     }
 
     public LdapUser getLdapUserByUid(String vgrId) {
+        LOGGER.info("getLdapUserByUid: " + vgrId);
+
         LdapUser ldapUser = getLdapUser(ldapBase, "(&(objectCategory=Person)(sAMAccountName=" + vgrId + "))");
 
         return ldapUser;
@@ -66,7 +74,7 @@ public class UserDirectoryService {
             SearchControls sc = new SearchControls();
             sc.setCountLimit(1);
             sc.setDerefLinkFlag(false);
-            sc.setReturningAttributes(new String[]{"displayname", "mail"});
+            sc.setReturningAttributes(new String[]{"displayname", "mail", "department", "division"});
             sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
             dirContext = getBaseContext();
             NamingEnumeration results = dirContext.search(base, filter, sc);
@@ -77,8 +85,10 @@ public class UserDirectoryService {
                 String dn = oneRes.getNameInNamespace();
                 SimpleLdapUser ldapUser = new SimpleLdapUser(dn);
 
-                ldapUser.setMail((String) oneRes.getAttributes().get("mail").get());
-                ldapUser.setAttributeValue("displayname", oneRes.getAttributes().get("displayname").get());
+                ldapUser.setMail((String) getAttributeValueSafely(oneRes, "mail"));
+                ldapUser.setAttributeValue("displayname", getAttributeValueSafely(oneRes, "displayname"));
+                ldapUser.setAttributeValue("department", getAttributeValueSafely(oneRes, "department"));
+                ldapUser.setAttributeValue("division", getAttributeValueSafely(oneRes, "division"));
 
                 entries.add(ldapUser);
 
@@ -97,6 +107,16 @@ public class UserDirectoryService {
         } finally {
             closeContext(dirContext);
         }
+    }
+
+    private Object getAttributeValueSafely(SearchResult oneRes, String key) throws NamingException {
+        Attribute attribute = oneRes.getAttributes().get(key);
+
+        if (attribute == null) {
+            return null;
+        }
+
+        return attribute.get();
     }
 
     private DirContext getBaseContext() {

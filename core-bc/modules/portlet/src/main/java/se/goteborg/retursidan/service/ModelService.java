@@ -6,8 +6,16 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.BooleanUtils;
@@ -33,6 +41,8 @@ import se.goteborg.retursidan.model.entity.Person;
 import se.goteborg.retursidan.model.entity.Photo;
 import se.goteborg.retursidan.model.entity.Request;
 import se.goteborg.retursidan.model.entity.Unit;
+import se.vgregion.ldapservice.LdapUser;
+import se.vgregion.ldapservice.SimpleLdapUser;
 
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
@@ -40,66 +50,75 @@ import javax.sql.rowset.serial.SerialBlob;
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class ModelService {
-	@Autowired
-	private AdvertisementDAO advertisementDAO;
-	
-	@Autowired
-	private RequestDAO requestDAO;
-	
-	@Autowired
-	private CategoryDAO categoryDAO;
+    @Autowired
+    private AdvertisementDAO advertisementDAO;
 
-	@Autowired
-	private UnitDAO unitDAO;
+    @Autowired
+    private RequestDAO requestDAO;
 
-	@Autowired
-	private AreaDAO areaDAO;
+    @Autowired
+    private CategoryDAO categoryDAO;
 
-	@Autowired
-	private PersonDAO personDAO;
+    @Autowired
+    private UnitDAO unitDAO;
 
-	@Autowired
-	private PhotoDAO photoDAO;
+    @Autowired
+    private AreaDAO areaDAO;
 
-	
-	public void addCategory(Category category) {
-		if (category.getParent() != null && category.getParent().getId() == -1) {
-			category.setParent(null);
-		}
-		categoryDAO.add(category);
-	}
-	public List<Category> getCategories() {
-		return categoryDAO.findAll();
-	}
-	public List<Category> getTopCategories() {
-		return categoryDAO.findTopCategories();
-	}
-	public List<Category> getSubCategories(int id) {
-		return categoryDAO.findAllSubCategories(id);
-	}
+    @Autowired
+    private PersonDAO personDAO;
 
-	public void addUnit(Unit unit) {
-		unitDAO.add(unit);
-	}
-	public List<Unit> getUnits() {
-		return unitDAO.findAll();
-	}
+    @Autowired
+    private PhotoDAO photoDAO;
 
-	public void addArea(Area area) {
-		areaDAO.add(area);
-	}
-	public List<Area> getAreas() {
-		return areaDAO.findAll();
-	}
+    @Autowired
+    private UserDirectoryService userDirectoryService;
 
-	public void addPerson(Person person) {
-		personDAO.add(person);
-	}
-	
-	public void addPhoto(Photo photo) {
-		photoDAO.add(photo);
-	}
-	public Photo getPhoto(int id) {
+
+    public void addCategory(Category category) {
+        if (category.getParent() != null && category.getParent().getId() == -1) {
+            category.setParent(null);
+        }
+        categoryDAO.add(category);
+    }
+
+    public List<Category> getCategories() {
+        return categoryDAO.findAll();
+    }
+
+    public List<Category> getTopCategories() {
+        return categoryDAO.findTopCategories();
+    }
+
+    public List<Category> getSubCategories(int id) {
+        return categoryDAO.findAllSubCategories(id);
+    }
+
+    public void addUnit(Unit unit) {
+        unitDAO.add(unit);
+    }
+
+    public List<Unit> getUnits() {
+        return unitDAO.findAll();
+    }
+
+    public void addArea(Area area) {
+        areaDAO.add(area);
+    }
+
+    public List<Area> getAreas() {
+        return areaDAO.findAll();
+    }
+
+    public void addPerson(Person person) {
+        personDAO.add(person);
+    }
+
+    public void addPhoto(Photo photo) {
+        photoDAO.add(photo);
+    }
+
+    public Photo getPhoto(int id) {
         return photoDAO.findById(id);
     }
 
@@ -137,152 +156,235 @@ public class ModelService {
     }
 
     public void removePhoto(Photo photo) {
-		photoDAO.delete(photo);
-	}
-	public List<Photo> getAllPhotos() {
-		return photoDAO.findAll();
-	}	
-	
-	public Category getCategory(int id) {
-		return categoryDAO.findById(id);
-	}
-	
-	
-	public void addAdvertisement(Advertisement advertisement) {
-		advertisementDAO.add(advertisement);
-	}
-	public Advertisement getAdvertisement(int id) {
-		return advertisementDAO.findById(id);
-	}
-	public PagedList<Advertisement> getAllFilteredAdvertisements(Advertisement.Status status, Category topCategory,
-																 Category category, Unit unit, Area area,
-																 Boolean hidden, int page, int pageSize) {
-		return advertisementDAO.find(null, status, topCategory, category, unit, area, hidden, false, page, pageSize);
-	}
-	public PagedList<Advertisement> getAllAdvertisements(Advertisement.Status status, Boolean hidden, int page,
-														 int pageSize) {
-		return advertisementDAO.find(null, status, null, null, null, null, hidden, false, page, pageSize);
-	}
-	public PagedList<Advertisement> getAllAdvertisementsForUid(String uid, Advertisement.Status status, Boolean hidden,
-															   int page, int pageSize) {
-		return advertisementDAO.find(uid, status, null, null, null, null, hidden, false, page, pageSize);
-	}
-	public PagedList<Advertisement> getAllFilteredAdvertisementsForUid(String uid, Advertisement.Status status,
-																	   Category topCategory, Category category,
-																	   Unit unit, Area area, Boolean hidden,
-																	   int page, int pageSize) {
-		return advertisementDAO.find(uid, status, topCategory, category, unit, area, hidden, false, page, pageSize);
-	}
+        photoDAO.delete(photo);
+    }
 
-	public long publishDraftsForUid(String uid) {
-		PagedList<Advertisement> usersDrafts = advertisementDAO.find(uid, Advertisement.Status.DRAFT, null, null, null,
-				null, null, false, 1, Integer.MAX_VALUE);
+    public List<Photo> getAllPhotos() {
+        return photoDAO.findAll();
+    }
 
-		for (Advertisement advertisement : usersDrafts.getList()) {
-			advertisement.setStatus(Advertisement.Status.PUBLISHED);
-			advertisementDAO.merge(advertisement);
-		}
+    public Category getCategory(int id) {
+        return categoryDAO.findById(id);
+    }
 
-		return usersDrafts.getTotalCount();
-	}
-	
-	public void removeAdvertisement(Advertisement advertisement) {
-		advertisementDAO.delete(advertisement);
-	}
-	
-	public void addRequest(Request request) {
-		requestDAO.add(request);
-	}
-	public Request getRequest(int id) {
-		return requestDAO.findById(id);
-	}
-	
-	public int saveRequest(Request request) {
-		return requestDAO.add(request);
-	}
-	public PagedList<Request> getAllRequests(int page, int pageSize) {
-		return requestDAO.find(null, page, pageSize);
-	}
-	
-	public int saveAd(Advertisement ad) {
-		return advertisementDAO.add(ad);
-	}
 
-	
-	public void updateAd(Advertisement ad) {
-		advertisementDAO.update(ad);
-	}
+    public void addAdvertisement(Advertisement advertisement) {
+        advertisementDAO.add(advertisement);
+    }
 
-	
-	public void updateRequest(Request request) {
-		requestDAO.update(request);
-	}
+    public Advertisement getAdvertisement(int id) {
+        return advertisementDAO.findById(id);
+    }
 
-	public Person getPerson(String uid) {
-		return personDAO.findByUid(uid);
-	}
-	public void removeRequest(Request request) {
-		requestDAO.delete(request);
-	}
-	public List<Request> getAllRequests(Request.Status status) {
-		return requestDAO.findAll(status);
-	}
-	public void removeUnit(Unit unit) {
-		unitDAO.delete(unit);
-	}
-	public void removeArea(Area area) {
-		areaDAO.delete(area);
-	}
-	public void removeCategory(Category category) {
-		categoryDAO.delete(category);
-	}
+    public PagedList<Advertisement> getAllFilteredAdvertisements(Advertisement.Status status, Category topCategory,
+                                                                 Category category, Unit unit, Area area,
+                                                                 Boolean hidden, int page, int pageSize) {
+        return advertisementDAO.find(null, status, topCategory, category, unit, area, hidden, false, page, pageSize);
+    }
 
-	public void hideAdvertisement(Integer advertisementId, Boolean markAsBooked) {
-		Advertisement ad = advertisementDAO.findById(advertisementId);
-		ad.setHidden(true);
+    public PagedList<Advertisement> getAllAdvertisements(Advertisement.Status status, Boolean hidden, int page,
+                                                         int pageSize) {
+        return advertisementDAO.find(null, status, null, null, null, null, hidden, false, page, pageSize);
+    }
 
-		if (BooleanUtils.isTrue(markAsBooked)) {
-			ad.setStatus(Advertisement.Status.BOOKED);
-		}
+    public PagedList<Advertisement> getAllAdvertisementsForUid(String uid, Advertisement.Status status, Boolean hidden,
+                                                               int page, int pageSize) {
+        return advertisementDAO.find(uid, status, null, null, null, null, hidden, false, page, pageSize);
+    }
 
-		advertisementDAO.update(ad);
-	}
+    public PagedList<Advertisement> getAllFilteredAdvertisementsForUid(String uid, Advertisement.Status status,
+                                                                       Category topCategory, Category category,
+                                                                       Unit unit, Area area, Boolean hidden,
+                                                                       int page, int pageSize) {
+        return advertisementDAO.find(uid, status, topCategory, category, unit, area, hidden, false, page, pageSize);
+    }
 
-	public void rotatePhoto(Integer id, Function<BufferedImage, BufferedImage> postTransformFunction) {
-		Photo photo = getPhoto(id);
-		if (photo != null) {
-			BufferedImage image = null;
-			try {
-				image = ImageIO.read(photo.getImage().getBinaryStream());
-				BufferedImage thumbnail = ImageIO.read(photo.getThumbnail().getBinaryStream());
-				rotateImage(photo, image, thumbnail, postTransformFunction);
-			} catch (IOException | SQLException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
+    public long publishDraftsForUid(String uid) {
+        PagedList<Advertisement> usersDrafts = advertisementDAO.find(uid, Advertisement.Status.DRAFT, null, null, null,
+                null, null, false, 1, Integer.MAX_VALUE);
 
-	private void rotateImage(Photo photo, BufferedImage image, BufferedImage thumbnail, Function<BufferedImage,
-			BufferedImage> postTransformFunction) throws IOException, SQLException {
+        for (Advertisement advertisement : usersDrafts.getList()) {
+            advertisement.setStatus(Advertisement.Status.PUBLISHED);
+            advertisementDAO.merge(advertisement);
+        }
 
-		BufferedImage rotated = Scalr.rotate(image, Scalr.Rotation.CW_90);
-		BufferedImage rotatedThumbnail = Scalr.rotate(thumbnail, Scalr.Rotation.CW_90);
+        return usersDrafts.getTotalCount();
+    }
 
-		if (postTransformFunction != null) {
-			rotated = postTransformFunction.apply(rotated);
-		}
+    public void removeAdvertisement(Advertisement advertisement) {
+        advertisementDAO.delete(advertisement);
+    }
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write(rotated, "png", baos);
+    public void addRequest(Request request) {
+        requestDAO.add(request);
+    }
 
-		photo.setImage(new SerialBlob(baos.toByteArray()));
+    public Request getRequest(int id) {
+        return requestDAO.findById(id);
+    }
 
-		baos = new ByteArrayOutputStream();
-		ImageIO.write(rotatedThumbnail, "png", baos);
+    public int saveRequest(Request request) {
+        return requestDAO.add(request);
+    }
 
-		photo.setThumbnail(new SerialBlob(baos.toByteArray()));
+    public PagedList<Request> getAllRequests(int page, int pageSize) {
+        return requestDAO.find(null, page, pageSize);
+    }
 
-		addPhoto(photo);
-	}
+    public int saveAd(Advertisement ad) {
+        return advertisementDAO.add(ad);
+    }
+
+
+    public void updateAd(Advertisement ad) {
+        advertisementDAO.update(ad);
+    }
+
+
+    public void updateRequest(Request request) {
+        requestDAO.update(request);
+    }
+
+    public Person getPerson(String uid) {
+        return personDAO.findByUid(uid);
+    }
+
+    public void removeRequest(Request request) {
+        requestDAO.delete(request);
+    }
+
+    public List<Request> getAllRequests(Request.Status status) {
+        return requestDAO.findAll(status);
+    }
+
+    public void removeUnit(Unit unit) {
+        unitDAO.delete(unit);
+    }
+
+    public void removeArea(Area area) {
+        areaDAO.delete(area);
+    }
+
+    public void removeCategory(Category category) {
+        categoryDAO.delete(category);
+    }
+
+    public void hideAdvertisement(Integer advertisementId, Boolean markAsBooked) {
+        Advertisement ad = advertisementDAO.findById(advertisementId);
+        ad.setHidden(true);
+
+        if (BooleanUtils.isTrue(markAsBooked)) {
+            ad.setStatus(Advertisement.Status.BOOKED);
+        }
+
+        advertisementDAO.update(ad);
+    }
+
+    public void rotatePhoto(Integer id, Function<BufferedImage, BufferedImage> postTransformFunction) {
+        Photo photo = getPhoto(id);
+        if (photo != null) {
+            BufferedImage image = null;
+            try {
+                image = ImageIO.read(photo.getImage().getBinaryStream());
+                BufferedImage thumbnail = ImageIO.read(photo.getThumbnail().getBinaryStream());
+                rotateImage(photo, image, thumbnail, postTransformFunction);
+            } catch (IOException | SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void rotateImage(Photo photo, BufferedImage image, BufferedImage thumbnail, Function<BufferedImage,
+            BufferedImage> postTransformFunction) throws IOException, SQLException {
+
+        BufferedImage rotated = Scalr.rotate(image, Scalr.Rotation.CW_90);
+        BufferedImage rotatedThumbnail = Scalr.rotate(thumbnail, Scalr.Rotation.CW_90);
+
+        if (postTransformFunction != null) {
+            rotated = postTransformFunction.apply(rotated);
+        }
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(rotated, "png", baos);
+
+        photo.setImage(new SerialBlob(baos.toByteArray()));
+
+        baos = new ByteArrayOutputStream();
+        ImageIO.write(rotatedThumbnail, "png", baos);
+
+        photo.setThumbnail(new SerialBlob(baos.toByteArray()));
+
+        addPhoto(photo);
+    }
+
+    public Map<String, Long>[] groupCountDepartmentsAndDivisions() {
+        List<Advertisement> all = advertisementDAO.findAll();
+
+//        Set<String> departments = new TreeSet<>();
+//        Set<String> divisions = new TreeSet<>();
+
+        Map<String, String> userIdToDepartment = new HashMap<>();
+        Map<String, String> userIdToDivision = new HashMap<>();
+        Map<String, LdapUser> ldapUserMap = new HashMap<>();
+
+        all.forEach(advertisement -> {
+            String creatorUid = advertisement.getCreatorUid();
+
+            if (creatorUid == null) return;
+
+            if (userIdToDepartment.containsKey(creatorUid)) {
+                advertisement.setDepartment(userIdToDepartment.get(creatorUid));
+                advertisement.setDivision(userIdToDivision.get(creatorUid));
+
+                return;
+            }
+
+            LdapUser ldapUserByUid;
+            if (ldapUserMap.containsKey(creatorUid)) {
+                ldapUserByUid = ldapUserMap.get(creatorUid);
+            } else {
+                ldapUserByUid = this.userDirectoryService.getLdapUserByUid(creatorUid);
+                ldapUserMap.put(creatorUid, ldapUserByUid);
+            }
+
+            if (ldapUserByUid == null) return;
+
+            advertisement.setDepartment(ldapUserByUid.getAttributeValue("department"));
+            advertisement.setDivision(ldapUserByUid.getAttributeValue("division"));
+
+        });
+
+/*        Set<SimpleLdapUser> collect = all.stream()
+                .map(Advertisement::getCreatorUid)
+                .filter(Objects::nonNull)
+                .distinct()
+                .map(userId -> (SimpleLdapUser) this.userDirectoryService.getLdapUserByUid(userId))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());*/
+
+        Collector<String, ?, Map<String, Long>> stringMapCollector = Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        );
+
+        Map<String, Long> departmentMap = new TreeMap<>(all.stream()
+                .map(ad -> ad.getDepartment() != null ? ad.getDepartment() : "okänd")
+                .filter(Objects::nonNull)
+                .collect(stringMapCollector));
+
+        Map<String, Long> divisionMap = new TreeMap<>(all.stream()
+                .map(ad -> ad.getDivision() != null ? ad.getDivision() : "okänd")
+                .filter(Objects::nonNull)
+                .collect(stringMapCollector));
+
+        Map<String, Long>[] result = new Map[]{departmentMap, divisionMap};
+
+        return result;
+        /*System.out.println(departments);
+        System.out.println(divisions);
+
+        System.out.println("Departments count: " + departments.size());
+        System.out.println("Divisions count: " + divisions.size());*/
+    }
 
 }

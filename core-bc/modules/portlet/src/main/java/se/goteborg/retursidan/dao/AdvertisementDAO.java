@@ -50,7 +50,10 @@ public class AdvertisementDAO extends BaseDAO<Advertisement> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Advertisement> findAll() {
-		throw new UnsupportedOperationException("Not used");
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Advertisement.class);
+		criteria.setMaxResults(-1);
+		return criteria.list();
+		//throw new UnsupportedOperationException("Not used");
 	}
 	
 	/**
