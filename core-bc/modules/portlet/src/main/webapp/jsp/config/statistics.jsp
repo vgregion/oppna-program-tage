@@ -18,6 +18,9 @@
     <div style="font-size: 12pt;">Antal unika besökare på funktionen: <strong>${uniqueVisitors}</strong></div>
     <h2>Upplagda annonser</h2>
 
+	<portlet:resourceURL id="downloadDivisionDepartmentStatistics" var="downloadDivisionDepartmentStatistics"/>
+	<p><a href="${downloadDivisionDepartmentStatistics}">Hämta statistik för verksamheter/avdelningar</a></p>
+
 	<div class="cols-2 clearfix">
 		<div class="col-table col col-1">
 			<table class="statistics" style="border: 1px solid #AAA">

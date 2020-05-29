@@ -31,14 +31,6 @@ Generation time : 2014-01-21 08:45:01 CET
           <wtpContextName>${project.artifactId}</wtpContextName>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
 
@@ -58,6 +50,8 @@ Generation time : 2014-01-21 08:45:01 CET
     <dependency>
       <groupId>javax.portlet</groupId>
       <artifactId>portlet-api</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -74,14 +68,17 @@ Generation time : 2014-01-21 08:45:01 CET
     <dependency>
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
+      <version>1.1.2</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
+      <version>1.2</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
+      <version>${spring.fw.version}</version>
     </dependency>
     <!--
       We use a Servlet Filter from spring-web to control UTF-8 encodings.
@@ -89,39 +86,46 @@ Generation time : 2014-01-21 08:45:01 CET
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
+        <version>${spring.fw.version}</version>
     </dependency>
     <dependency>
       <!-- required by the Spring-JS resource-loading servlet -->
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
+      <version>${spring.fw.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc-portlet</artifactId>
+      <version>4.3.26.RELEASE</version>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>
+      <version>${spring.fw.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
+      <version>${spring.fw.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>9.4.1212.jre7</version>
+      <version>42.2.12</version>
     </dependency>
 
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -166,6 +170,13 @@ Generation time : 2014-01-21 08:45:01 CET
       <artifactId>jaxb-api</artifactId>
       <version>2.3.1</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.3.3</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

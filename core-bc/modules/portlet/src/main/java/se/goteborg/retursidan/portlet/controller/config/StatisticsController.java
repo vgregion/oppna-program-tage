@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
+import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Unit;
 import se.goteborg.retursidan.portlet.controller.BaseController;
@@ -15,7 +16,13 @@ import se.goteborg.retursidan.service.VisitorLoggingService;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -97,5 +104,19 @@ public class StatisticsController extends BaseController {
 
 		model.addAttribute("totalNumberOfExpiredAds", statisticsService.getTotalNumberOfExpiredAds());
 		return "config/statistics";
+	}
+
+	@ResourceMapping("downloadDivisionDepartmentStatistics")
+	public void downloadDivisionDepartmentStatistics(ResourceRequest request, ResourceResponse response) throws IOException {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdf.format(new Date());
+
+		OutputStream portletOutputStream = response.getPortletOutputStream();
+
+		statisticsService.writeDivisionsAndDepartmentsAsExcel(portletOutputStream);
+
+		response.setContentType("application/excel");
+		response.setProperty("Content-disposition", "attachment; filename=Tage_statistik_verksamheter_avdelningar_" + today + ".xlsx");
 	}
 }

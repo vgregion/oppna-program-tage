@@ -4,21 +4,19 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.KeyValue;
+import org.apache.commons.collections4.keyvalue.DefaultKeyValue;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.BooleanUtils;
+import org.hibernate.Query;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +30,10 @@ import se.goteborg.retursidan.dao.PersonDAO;
 import se.goteborg.retursidan.dao.PhotoDAO;
 import se.goteborg.retursidan.dao.RequestDAO;
 import se.goteborg.retursidan.dao.UnitDAO;
+import se.goteborg.retursidan.model.DivisionDepartmentKey;
 import se.goteborg.retursidan.model.PagedList;
 import se.goteborg.retursidan.model.PhotoHolder;
+import se.goteborg.retursidan.model.Year;
 import se.goteborg.retursidan.model.entity.Advertisement;
 import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Category;
@@ -42,7 +42,6 @@ import se.goteborg.retursidan.model.entity.Photo;
 import se.goteborg.retursidan.model.entity.Request;
 import se.goteborg.retursidan.model.entity.Unit;
 import se.vgregion.ldapservice.LdapUser;
-import se.vgregion.ldapservice.SimpleLdapUser;
 
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
@@ -317,14 +316,71 @@ public class ModelService {
         addPhoto(photo);
     }
 
-    public Map<String, Long>[] groupCountDepartmentsAndDivisions() {
+    public Map<DivisionDepartmentKey, KeyValue<Year, Long>> calculateDepartmentAndDivisionGroupCount(int year) {
+        /*List<Advertisement> all = advertisementDAO.findAll();
+
+        Collector<String, ?, Map<String, Long>> stringMapCollector = Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        );
+
+        Map<String, Long> departmentMap = new TreeMap<>(all.stream()
+                .map(ad -> ad.getDepartment() != null ? ad.getDepartment() : "okänd")
+                .filter(Objects::nonNull)
+                .collect(stringMapCollector));
+
+        Map<String, Long> divisionMap = new TreeMap<>(all.stream()
+                .map(ad -> ad.getDivision() != null ? ad.getDivision() : "okänd")
+                .filter(Objects::nonNull)
+                .collect(stringMapCollector));*/
+
+//        int year = 2016;
+        int toYear = year + 1;
+
+        Query query = advertisementDAO.getSessionFactory().getCurrentSession().createSQLQuery(
+                "select division, department, count(*) from vgr_tage_advertisement" +
+                        " where created >= '" + year + "-01-01' and created < '" + toYear + "-01-01' group by division, department" +
+                        " order by division, department asc"
+        );
+
+//        query.setParameter("fromDate", "2016-01-01", StandardBasicTypes.TIMESTAMP);
+//        query.setParameter("toDate", "2017-01-01", StandardBasicTypes.TIMESTAMP);
+
+        List<Object[]> rows = query.list();
+
+        Map<DivisionDepartmentKey, KeyValue<Year, Long>> mapKeyToYearCount = new HashMap<>();
+
+        rows.stream().forEach(row -> {
+            String division = row[0] != null ? (String) row[0] : "okänd";
+            String department = row[1] != null ? (String) row[1] : "okänd";
+            DivisionDepartmentKey key = DivisionDepartmentKey.from(division, department); // TODO make a class for this key
+
+            DefaultKeyValue<Year, Long> yearCount = new DefaultKeyValue<>(Year.of(year), ((BigInteger) row[2]).longValue());
+//            yearCount.put(String.valueOf(year), ((BigInteger) o[2]).longValue());
+
+            mapKeyToYearCount.put(key, yearCount);
+        });
+
+        return mapKeyToYearCount;
+        /*Map<String, List<DepartmentDivisionCountTuple>> collect = list.stream().map(o -> new DepartmentDivisionCountTuple(
+                (String) o[0],
+                (String) o[1],
+                ((BigInteger) o[2]).longValue())
+        )
+                .collect(Collectors.groupingBy(tuple -> tuple.getDivision() + ";" + tuple.getDepartment()));
+
+        return collect;*/
+//        return new DepartmentAndDivisionGroupCount(null, null);
+    }
+
+    public void complementAdsWithDepartmentsAndDivisions() {
         List<Advertisement> all = advertisementDAO.findAll();
 
 //        Set<String> departments = new TreeSet<>();
 //        Set<String> divisions = new TreeSet<>();
 
-        Map<String, String> userIdToDepartment = new HashMap<>();
-        Map<String, String> userIdToDivision = new HashMap<>();
+//        Map<String, String> userIdToDepartment = new HashMap<>();
+//        Map<String, String> userIdToDivision = new HashMap<>();
         Map<String, LdapUser> ldapUserMap = new HashMap<>();
 
         all.forEach(advertisement -> {
@@ -332,12 +388,12 @@ public class ModelService {
 
             if (creatorUid == null) return;
 
-            if (userIdToDepartment.containsKey(creatorUid)) {
+            /*if (userIdToDepartment.containsKey(creatorUid)) {
                 advertisement.setDepartment(userIdToDepartment.get(creatorUid));
                 advertisement.setDivision(userIdToDivision.get(creatorUid));
 
                 return;
-            }
+            }*/
 
             LdapUser ldapUserByUid;
             if (ldapUserMap.containsKey(creatorUid)) {
@@ -352,6 +408,7 @@ public class ModelService {
             advertisement.setDepartment(ldapUserByUid.getAttributeValue("department"));
             advertisement.setDivision(ldapUserByUid.getAttributeValue("division"));
 
+            updateAd(advertisement);
         });
 
 /*        Set<SimpleLdapUser> collect = all.stream()
@@ -362,7 +419,7 @@ public class ModelService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());*/
 
-        Collector<String, ?, Map<String, Long>> stringMapCollector = Collectors.groupingBy(
+        /*Collector<String, ?, Map<String, Long>> stringMapCollector = Collectors.groupingBy(
                 Function.identity(),
                 Collectors.counting()
         );
@@ -379,7 +436,7 @@ public class ModelService {
 
         Map<String, Long>[] result = new Map[]{departmentMap, divisionMap};
 
-        return result;
+        return result;*/
         /*System.out.println(departments);
         System.out.println(divisions);
 

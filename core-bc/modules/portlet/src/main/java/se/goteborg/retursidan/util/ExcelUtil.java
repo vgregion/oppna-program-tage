@@ -22,22 +22,28 @@ public class ExcelUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExcelUtil.class);
 
-    public static InputStream exportToStream(Map<String, List<String[]>> sheets) {
+    public static InputStream exportToStream(Map<String, List<Object[]>> sheets) {
 
         Workbook wb = new XSSFWorkbook();
 
-        for (Map.Entry<String, List<String[]>> sheetEntry : sheets.entrySet()) {
+        for (Map.Entry<String, List<Object[]>> sheetEntry : sheets.entrySet()) {
             Sheet sheet = wb.createSheet(sheetEntry.getKey());
 
             int rownum = 0;
-            for (String[] array : sheetEntry.getValue()) {
+            for (Object[] array : sheetEntry.getValue()) {
                 Row row = sheet.createRow(rownum++);
 
                 int cellnum = 0;
 
-                for (String string : array) {
+                for (Object value : array) {
                     Cell cell = row.createCell(cellnum++);
-                    cell.setCellValue(string);
+                    if (value instanceof String) {
+                        cell.setCellValue((String) value);
+                    } else if (value instanceof Number) {
+                        cell.setCellValue(Double.parseDouble(value.toString()));
+                    } else {
+                        throw new RuntimeException("Unexpected type of " + value + ": " + value.getClass());
+                    }
                 }
             }
         }

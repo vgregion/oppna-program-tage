@@ -91,9 +91,10 @@ public class Advertisement extends GeneralEntityBean implements Serializable, Co
 	@Column
 	private Boolean hidden;
 
-	@Transient
+	@Column
 	private String department;
-	@Transient
+
+	@Column
 	private String division;
 
 	/**
