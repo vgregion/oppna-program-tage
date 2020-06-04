@@ -18,6 +18,7 @@ import se.goteborg.retursidan.model.entity.Category;
 import se.goteborg.retursidan.model.entity.Unit;
 import se.goteborg.retursidan.portlet.binding.PhotoListPropertyEditor;
 import se.goteborg.retursidan.portlet.validation.AdValidator;
+import se.vgregion.ldapservice.LdapUser;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -105,7 +106,8 @@ public class CreateAdController extends CreateController {
 	@ActionMapping("saveAd")
 	public void saveAd(@Valid @ModelAttribute("advertisement") Advertisement advertisement, BindingResult bindingResult,
                        ActionRequest request, ActionResponse response, Model model) {
-		advertisement.setCreatorUid(getUserId(request));
+		String userId = getUserId(request);
+		advertisement.setCreatorUid(userId);
 		if (!bindingResult.hasErrors()) {
 			logger.trace("Saving advertisement: " + advertisement);
 
@@ -113,6 +115,13 @@ public class CreateAdController extends CreateController {
 				advertisement.setStatus(Advertisement.Status.DRAFT);
 			} else {
 				advertisement.setStatus(Advertisement.Status.PUBLISHED);
+			}
+
+			LdapUser ldapUser = userDirectoryService.getLdapUserByUid(userId);
+
+			if (ldapUser != null) {
+				advertisement.setDepartment(ldapUser.getAttributeValue("department"));
+				advertisement.setDivision(ldapUser.getAttributeValue("division"));
 			}
 
 			int id = modelService.saveAd(advertisement);

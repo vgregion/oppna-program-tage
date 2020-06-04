@@ -117,8 +117,6 @@ public class StatisticsService {
 
 		Map<DivisionDepartmentKey, Map<Year, Long>> aggregateYears = aggregateYearsOfDivisionsAndDepartments(years);
 
-		System.out.println(aggregateYears);
-
 		for (Map.Entry<DivisionDepartmentKey, Map<Year, Long>> entry : aggregateYears.entrySet()) {
 			String division = entry.getKey().getDivision();
 			String department = entry.getKey().getDepartment();
