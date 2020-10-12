@@ -110,15 +110,17 @@ public class StatisticsController extends BaseController {
 	@ResourceMapping("downloadDivisionDepartmentStatisticsBooked")
 	public void downloadDivisionDepartmentStatisticsBooked(ResourceRequest request, ResourceResponse response)
 			throws IOException {
-		downloadDivisionDepartmentStatistics(request, response);
+		downloadDivisionDepartmentStatistics(response, "BOOKED");
 	}
 
 	@ResourceMapping("downloadDivisionDepartmentStatistics")
 	public void downloadDivisionDepartmentStatistics(ResourceRequest request, ResourceResponse response)
 			throws IOException {
 
-		String statusString = request.getResourceParameters().getValue("status");
+		downloadDivisionDepartmentStatistics(response, null);
+	}
 
+	private void downloadDivisionDepartmentStatistics(ResourceResponse response, String statusString) throws IOException {
 		Advertisement.Status status;
 		String bookedPart;
 		logger.info("Status=" + statusString);

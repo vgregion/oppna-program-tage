@@ -133,7 +133,6 @@
 	<h2>Bokade annonser</h2>
 
 	<portlet:resourceURL id="downloadDivisionDepartmentStatisticsBooked" var="downloadDivisionDepartmentStatisticsBooked">
-		<portlet:param name="status" value="BOOKED"/>
 	</portlet:resourceURL>
 	<p><a href="${downloadDivisionDepartmentStatisticsBooked}">Hämta statistik för verksamheter/avdelningar</a></p>
 
