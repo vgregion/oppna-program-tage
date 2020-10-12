@@ -35,6 +35,7 @@ import se.goteborg.retursidan.model.PagedList;
 import se.goteborg.retursidan.model.PhotoHolder;
 import se.goteborg.retursidan.model.Year;
 import se.goteborg.retursidan.model.entity.Advertisement;
+import se.goteborg.retursidan.model.entity.Advertisement.Status;
 import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Category;
 import se.goteborg.retursidan.model.entity.Person;
@@ -316,35 +317,27 @@ public class ModelService {
         addPhoto(photo);
     }
 
-    public Map<DivisionDepartmentKey, KeyValue<Year, Long>> calculateDepartmentAndDivisionGroupCount(int year) {
-        /*List<Advertisement> all = advertisementDAO.findAll();
+    public Map<DivisionDepartmentKey, KeyValue<Year, Long>> calculateDepartmentAndDivisionGroupCount(
+            int year,
+            Status status) {
 
-        Collector<String, ?, Map<String, Long>> stringMapCollector = Collectors.groupingBy(
-                Function.identity(),
-                Collectors.counting()
-        );
+        String bookedCondition = "";
+        if (status != null) {
+            bookedCondition = " and status=:status";
+        }
 
-        Map<String, Long> departmentMap = new TreeMap<>(all.stream()
-                .map(ad -> ad.getDepartment() != null ? ad.getDepartment() : "okänd")
-                .filter(Objects::nonNull)
-                .collect(stringMapCollector));
-
-        Map<String, Long> divisionMap = new TreeMap<>(all.stream()
-                .map(ad -> ad.getDivision() != null ? ad.getDivision() : "okänd")
-                .filter(Objects::nonNull)
-                .collect(stringMapCollector));*/
-
-//        int year = 2016;
         int toYear = year + 1;
 
         Query query = advertisementDAO.getSessionFactory().getCurrentSession().createSQLQuery(
                 "select division, department, count(*) from vgr_tage_advertisement" +
-                        " where created >= '" + year + "-01-01' and created < '" + toYear + "-01-01' group by division, department" +
+                        " where created >= '" + year + "-01-01' and created < '" + toYear + "-01-01'" +
+                        bookedCondition +
+                        " group by division, department" +
                         " order by division, department asc"
         );
-
-//        query.setParameter("fromDate", "2016-01-01", StandardBasicTypes.TIMESTAMP);
-//        query.setParameter("toDate", "2017-01-01", StandardBasicTypes.TIMESTAMP);
+        if (status != null) {
+            query.setInteger("status", status.ordinal());
+        }
 
         List<Object[]> rows = query.list();
 
@@ -356,44 +349,22 @@ public class ModelService {
             DivisionDepartmentKey key = DivisionDepartmentKey.from(division, department); // TODO make a class for this key
 
             DefaultKeyValue<Year, Long> yearCount = new DefaultKeyValue<>(Year.of(year), ((BigInteger) row[2]).longValue());
-//            yearCount.put(String.valueOf(year), ((BigInteger) o[2]).longValue());
 
             mapKeyToYearCount.put(key, yearCount);
         });
 
         return mapKeyToYearCount;
-        /*Map<String, List<DepartmentDivisionCountTuple>> collect = list.stream().map(o -> new DepartmentDivisionCountTuple(
-                (String) o[0],
-                (String) o[1],
-                ((BigInteger) o[2]).longValue())
-        )
-                .collect(Collectors.groupingBy(tuple -> tuple.getDivision() + ";" + tuple.getDepartment()));
-
-        return collect;*/
-//        return new DepartmentAndDivisionGroupCount(null, null);
     }
 
     public void complementAdsWithDepartmentsAndDivisions() {
         List<Advertisement> all = advertisementDAO.findAll();
 
-//        Set<String> departments = new TreeSet<>();
-//        Set<String> divisions = new TreeSet<>();
-
-//        Map<String, String> userIdToDepartment = new HashMap<>();
-//        Map<String, String> userIdToDivision = new HashMap<>();
         Map<String, LdapUser> ldapUserMap = new HashMap<>();
 
         all.forEach(advertisement -> {
             String creatorUid = advertisement.getCreatorUid();
 
             if (creatorUid == null) return;
-
-            /*if (userIdToDepartment.containsKey(creatorUid)) {
-                advertisement.setDepartment(userIdToDepartment.get(creatorUid));
-                advertisement.setDivision(userIdToDivision.get(creatorUid));
-
-                return;
-            }*/
 
             LdapUser ldapUserByUid;
             if (ldapUserMap.containsKey(creatorUid)) {
@@ -410,38 +381,6 @@ public class ModelService {
 
             updateAd(advertisement);
         });
-
-/*        Set<SimpleLdapUser> collect = all.stream()
-                .map(Advertisement::getCreatorUid)
-                .filter(Objects::nonNull)
-                .distinct()
-                .map(userId -> (SimpleLdapUser) this.userDirectoryService.getLdapUserByUid(userId))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());*/
-
-        /*Collector<String, ?, Map<String, Long>> stringMapCollector = Collectors.groupingBy(
-                Function.identity(),
-                Collectors.counting()
-        );
-
-        Map<String, Long> departmentMap = new TreeMap<>(all.stream()
-                .map(ad -> ad.getDepartment() != null ? ad.getDepartment() : "okänd")
-                .filter(Objects::nonNull)
-                .collect(stringMapCollector));
-
-        Map<String, Long> divisionMap = new TreeMap<>(all.stream()
-                .map(ad -> ad.getDivision() != null ? ad.getDivision() : "okänd")
-                .filter(Objects::nonNull)
-                .collect(stringMapCollector));
-
-        Map<String, Long>[] result = new Map[]{departmentMap, divisionMap};
-
-        return result;*/
-        /*System.out.println(departments);
-        System.out.println(divisions);
-
-        System.out.println("Departments count: " + departments.size());
-        System.out.println("Divisions count: " + divisions.size());*/
     }
 
 }

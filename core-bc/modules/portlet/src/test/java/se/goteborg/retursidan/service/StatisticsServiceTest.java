@@ -18,6 +18,7 @@ import java.util.TreeMap;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,14 +43,14 @@ public class StatisticsServiceTest {
         _2019.put(DivisionDepartmentKey.from("division3", "department3"), new DefaultKeyValue<>(Year.of("2019"), 15L));
 
 
-        when(modelService.calculateDepartmentAndDivisionGroupCount(eq(2018))).thenReturn(_2018);
-        when(modelService.calculateDepartmentAndDivisionGroupCount(eq(2019))).thenReturn(_2019);
+        when(modelService.calculateDepartmentAndDivisionGroupCount(eq(2018), isNull())).thenReturn(_2018);
+        when(modelService.calculateDepartmentAndDivisionGroupCount(eq(2019), isNull())).thenReturn(_2019);
     }
 
     @Test
     public void aggregateYearsOfDivisionsAndDepartments() {
         Map<DivisionDepartmentKey, Map<Year, Long>> keyMapMap = statisticsService.aggregateYearsOfDivisionsAndDepartments(
-                List.of(2018, 2019)
+                List.of(2018, 2019), null
         );
 
         assertTrue(keyMapMap.containsKey(DivisionDepartmentKey.from("division1", "department1")));
@@ -71,7 +72,7 @@ public class StatisticsServiceTest {
     @Test
     public void exportDivisionsAndDepartmentsAsExcel() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        statisticsService.writeDivisionsAndDepartmentsAsExcel(baos);
+        statisticsService.writeDivisionsAndDepartmentsAsExcel(baos, null);
 
         assertTrue(baos.size() > 0);
     }

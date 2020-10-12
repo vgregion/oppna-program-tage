@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
+import se.goteborg.retursidan.model.entity.Advertisement;
 import se.goteborg.retursidan.model.entity.Area;
 import se.goteborg.retursidan.model.entity.Unit;
 import se.goteborg.retursidan.portlet.controller.BaseController;
@@ -106,17 +107,40 @@ public class StatisticsController extends BaseController {
 		return "config/statistics";
 	}
 
+	@ResourceMapping("downloadDivisionDepartmentStatisticsBooked")
+	public void downloadDivisionDepartmentStatisticsBooked(ResourceRequest request, ResourceResponse response)
+			throws IOException {
+		downloadDivisionDepartmentStatistics(request, response);
+	}
+
 	@ResourceMapping("downloadDivisionDepartmentStatistics")
-	public void downloadDivisionDepartmentStatistics(ResourceRequest request, ResourceResponse response) throws IOException {
+	public void downloadDivisionDepartmentStatistics(ResourceRequest request, ResourceResponse response)
+			throws IOException {
+
+		String statusString = request.getResourceParameters().getValue("status");
+
+		Advertisement.Status status;
+		String bookedPart;
+		logger.info("Status=" + statusString);
+		if (statusString != null) {
+			status = Advertisement.Status.valueOf(statusString);
+			String friendlyWord = statusString.equals("BOOKED") ? "bokade" : statusString;
+			bookedPart = friendlyWord + "_annonser_";
+		} else {
+			status = null;
+			bookedPart = "alla_annonser_";
+		}
+		logger.info("bookedPart=" + bookedPart);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String today = sdf.format(new Date());
 
-		OutputStream portletOutputStream = response.getPortletOutputStream();
-
-		statisticsService.writeDivisionsAndDepartmentsAsExcel(portletOutputStream);
+		try (OutputStream portletOutputStream = response.getPortletOutputStream()) {
+			statisticsService.writeDivisionsAndDepartmentsAsExcel(portletOutputStream, status);
+		}
+		logger.info("wrote");
 
 		response.setContentType("application/excel");
-		response.setProperty("Content-disposition", "attachment; filename=Tage_statistik_verksamheter_avdelningar_" + today + ".xlsx");
+		response.setProperty("Content-disposition", "attachment; filename=Tage_" + bookedPart + "statistik_verksamheter_avdelningar_" + today + ".xlsx");
 	}
 }

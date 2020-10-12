@@ -97,7 +97,7 @@ public class StatisticsService {
 		return advertisementDAO.count(Status.BOOKED, area);
 	}
 
-	public void writeDivisionsAndDepartmentsAsExcel(OutputStream outputStream) {
+	public void writeDivisionsAndDepartmentsAsExcel(OutputStream outputStream, Status status) {
 		Map<String, List<Object[]>> sheets = new LinkedHashMap<>();
 
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -115,7 +115,10 @@ public class StatisticsService {
 
 		departmentsMatrix.add(headings);
 
-		Map<DivisionDepartmentKey, Map<Year, Long>> aggregateYears = aggregateYearsOfDivisionsAndDepartments(years);
+		Map<DivisionDepartmentKey, Map<Year, Long>> aggregateYears = aggregateYearsOfDivisionsAndDepartments(
+				years,
+				status
+		);
 
 		for (Map.Entry<DivisionDepartmentKey, Map<Year, Long>> entry : aggregateYears.entrySet()) {
 			String division = entry.getKey().getDivision();
@@ -195,7 +198,8 @@ public class StatisticsService {
 		}
 	}
 
-	Map<DivisionDepartmentKey, Map<Year, Long>> aggregateYearsOfDivisionsAndDepartments(List<Integer> years) {
+	Map<DivisionDepartmentKey, Map<Year, Long>> aggregateYearsOfDivisionsAndDepartments(List<Integer> years,
+																						Status status) {
 		Map<DivisionDepartmentKey, Map<Year, Long>> aggregateYears = new TreeMap<>();
 
 		boolean firstYear = true;
@@ -204,7 +208,7 @@ public class StatisticsService {
 //			Year yearString = year + "";
 
 			Map<DivisionDepartmentKey, KeyValue<Year, Long>> departmentsAndDivisionsOneYear = modelService
-					.calculateDepartmentAndDivisionGroupCount(year.intValue);
+					.calculateDepartmentAndDivisionGroupCount(year.intValue, status);
 
 //            if (firstYear) {
 			// Then add all divisions and departments
